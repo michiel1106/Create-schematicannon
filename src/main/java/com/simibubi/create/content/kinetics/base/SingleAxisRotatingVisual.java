@@ -11,10 +11,14 @@ import dev.engine_room.flywheel.api.model.Model;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import dev.engine_room.flywheel.lib.model.Models;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import dev.engine_room.flywheel.lib.visual.SimpleTickableVisual;
 import dev.engine_room.flywheel.lib.visualization.SimpleBlockEntityVisualizer;
+import dev.engine_room.flywheel.lib.visualization.VisualizationHelper;
+import net.createmod.catnip.theme.Color;
 import net.minecraft.core.Direction;
 
-public class SingleAxisRotatingVisual<T extends KineticBlockEntity> extends KineticBlockEntityVisual<T> {
+public class SingleAxisRotatingVisual<T extends KineticBlockEntity> extends KineticBlockEntityVisual<T> implements SimpleTickableVisual {
+	public static boolean rainbowMode = false;
 
 	protected final RotatingInstance rotatingModel;
 
@@ -23,7 +27,7 @@ public class SingleAxisRotatingVisual<T extends KineticBlockEntity> extends Kine
 	}
 
 	/**
-	 * @param from The source model orientation to rotate away from.
+	 * @param from  The source model orientation to rotate away from.
 	 * @param model The model to spin.
 	 */
 	public SingleAxisRotatingVisual(VisualizationContext context, T blockEntity, float partialTick, Direction from, Model model) {
@@ -63,8 +67,27 @@ public class SingleAxisRotatingVisual<T extends KineticBlockEntity> extends Kine
 
 	@Override
 	public void update(float pt) {
-		rotatingModel.setup(blockEntity)
-			.setChanged();
+		var model = rotatingModel.setup(blockEntity);
+
+		float overStressedEffect = blockEntity.effects.overStressedEffect;
+		if (overStressedEffect != 0) {
+			boolean overstressed = overStressedEffect > 0;
+			Color color = overstressed ? Color.RED : Color.SPRING_GREEN;
+			float weight = overstressed ? overStressedEffect : -overStressedEffect;
+
+			model.setColor(Color.WHITE.mixWith(color, weight));
+		} else {
+			model.setColor(Color.WHITE);
+		}
+
+		model.setChanged();
+	}
+
+	@Override
+	public void tick(Context context) {
+		float overStressedEffect = blockEntity.effects.overStressedEffect;
+		if (overStressedEffect != 0)
+			VisualizationHelper.queueUpdate(blockEntity);
 	}
 
 	@Override
