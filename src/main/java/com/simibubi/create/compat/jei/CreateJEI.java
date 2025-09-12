@@ -46,7 +46,6 @@ import com.simibubi.create.compat.jei.category.SpoutCategory;
 import com.simibubi.create.content.equipment.blueprint.BlueprintScreen;
 import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
 import com.simibubi.create.content.fluids.potion.PotionFluid;
-import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.crafter.MechanicalCraftingRecipe;
@@ -56,6 +55,7 @@ import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
 import com.simibubi.create.content.kinetics.deployer.ManualApplicationRecipe;
 import com.simibubi.create.content.kinetics.fan.processing.HauntingRecipe;
 import com.simibubi.create.content.kinetics.fan.processing.SplashingRecipe;
+import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
@@ -184,7 +184,8 @@ public class CreateJEI implements IModPlugin {
 				.build("fan_haunting", FanHauntingCategory::new),
 
 			mixing = builder(BasinRecipe.class)
-				.addTypedRecipes(AllRecipeTypes.MIXING)
+				.addTypedRecipesIf(AllRecipeTypes.MIXING.getType(), r ->
+					!(r.getId().getNamespace().equals(Create.ID) && r.getId().getPath().startsWith("potion_mixing_")))
 				.catalyst(AllBlocks.MECHANICAL_MIXER::get)
 				.catalyst(AllBlocks.BASIN::get)
 				.doubleItemIcon(AllBlocks.MECHANICAL_MIXER.get(), AllBlocks.BASIN.get())
@@ -206,7 +207,8 @@ public class CreateJEI implements IModPlugin {
 
 			brewing = builder(BasinRecipe.class)
 				.enableWhen(c -> c.allowBrewingInMixer)
-				.addRecipes(() -> PotionMixingRecipes.ALL)
+				.addAllRecipesIf(r -> r instanceof MixingRecipe &&
+					r.getId().getNamespace().equals(Create.ID) && r.getId().getPath().startsWith("potion_mixing_"))
 				.catalyst(AllBlocks.MECHANICAL_MIXER::get)
 				.catalyst(AllBlocks.BASIN::get)
 				.doubleItemIcon(AllBlocks.MECHANICAL_MIXER.get(), Blocks.BREWING_STAND)

@@ -1,11 +1,7 @@
 package com.simibubi.create.content.fluids.potion;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.simibubi.create.Create;
 import com.simibubi.create.content.fluids.potion.PotionFluid.BottleType;
@@ -29,14 +25,14 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class PotionMixingRecipes {
-
 	public static final List<Item> SUPPORTED_CONTAINERS = List.of(Items.POTION, Items.SPLASH_POTION, Items.LINGERING_POTION);
 
-	public static final List<MixingRecipe> ALL = createRecipes();
-	public static final Map<Item, List<MixingRecipe>> BY_ITEM = sortRecipesByItem(ALL);
-
-	private static List<MixingRecipe> createRecipes() {
+	public static List<MixingRecipe> createRecipes() {
 		List<MixingRecipe> mixingRecipes = new ArrayList<>();
+
+		// FIXME
+//		if (!AllConfigs.server().recipes.allowBrewingInMixer.get())
+//			return mixingRecipes;
 
 		int recipeIndex = 0;
 
@@ -99,7 +95,7 @@ public class PotionMixingRecipes {
 				for (ItemStack stack : supportedContainerStacks) {
 					if (input.test(stack)) {
 						ItemStack[] stacks = input.getItems();
-						if (stacks.length == 0){
+						if (stacks.length == 0) {
 							continue;
 						}
 						FluidStack inputFluid = PotionFluidHandler.getFluidFromPotionItem(stacks[0]);
@@ -118,30 +114,11 @@ public class PotionMixingRecipes {
 	}
 
 	private static MixingRecipe createRecipe(String id, Ingredient ingredient, FluidStack fromFluid, FluidStack toFluid) {
-		return new ProcessingRecipeBuilder<>(MixingRecipe::new,
-				Create.asResource(id)).require(ingredient)
-				.require(FluidIngredient.fromFluidStack(fromFluid))
-				.output(toFluid)
-				.requiresHeat(HeatCondition.HEATED)
-				.build();
+		return new ProcessingRecipeBuilder<>(MixingRecipe::new, Create.asResource(id))
+			.require(ingredient)
+			.require(FluidIngredient.fromFluidStack(fromFluid))
+			.output(toFluid)
+			.requiresHeat(HeatCondition.HEATED)
+			.build();
 	}
-
-	private static Map<Item, List<MixingRecipe>> sortRecipesByItem(List<MixingRecipe> all) {
-		Map<Item, List<MixingRecipe>> byItem = new HashMap<>();
-		Set<Item> processedItems = new HashSet<>();
-		for (MixingRecipe recipe : all) {
-			for (Ingredient ingredient : recipe.getIngredients()) {
-				for (ItemStack itemStack : ingredient.getItems()) {
-					Item item = itemStack.getItem();
-					if (processedItems.add(item)) {
-						byItem.computeIfAbsent(item, i -> new ArrayList<>())
-							.add(recipe);
-					}
-				}
-			}
-			processedItems.clear();
-		}
-		return byItem;
-	}
-
 }

@@ -43,6 +43,11 @@ public class DynamicPack implements PackResources {
 		return packType.getDirectory() + "/" + resourceLocation.getNamespace() + "/" + resourceLocation.getPath();
 	}
 
+	public DynamicPack clear() {
+		files.clear();
+		return this;
+	}
+
 	public DynamicPack put(ResourceLocation location, IoSupplier<InputStream> stream) {
 		files.put(getPath(packType, location), stream);
 		return this;

@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 /**
@@ -19,7 +20,6 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
  */
 @ParametersAreNonnullByDefault
 public class ConversionRecipe extends ProcessingRecipe<RecipeWrapper> {
-
 	static int counter = 0;
 
 	public static ConversionRecipe create(ItemStack from, ItemStack to) {
