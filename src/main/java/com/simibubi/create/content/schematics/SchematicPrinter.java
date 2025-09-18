@@ -4,10 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.Create;
-import com.simibubi.create.api.contraption.BlockMovementChecks;
-import com.simibubi.create.content.contraptions.StructureTransform;
 import com.simibubi.create.content.schematics.cannon.MaterialChecklist;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.blockEntity.IMergeableBE;
@@ -115,10 +112,8 @@ public class SchematicPrinter {
 			.offset(-1, -1, -1));
 		blockReader.setBounds(BBHelper.encapsulate(blockReader.getBounds(), extraBounds));
 
-		StructureTransform transform = new StructureTransform(settings.getRotationPivot(), Direction.Axis.Y,
-			settings.getRotation(), settings.getMirror());
+
 		for (BlockEntity be : blockReader.getBlockEntities())
-			transform.apply(be);
 
 		printingEntityIndex = -1;
 		printStage = PrintStage.BLOCKS;
@@ -345,8 +340,7 @@ public class SchematicPrinter {
 	}
 
 	public static boolean shouldDeferBlock(BlockState state) {
-		return AllBlocks.GANTRY_CARRIAGE.has(state) || AllBlocks.MECHANICAL_ARM.has(state)
-			|| BlockMovementChecks.isBrittle(state);
+		return false;
 	}
 
 	public void sendBlockUpdates(Level level) {

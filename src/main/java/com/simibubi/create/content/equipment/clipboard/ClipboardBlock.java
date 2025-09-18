@@ -5,7 +5,6 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.AllShapes;
-import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.block.ProperWaterloggedBlock;
 
@@ -42,7 +41,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.DistExecutor;
 
 public class ClipboardBlock extends FaceAttachedHorizontalDirectionalBlock
-	implements IBE<ClipboardBlockEntity>, IWrenchable, ProperWaterloggedBlock {
+	implements IBE<ClipboardBlockEntity>, ProperWaterloggedBlock {
 
 	public static final BooleanProperty WRITTEN = BooleanProperty.create("written");
 

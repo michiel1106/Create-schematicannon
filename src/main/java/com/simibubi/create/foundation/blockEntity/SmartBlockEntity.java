@@ -6,12 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import com.simibubi.create.api.event.BlockEntityBehaviourEvent;
 import com.simibubi.create.api.schematic.nbt.PartialSafeNBT;
 import com.simibubi.create.api.schematic.requirement.SpecialBlockEntityItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
-import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
-import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.IInteractionChecker;
@@ -24,10 +21,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
 public abstract class SmartBlockEntity extends CachedRenderBBBlockEntity
 	implements PartialSafeNBT, IInteractionChecker, SpecialBlockEntityItemRequirement, VirtualBlockEntity {
@@ -63,7 +56,6 @@ public abstract class SmartBlockEntity extends CachedRenderBBBlockEntity
 	public void initialize() {
 		if (firstNbtRead) {
 			firstNbtRead = false;
-			MinecraftForge.EVENT_BUS.post(new BlockEntityBehaviourEvent<>(this, behaviours));
 		}
 
 		forEachBehaviour(BlockEntityBehaviour::initialize);
@@ -112,7 +104,6 @@ public abstract class SmartBlockEntity extends CachedRenderBBBlockEntity
 			ArrayList<BlockEntityBehaviour> list = new ArrayList<>();
 			addBehavioursDeferred(list);
 			list.forEach(b -> behaviours.put(b.getType(), b));
-			MinecraftForge.EVENT_BUS.post(new BlockEntityBehaviourEvent<>(this, behaviours));
 		}
 		super.load(tag);
 		forEachBehaviour(tb -> tb.read(tag, clientPacket));
@@ -233,39 +224,8 @@ public abstract class SmartBlockEntity extends CachedRenderBBBlockEntity
 		buffer.writeNbt(getUpdateTag());
 	}
 
-	@SuppressWarnings("deprecation")
-	public void refreshBlockState() {
-		setBlockState(getLevel().getBlockState(getBlockPos()));
-	}
 
-	protected boolean isItemHandlerCap(Capability<?> cap) {
-		return cap == ForgeCapabilities.ITEM_HANDLER;
-	}
 
-	protected boolean isFluidHandlerCap(Capability<?> cap) {
-		return cap == ForgeCapabilities.FLUID_HANDLER;
-	}
 
-	public void registerAwardables(List<BlockEntityBehaviour> behaviours, CreateAdvancement... advancements) {
-		for (BlockEntityBehaviour behaviour : behaviours) {
-			if (behaviour instanceof AdvancementBehaviour ab) {
-				ab.add(advancements);
-				return;
-			}
-		}
-		behaviours.add(new AdvancementBehaviour(this, advancements));
-	}
-
-	public void award(CreateAdvancement advancement) {
-		AdvancementBehaviour behaviour = getBehaviour(AdvancementBehaviour.TYPE);
-		if (behaviour != null)
-			behaviour.awardPlayer(advancement);
-	}
-
-	public void awardIfNear(CreateAdvancement advancement, int range) {
-		AdvancementBehaviour behaviour = getBehaviour(AdvancementBehaviour.TYPE);
-		if (behaviour != null)
-			behaviour.awardPlayerIfNear(advancement, range);
-	}
 
 }

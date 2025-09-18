@@ -1,32 +1,13 @@
 package com.simibubi.create;
 
-import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
-import com.simibubi.create.content.contraptions.ControlledContraptionEntity;
-import com.simibubi.create.content.contraptions.OrientedContraptionEntity;
-import com.simibubi.create.content.contraptions.actors.seat.SeatEntity;
-import com.simibubi.create.content.contraptions.gantry.GantryContraptionEntity;
-import com.simibubi.create.content.contraptions.glue.SuperGlueEntity;
-import com.simibubi.create.content.contraptions.glue.SuperGlueRenderer;
-import com.simibubi.create.content.contraptions.render.ContraptionEntityRenderer;
-import com.simibubi.create.content.contraptions.render.ContraptionVisual;
-import com.simibubi.create.content.contraptions.render.OrientedContraptionEntityRenderer;
+
 import com.simibubi.create.content.equipment.blueprint.BlueprintEntity;
 import com.simibubi.create.content.equipment.blueprint.BlueprintRenderer;
-import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileEntity;
-import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileRenderer;
-import com.simibubi.create.content.logistics.box.PackageEntity;
-import com.simibubi.create.content.logistics.box.PackageRenderer;
-import com.simibubi.create.content.logistics.box.PackageVisual;
-import com.simibubi.create.content.trains.entity.CarriageContraptionEntity;
-import com.simibubi.create.content.trains.entity.CarriageContraptionEntityRenderer;
-import com.simibubi.create.content.trains.entity.CarriageContraptionVisual;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
 import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 
 import net.createmod.catnip.lang.Lang;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -38,11 +19,6 @@ import net.minecraft.world.entity.MobCategory;
 
 public class AllEntityTypes {
 
-	public static final EntityEntry<OrientedContraptionEntity> ORIENTED_CONTRAPTION = contraption("contraption",
-		OrientedContraptionEntity::new, () -> OrientedContraptionEntityRenderer::new, 5, 3, true)
-		.visual(() -> ContraptionVisual::new)
-		.register();
-
 
 
 	public static final EntityEntry<BlueprintEntity> CRAFTING_BLUEPRINT =
@@ -50,16 +26,6 @@ public class AllEntityTypes {
 			Integer.MAX_VALUE, false, true, BlueprintEntity::build).register();
 
 
-
-
-	//
-
-	private static <T extends Entity> CreateEntityBuilder<T, ?> contraption(String name, EntityFactory<T> factory,
-																			NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer, int range,
-																			int updateFrequency, boolean sendVelocity) {
-		return register(name, factory, renderer, MobCategory.MISC, range, updateFrequency, sendVelocity, true,
-			AbstractContraptionEntity::build);
-	}
 
 	private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityFactory<T> factory,
 																		 NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,

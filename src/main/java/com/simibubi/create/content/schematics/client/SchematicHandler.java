@@ -10,7 +10,7 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.AllKeys;
 import com.simibubi.create.AllPackets;
 import com.simibubi.create.Create;
-import com.simibubi.create.content.contraptions.StructureTransform;
+import com.simibubi.create.StructureTransform;
 import com.simibubi.create.content.schematics.SchematicInstances;
 import com.simibubi.create.content.schematics.SchematicItem;
 import com.simibubi.create.content.schematics.client.tools.ToolType;
@@ -291,8 +291,6 @@ public class SchematicHandler implements IGuiOverlay {
 		if (mc.hitResult instanceof BlockHitResult blockRayTraceResult) {
 			BlockState clickedBlock = mc.level.getBlockState(blockRayTraceResult.getBlockPos());
 			if (AllBlocks.SCHEMATICANNON.has(clickedBlock))
-				return false;
-			if (AllBlocks.DEPLOYER.has(clickedBlock))
 				return false;
 		}
 		return currentTool.getTool()

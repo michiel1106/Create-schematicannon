@@ -1,14 +1,10 @@
 package com.simibubi.create;
 
-import static net.minecraft.core.Direction.EAST;
 import static net.minecraft.core.Direction.NORTH;
 import static net.minecraft.core.Direction.SOUTH;
 import static net.minecraft.core.Direction.UP;
 
 import java.util.function.BiFunction;
-
-import com.simibubi.create.content.logistics.chute.ChuteShapes;
-import com.simibubi.create.content.trains.track.TrackVoxelShapes;
 
 import net.createmod.catnip.math.VoxelShaper;
 import net.minecraft.core.Direction;
@@ -26,170 +22,158 @@ public class AllShapes {
 	// Independent Shapers
 	public static final VoxelShaper
 
-	CASING_14PX = shape(0, 0, 0, 16, 14, 16).forDirectional(),
-		CASING_13PX = shape(0, 0, 0, 16, 13, 16).forDirectional(),
-		CASING_12PX = shape(0, 0, 0, 16, 12, 16).forDirectional(),
-		CASING_11PX = shape(0, 0, 0, 16, 11, 16).forDirectional(),
-		CASING_3PX = shape(0, 0, 0, 16, 3, 16).forDirectional(),
-		CASING_2PX = shape(0, 0, 0, 16, 2, 16).forDirectional(),
-		MOTOR_BLOCK = shape(3, 0, 3, 13, 14, 13).forDirectional(),
+	CASING_14PX = shape(0, 0, 0, 16, 14, 16).forDirectional();
+	public static final VoxelShaper CASING_12PX = shape(0, 0, 0, 16, 12, 16).forDirectional();
 
-		FOUR_VOXEL_POLE = shape(6, 0, 6, 10, 16, 10).forAxis(), SIX_VOXEL_POLE = shape(5, 0, 5, 11, 16, 11).forAxis(),
-		EIGHT_VOXEL_POLE = shape(4, 0, 4, 12, 16, 12).forAxis(), TEN_VOXEL_POLE = shape(3, 0, 3, 13, 16, 13).forAxis(),
-		FURNACE_ENGINE = shape(1, 1, 0, 15, 15, 16).add(0, 0, 9, 16, 16, 14)
-			.forHorizontal(SOUTH),
-		PORTABLE_STORAGE_INTERFACE = shape(0, 0, 0, 16, 14, 16).forDirectional(),
-		ELEVATOR_PULLEY = shape(0, 0, 0, 16, 16, 2).add(0, 0, 14, 16, 16, 16)
-			.add(2, 0, 2, 14, 14, 14)
-			.forHorizontal(EAST),
-		SAIL_FRAME_COLLISION = shape(0, 5, 0, 16, 9, 16).erase(2, 0, 2, 14, 16, 14)
-			.forDirectional(),
-		SAIL_FRAME = shape(0, 5, 0, 16, 9, 16).forDirectional(), SAIL = shape(0, 5, 0, 16, 10, 16).forDirectional(),
-		HARVESTER_BASE = shape(0, 2, 0, 16, 14, 3).forDirectional(SOUTH),
-		ROLLER_BASE = shape(0, 0, 0, 16, 16, 10).forDirectional(SOUTH),
-		NOZZLE = shape(2, 0, 2, 14, 14, 14).add(1, 13, 1, 15, 15, 15)
+	public static final VoxelShaper FOUR_VOXEL_POLE = shape(6, 0, 6, 10, 16, 10).forAxis();
+	public static final VoxelShaper SIX_VOXEL_POLE = shape(5, 0, 5, 11, 16, 11).forAxis();
+	public static final VoxelShaper EIGHT_VOXEL_POLE = shape(4, 0, 4, 12, 16, 12).forAxis();
+	public static final VoxelShaper TEN_VOXEL_POLE = shape(3, 0, 3, 13, 16, 13).forAxis();
+	public static final VoxelShaper SAIL_FRAME_COLLISION = shape(0, 5, 0, 16, 9, 16).erase(2, 0, 2, 14, 16, 14)
+			.forDirectional();
+	public static final VoxelShaper SAIL_FRAME = shape(0, 5, 0, 16, 9, 16).forDirectional();
+	public static final VoxelShaper SAIL = shape(0, 5, 0, 16, 10, 16).forDirectional();
+	public static final VoxelShaper HARVESTER_BASE = shape(0, 2, 0, 16, 14, 3).forDirectional(SOUTH);
+	public static final VoxelShaper ROLLER_BASE = shape(0, 0, 0, 16, 16, 10).forDirectional(SOUTH);
+	public static final VoxelShaper NOZZLE = shape(2, 0, 2, 14, 14, 14).add(1, 13, 1, 15, 15, 15)
 			.erase(3, 13, 3, 13, 15, 13)
-			.forDirectional(),
-		CRANK = shape(5, 0, 5, 11, 6, 11).add(1, 3, 1, 15, 8, 15)
-			.forDirectional(),
-		VALVE_HANDLE = shape(5, 0, 5, 11, 4, 11).add(1, 3, 1, 15, 8, 15)
-			.forDirectional(),
-		CART_ASSEMBLER = shape(0, 12, 0, 16, 16, 16).add(-2, 0, 1, 18, 14, 15)
-			.forHorizontalAxis(),
-		CART_ASSEMBLER_PLAYER_COLLISION = shape(0, 0, 1, 16, 16, 15).forHorizontalAxis(),
-		STOCKPILE_SWITCH = shape(0, 0, 0, 16, 2, 16).add(1, 0, 1, 15, 16, 15)
+			.forDirectional();
+	public static final VoxelShaper CRANK = shape(5, 0, 5, 11, 6, 11).add(1, 3, 1, 15, 8, 15)
+			.forDirectional();
+	public static final VoxelShaper VALVE_HANDLE = shape(5, 0, 5, 11, 4, 11).add(1, 3, 1, 15, 8, 15)
+			.forDirectional();
+	public static final VoxelShaper CART_ASSEMBLER = shape(0, 12, 0, 16, 16, 16).add(-2, 0, 1, 18, 14, 15)
+			.forHorizontalAxis();
+	public static final VoxelShaper CART_ASSEMBLER_PLAYER_COLLISION = shape(0, 0, 1, 16, 16, 15).forHorizontalAxis();
+	public static final VoxelShaper STOCKPILE_SWITCH = shape(0, 0, 0, 16, 2, 16).add(1, 0, 1, 15, 16, 15)
 			.add(0, 14, 0, 16, 16, 16)
 			.add(3, 3, -2, 13, 13, 2)
-			.forHorizontal(NORTH),
-		CONTENT_OBSERVER = shape(0, 0, 0, 16, 6, 16).add(1, 0, 1, 15, 16, 15)
+			.forHorizontal(NORTH);
+	public static final VoxelShaper CONTENT_OBSERVER = shape(0, 0, 0, 16, 6, 16).add(1, 0, 1, 15, 16, 15)
 			.add(0, 14, 0, 16, 16, 16)
 			.add(3, 3, -2, 13, 13, 2)
-			.forHorizontal(NORTH),
-		FUNNEL_COLLISION = shape(0, 0, 0, 16, 4, 16).forDirectional(UP),
-		BELT_FUNNEL_RETRACTED = shape(2, -2, 14, 14, 14, 18).add(0, -5, 8, 16, 16, 14)
-			.forHorizontal(NORTH),
-		BELT_FUNNEL_EXTENDED = shape(2, -2, 14, 14, 14, 18).add(3, -4, 10, 13, 13, 14)
+			.forHorizontal(NORTH);
+	public static final VoxelShaper FUNNEL_COLLISION = shape(0, 0, 0, 16, 4, 16).forDirectional(UP);
+	public static final VoxelShaper BELT_FUNNEL_RETRACTED = shape(2, -2, 14, 14, 14, 18).add(0, -5, 8, 16, 16, 14)
+			.forHorizontal(NORTH);
+	public static final VoxelShaper BELT_FUNNEL_EXTENDED = shape(2, -2, 14, 14, 14, 18).add(3, -4, 10, 13, 13, 14)
 			.add(2, -4, 6, 14, 14, 10)
 			.add(0, -5, 0, 16, 16, 6)
-			.forHorizontal(NORTH),
-		BELT_FUNNEL_PERPENDICULAR = shape(2, -2, 14, 14, 14, 18).add(1, 8, 12, 15, 15, 14)
+			.forHorizontal(NORTH);
+	public static final VoxelShaper BELT_FUNNEL_PERPENDICULAR = shape(2, -2, 14, 14, 14, 18).add(1, 8, 12, 15, 15, 14)
 			.add(0.1, 13, 7, 15.9, 15, 11)
 			.add(0.1, 9, 8, 15.9, 13, 12)
 			.add(0.1, 5, 9, 15.9, 9, 13)
 			.add(0.1, 1, 10, 15.9, 5, 14)
 			.add(0.1, -3, 11, 15.9, 1, 15)
-			.forHorizontal(NORTH),
-		FUNNEL_WALL = shape(2, 2, 14, 14, 14, 18).add(1, 8, 12, 15, 15, 14)
+			.forHorizontal(NORTH);
+	public static final VoxelShaper FUNNEL_WALL = shape(2, 2, 14, 14, 14, 18).add(1, 8, 12, 15, 15, 14)
 			.add(0.1, 13, 7, 15.9, 15, 11)
 			.add(0.1, 9, 8, 15.9, 13, 12)
 			.add(0.1, 5, 9, 15.9, 9, 13)
 			.add(0.1, 1, 10, 15.9, 5, 14)
 			.add(0.1, -1, 11, 15.9, 1, 15)
-			.forHorizontal(NORTH),
-		FLUID_VALVE = shape(3, 0, 3, 13, 16, 13).add(2, 2, 2, 14, 14, 14)
-			.forAxis(),
-		TOOLBOX = shape(1, 0, 4, 15, 9, 12).forHorizontal(NORTH),
-		SMART_FLUID_PIPE_FLOOR = shape(4, 4, 0, 12, 12, 16).add(3, 3, 3, 13, 13, 13)
+			.forHorizontal(NORTH);
+	public static final VoxelShaper FLUID_VALVE = shape(3, 0, 3, 13, 16, 13).add(2, 2, 2, 14, 14, 14)
+			.forAxis();
+	public static final VoxelShaper TOOLBOX = shape(1, 0, 4, 15, 9, 12).forHorizontal(NORTH);
+	public static final VoxelShaper SMART_FLUID_PIPE_FLOOR = shape(4, 4, 0, 12, 12, 16).add(3, 3, 3, 13, 13, 13)
 			.add(5, 13, 3, 11, 14, 11)
 			.add(5, 14, 4, 11, 15, 10)
 			.add(5, 15, 5, 11, 16, 9)
 			.add(5, 16, 6, 11, 17, 8)
-			.forHorizontal(SOUTH),
-		SMART_FLUID_PIPE_WALL = shape(4, 0, 4, 12, 16, 12).add(3, 3, 3, 13, 13, 13)
+			.forHorizontal(SOUTH);
+	public static final VoxelShaper SMART_FLUID_PIPE_WALL = shape(4, 0, 4, 12, 16, 12).add(3, 3, 3, 13, 13, 13)
 			.add(5, 5, 13, 11, 13, 14)
 			.add(5, 6, 14, 11, 12, 15)
 			.add(5, 7, 15, 11, 11, 16)
 			.add(5, 8, 16, 11, 10, 17)
-			.forHorizontal(SOUTH),
-		SMART_FLUID_PIPE_CEILING = shape(4, 4, 0, 12, 12, 16).add(3, 3, 3, 13, 13, 13)
+			.forHorizontal(SOUTH);
+	public static final VoxelShaper SMART_FLUID_PIPE_CEILING = shape(4, 4, 0, 12, 12, 16).add(3, 3, 3, 13, 13, 13)
 			.add(5, 2, 3, 11, 3, 11)
 			.add(5, 1, 4, 11, 2, 10)
 			.add(5, 0, 5, 11, 1, 9)
 			.add(5, -1, 6, 11, 0, 8)
-			.forHorizontal(SOUTH),
-		PUMP = shape(2, 0, 2, 14, 16, 14).forDirectional(Direction.UP),
-		CRUSHING_WHEEL_CONTROLLER_COLLISION = shape(0, 0, 0, 16, 13, 16).forDirectional(Direction.DOWN),
+			.forHorizontal(SOUTH);
+	public static final VoxelShaper PUMP = shape(2, 0, 2, 14, 16, 14).forDirectional(Direction.UP);
+	public static final VoxelShaper CRUSHING_WHEEL_CONTROLLER_COLLISION = shape(0, 0, 0, 16, 13, 16).forDirectional(Direction.DOWN);
 
-		BELL_FLOOR = shape(0, 0, 5, 16, 11, 11).add(3, 1, 3, 13, 13, 13)
-			.forHorizontal(SOUTH),
-		BELL_WALL = shape(5, 5, 8, 11, 11, 16).add(3, 1, 3, 13, 13, 13)
-			.forHorizontal(SOUTH),
-		BELL_DOUBLE_WALL = shape(5, 5, 0, 11, 11, 16).add(3, 1, 3, 13, 13, 13)
-			.forHorizontal(SOUTH),
-		BELL_CEILING = shape(0, 5, 5, 16, 16, 11).add(3, 1, 3, 13, 13, 13)
-			.forHorizontal(SOUTH),
+	public static final VoxelShaper BELL_FLOOR = shape(0, 0, 5, 16, 11, 11).add(3, 1, 3, 13, 13, 13)
+			.forHorizontal(SOUTH);
+	public static final VoxelShaper BELL_WALL = shape(5, 5, 8, 11, 11, 16).add(3, 1, 3, 13, 13, 13)
+			.forHorizontal(SOUTH);
+	public static final VoxelShaper BELL_DOUBLE_WALL = shape(5, 5, 0, 11, 11, 16).add(3, 1, 3, 13, 13, 13)
+			.forHorizontal(SOUTH);
+	public static final VoxelShaper BELL_CEILING = shape(0, 5, 5, 16, 16, 11).add(3, 1, 3, 13, 13, 13)
+			.forHorizontal(SOUTH);
 
-		GIRDER_BEAM = shape(4, 2, 0, 12, 14, 16).forHorizontalAxis(),
-		GIRDER_BEAM_SHAFT = shape(GIRDER_BEAM.get(Axis.X)).add(SIX_VOXEL_POLE.get(Axis.Z))
-			.forHorizontalAxis(),
+	public static final VoxelShaper GIRDER_BEAM = shape(4, 2, 0, 12, 14, 16).forHorizontalAxis();
+	public static final VoxelShaper GIRDER_BEAM_SHAFT = shape(GIRDER_BEAM.get(Axis.X)).add(SIX_VOXEL_POLE.get(Axis.Z))
+			.forHorizontalAxis();
 
-		STEP_BOTTOM = shape(0, 0, 8, 16, 8, 16).forHorizontal(SOUTH),
-		STEP_TOP = shape(0, 8, 8, 16, 16, 16).forHorizontal(SOUTH),
+	public static final VoxelShaper STEP_BOTTOM = shape(0, 0, 8, 16, 8, 16).forHorizontal(SOUTH);
+	public static final VoxelShaper STEP_TOP = shape(0, 8, 8, 16, 16, 16).forHorizontal(SOUTH);
 
-		CONTROLS = shape(0, 0, 6, 16, 16, 16).add(0, 0, 4, 16, 2, 16)
-			.forHorizontal(NORTH),
-		CONTROLS_COLLISION = shape(0, 0, 6, 16, 16, 16).forHorizontal(NORTH),
+	public static final VoxelShaper CONTROLS = shape(0, 0, 6, 16, 16, 16).add(0, 0, 4, 16, 2, 16)
+			.forHorizontal(NORTH);
+	public static final VoxelShaper CONTROLS_COLLISION = shape(0, 0, 6, 16, 16, 16).forHorizontal(NORTH);
 
-		CONTRAPTION_CONTROLS = shape(0, 0, 6, 2, 16, 16).add(14, 0, 6, 16, 16, 16)
+	public static final VoxelShaper CONTRAPTION_CONTROLS = shape(0, 0, 6, 2, 16, 16).add(14, 0, 6, 16, 16, 16)
 			.add(0, 0, 14, 16, 16, 16)
 			.add(0, 0, 6, 16, 12, 16)
 			.add(0, 0, 4, 16, 2, 16)
-			.forHorizontal(NORTH),
-		CONTRAPTION_CONTROLS_COLLISION = shape(0, 0, 6, 2, 16, 16).add(14, 0, 6, 16, 16, 16)
+			.forHorizontal(NORTH);
+	public static final VoxelShaper CONTRAPTION_CONTROLS_COLLISION = shape(0, 0, 6, 2, 16, 16).add(14, 0, 6, 16, 16, 16)
 			.add(0, 0, 14, 16, 16, 16)
 			.add(0, 0, 7, 16, 12, 16)
-			.forHorizontal(NORTH),
+			.forHorizontal(NORTH);
 
-		NIXIE_TUBE = shape(9, 0, 5, 15, 12, 11).add(1, 0, 5, 7, 12, 11)
-			.forHorizontalAxis(),
-		NIXIE_TUBE_CEILING = shape(9, 4, 5, 15, 16, 11).add(1, 4, 5, 7, 16, 11)
-			.forHorizontalAxis(),
-		NIXIE_TUBE_WALL = shape(5, 9, 0, 11, 15, 12).add(5, 1, 0, 11, 7, 12)
-			.forHorizontal(SOUTH),
+	public static final VoxelShaper NIXIE_TUBE = shape(9, 0, 5, 15, 12, 11).add(1, 0, 5, 7, 12, 11)
+			.forHorizontalAxis();
+	public static final VoxelShaper NIXIE_TUBE_CEILING = shape(9, 4, 5, 15, 16, 11).add(1, 4, 5, 7, 16, 11)
+			.forHorizontalAxis();
+	public static final VoxelShaper NIXIE_TUBE_WALL = shape(5, 9, 0, 11, 15, 12).add(5, 1, 0, 11, 7, 12)
+			.forHorizontal(SOUTH);
 
-		FLAP_DISPLAY = shape(0, 0, 3, 16, 16, 13).forHorizontal(SOUTH),
+	public static final VoxelShaper FLAP_DISPLAY = shape(0, 0, 3, 16, 16, 13).forHorizontal(SOUTH);
 
-		DATA_GATHERER = shape(1, 0, 1, 15, 6, 15).add(3, 5, 3, 13, 9, 13)
-			.forDirectional(),
-		STOCK_LINK = shape(1, 0, 1, 15, 5, 15).forDirectional(),
+	public static final VoxelShaper DATA_GATHERER = shape(1, 0, 1, 15, 6, 15).add(3, 5, 3, 13, 9, 13)
+			.forDirectional();
+	public static final VoxelShaper STOCK_LINK = shape(1, 0, 1, 15, 5, 15).forDirectional();
 
-		STEAM_ENGINE = shape(1, 0, 1, 15, 3, 15).add(3, 0, 3, 13, 15, 13)
+	public static final VoxelShaper STEAM_ENGINE = shape(1, 0, 1, 15, 3, 15).add(3, 0, 3, 13, 15, 13)
 			.add(1, 5, 4, 15, 13, 12)
-			.forHorizontalAxis(),
-		STEAM_ENGINE_CEILING = shape(1, 13, 1, 15, 16, 15).add(3, 1, 3, 13, 16, 13)
+			.forHorizontalAxis();
+	public static final VoxelShaper STEAM_ENGINE_CEILING = shape(1, 13, 1, 15, 16, 15).add(3, 1, 3, 13, 16, 13)
 			.add(1, 3, 4, 15, 11, 12)
-			.forHorizontalAxis(),
-		STEAM_ENGINE_WALL = shape(1, 1, 0, 15, 15, 3).add(3, 3, 0, 13, 13, 15)
+			.forHorizontalAxis();
+	public static final VoxelShaper STEAM_ENGINE_WALL = shape(1, 1, 0, 15, 15, 3).add(3, 3, 0, 13, 13, 15)
 			.add(1, 4, 5, 15, 12, 13)
-			.forHorizontal(SOUTH),
+			.forHorizontal(SOUTH);
 
-		PLACARD = shape(2, 0, 2, 14, 3, 14).forDirectional(UP),
-		FACTORY_PANEL_FALLBACK = shape(0, 0, 0, 16, 2, 16).forDirectional(UP),
+	public static final VoxelShaper PLACARD = shape(2, 0, 2, 14, 3, 14).forDirectional(UP);
+	public static final VoxelShaper FACTORY_PANEL_FALLBACK = shape(0, 0, 0, 16, 2, 16).forDirectional(UP);
 
-		CLIPBOARD_FLOOR = shape(3, 0, 1, 13, 1, 15).forHorizontal(SOUTH),
-		CLIPBOARD_CEILING = shape(3, 15, 1, 13, 16, 15).forHorizontal(SOUTH),
-		CLIPBOARD_WALL = shape(3, 1, 0, 13, 15, 1).forHorizontal(SOUTH),
+	public static final VoxelShaper CLIPBOARD_FLOOR = shape(3, 0, 1, 13, 1, 15).forHorizontal(SOUTH);
+	public static final VoxelShaper CLIPBOARD_CEILING = shape(3, 15, 1, 13, 16, 15).forHorizontal(SOUTH);
+	public static final VoxelShaper CLIPBOARD_WALL = shape(3, 1, 0, 13, 15, 1).forHorizontal(SOUTH);
 
-		TRACK_ORTHO = shape(TrackVoxelShapes.orthogonal()).forHorizontal(NORTH),
-		TRACK_ASC = shape(TrackVoxelShapes.ascending()).forHorizontal(SOUTH),
-		TRACK_DIAG = shape(TrackVoxelShapes.diagonal()).forHorizontal(SOUTH),
-		TRACK_ORTHO_LONG = shape(TrackVoxelShapes.longOrthogonalZOffset()).forHorizontal(SOUTH),
 
-		DEPLOYER_INTERACTION = shape(CASING_12PX.get(UP)).add(SIX_VOXEL_POLE.get(Axis.Y))
-			.forDirectional(UP),
+	public static final VoxelShaper DEPLOYER_INTERACTION = shape(CASING_12PX.get(UP)).add(SIX_VOXEL_POLE.get(Axis.Y))
+			.forDirectional(UP);
 
-		WHISTLE_BASE = shape(1, 0, 1, 15, 3, 15).add(5, 0, 5, 11, 8, 11)
-			.forDirectional(UP),
+	public static final VoxelShaper WHISTLE_BASE = shape(1, 0, 1, 15, 3, 15).add(5, 0, 5, 11, 8, 11)
+			.forDirectional(UP);
 
-		DESK_BELL = shape(3, 0, 3, 13, 3, 13).add(4, 0, 4, 12, 9, 12)
-			.forDirectional(UP),
+	public static final VoxelShaper DESK_BELL = shape(3, 0, 3, 13, 3, 13).add(4, 0, 4, 12, 9, 12)
+			.forDirectional(UP);
 
-		ITEM_HATCH = shape(1, 0, 0, 15, 16, 2).add(2, 2, 0, 14, 13, 3.8)
+	public static final VoxelShaper ITEM_HATCH = shape(1, 0, 0, 15, 16, 2).add(2, 2, 0, 14, 13, 3.8)
 			.add(2, 4, 0, 14, 11, 5.8)
 			.add(2, 6, 0, 14, 9, 7.8)
-			.forHorizontal(SOUTH),
+			.forHorizontal(SOUTH);
 
-		POSTBOX = shape(2, 0, 0, 14, 14, 16).forHorizontal(SOUTH);
+	public static final VoxelShaper POSTBOX = shape(2, 0, 0, 14, 14, 16).forHorizontal(SOUTH);
 
 	// Internally Shared Shapes
 	private static final VoxelShape
@@ -221,11 +205,7 @@ public class AllShapes {
 		.add(14, 0, 14, 16, 16, 16)
 		.build(),
 
-		TRACK_CROSS = shape(TRACK_ORTHO.get(SOUTH)).add(TRACK_ORTHO.get(EAST))
-			.build(),
 
-		TRACK_CROSS_DIAG = shape(TRACK_DIAG.get(SOUTH)).add(TRACK_DIAG.get(EAST))
-			.build(),
 
 		TRACK_COLLISION = shape(0, 0, 0, 16, 2, 16).build(),
 
@@ -329,32 +309,9 @@ public class AllShapes {
 	// More Shapers
 	public static final VoxelShaper
 
-	TRACK_CROSS_ORTHO_DIAG = shape(TRACK_DIAG.get(SOUTH)).add(TRACK_ORTHO.get(EAST))
-		.forHorizontal(SOUTH), TRACK_CROSS_DIAG_ORTHO =
-			shape(TRACK_DIAG.get(SOUTH)).add(TRACK_ORTHO.get(SOUTH))
-				.forHorizontal(SOUTH),
-
-		MECHANICAL_PISTON_HEAD = shape(PISTON_HEAD).forDirectional(), MECHANICAL_PISTON = CASING_12PX,
-		MECHANICAL_PISTON_EXTENDED = shape(PISTON_EXTENDED).forDirectional(),
-		SMALL_GEAR = shape(SMALL_GEAR_SHAPE).add(SIX_VOXEL_POLE.get(Axis.Y))
-			.forAxis(),
-		LARGE_GEAR = shape(LARGE_GEAR_SHAPE).add(SIX_VOXEL_POLE.get(Axis.Y))
-			.forAxis(),
-		LOGISTICAL_CONTROLLER = shape(SQUARE_TABLET_SHAPE).forDirectional(SOUTH),
-		REDSTONE_BRIDGE = shape(VERTICAL_TABLET_SHAPE).forDirectional(SOUTH)
-			.withVerticalShapes(LOGISTICAL_CONTROLLER.get(UP)),
-		LOGISTICS_TABLE = shape(TABLE_POLE_SHAPE).add(LOGISTICS_TABLE_SLOPE)
-			.forHorizontal(SOUTH),
 		SCHEMATICS_TABLE = shape(4, 0, 4, 12, 12, 12).add(0, 11, 2, 16, 14, 14)
-			.forDirectional(SOUTH),
-		CHUTE_SLOPE = shape(ChuteShapes.createSlope()).forHorizontal(SOUTH),
+			.forDirectional(SOUTH)
 
-		WHISTLE_SMALL_WALL = shape(WHISTLE_SMALL).add(WHISTLE_BASE.get(NORTH))
-			.forHorizontal(SOUTH),
-		WHISTLE_MEDIUM_WALL = shape(WHISTLE_MEDIUM).add(WHISTLE_BASE.get(NORTH))
-			.forHorizontal(SOUTH),
-		WHISTLE_LARGE_WALL = shape(WHISTLE_LARGE).add(WHISTLE_BASE.get(NORTH))
-			.forHorizontal(SOUTH)
 
 	;
 

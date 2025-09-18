@@ -59,8 +59,8 @@ public class TagGen {
 
 	public static class CreateTagsProvider<T> {
 
-		private RegistrateTagsProvider<T> provider;
-		private Function<T, ResourceKey<T>> keyExtractor;
+		private final RegistrateTagsProvider<T> provider;
+		private final Function<T, ResourceKey<T>> keyExtractor;
 
 		public CreateTagsProvider(RegistrateTagsProvider<T> provider, Function<T, Holder.Reference<T>> refExtractor) {
 			this.provider = provider;
@@ -80,7 +80,7 @@ public class TagGen {
 
 	public static class CreateTagAppender<T> extends TagsProvider.TagAppender<T> {
 
-		private Function<T, ResourceKey<T>> keyExtractor;
+		private final Function<T, ResourceKey<T>> keyExtractor;
 
 		public CreateTagAppender(TagBuilder pBuilder, Function<T, ResourceKey<T>> pKeyExtractor, String modId) {
 			super(pBuilder, modId);
@@ -94,7 +94,7 @@ public class TagGen {
 
 		@SafeVarargs
 		public final CreateTagAppender<T> add(T... entries) {
-			Stream.<T>of(entries)
+			Stream.of(entries)
 				.map(this.keyExtractor)
 				.forEach(this::add);
 			return this;

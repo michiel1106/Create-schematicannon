@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.simibubi.create.content.contraptions.StructureTransform;
+import com.simibubi.create.StructureTransform;
 
 import net.createmod.catnip.data.WorldAttached;
 import net.createmod.catnip.levelWrappers.SchematicLevel;
@@ -62,8 +62,14 @@ public class SchematicInstances {
 		StructurePlaceSettings settings = SchematicItem.getSettings(schematic);
 		activeTemplate.placeInWorld(world, anchor, anchor, settings, wrapped.getRandom(), Block.UPDATE_CLIENTS);
 
-		StructureTransform transform = new StructureTransform(settings.getRotationPivot(), Direction.Axis.Y,
-			settings.getRotation(), settings.getMirror());
+		StructureTransform transform = new StructureTransform(
+			settings.getRotationPivot(),
+			Direction.Axis.Y,
+			settings.getRotation(),
+			settings.getMirror());
+
+
+
 		for (BlockEntity be : world.getBlockEntities())
 			transform.apply(be);
 

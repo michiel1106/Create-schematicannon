@@ -6,9 +6,7 @@ import java.util.List;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.equipment.clipboard.ClipboardOverrides.ClipboardType;
-import com.simibubi.create.content.trains.track.TrackBlockOutline;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.CreateLang;
@@ -28,6 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderHighlightEvent;
@@ -75,7 +74,6 @@ public class ClipboardValueSettingsHandler {
 
 		ms.pushPose();
 		ms.translate(pos.getX() - camPos.x, pos.getY() - camPos.y, pos.getZ() - camPos.z);
-		TrackBlockOutline.renderShape(shape, ms, vb, true);
 		event.setCanceled(true);
 
 		ms.popPose();
@@ -96,7 +94,6 @@ public class ClipboardValueSettingsHandler {
 			List<MutableComponent> tip = new ArrayList<>();
 			tip.add(CreateLang.translateDirect("clipboard.actions"));
             tip.add(CreateLang.translateDirect("clipboard.copy_other_clipboard", Component.keybind("key.use")));
-			CreateClient.VALUE_SETTINGS_HANDLER.showHoverTip(tip);
 			return;
 		}
 
@@ -127,7 +124,6 @@ public class ClipboardValueSettingsHandler {
 		if (canPaste)
             tip.add(CreateLang.translateDirect("clipboard.to_paste", Component.keybind("key.attack")));
 
-		CreateClient.VALUE_SETTINGS_HANDLER.showHoverTip(tip);
 	}
 
 	@SubscribeEvent

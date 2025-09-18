@@ -1,5 +1,6 @@
 package com.simibubi.create;
 
+import com.simibubi.create.content.equipment.clipboard.ClipboardBlockEntity;
 import com.simibubi.create.content.schematics.cannon.SchematicannonBlockEntity;
 import com.simibubi.create.content.schematics.cannon.SchematicannonRenderer;
 import com.simibubi.create.content.schematics.cannon.SchematicannonVisual;
@@ -21,6 +22,11 @@ public class AllBlockEntityTypes {
 	public static final BlockEntityEntry<SchematicTableBlockEntity> SCHEMATIC_TABLE = REGISTRATE
 		.blockEntity("schematic_table", SchematicTableBlockEntity::new)
 		.validBlocks(AllBlocks.SCHEMATIC_TABLE)
+		.register();
+
+	public static final BlockEntityEntry<ClipboardBlockEntity> CLIPBOARD = REGISTRATE
+		.blockEntity("clipboard", ClipboardBlockEntity::new)
+		.validBlocks(AllBlocks.CLIPBOARD)
 		.register();
 
 

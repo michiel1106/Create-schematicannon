@@ -7,7 +7,5 @@ public interface CTType {
 
 	int getSheetSize();
 
-	ContextRequirement getContextRequirement();
 
-	int getTextureIndex(CTContext context);
 }

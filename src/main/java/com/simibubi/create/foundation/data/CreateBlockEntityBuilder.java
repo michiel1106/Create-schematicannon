@@ -6,14 +6,10 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import com.simibubi.create.api.behaviour.display.DisplaySource;
-import com.simibubi.create.api.behaviour.display.DisplayTarget;
-import com.simibubi.create.api.registry.CreateRegistries;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.BlockEntityBuilder;
 import com.tterrag.registrate.builders.BuilderCallback;
 import com.tterrag.registrate.util.OneTimeEventReceiver;
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
 import dev.engine_room.flywheel.lib.visualization.SimpleBlockEntityVisualizer;
@@ -60,21 +56,7 @@ public class CreateBlockEntityBuilder<T extends BlockEntity, P> extends BlockEnt
 		return super.createEntry();
 	}
 
-	public CreateBlockEntityBuilder<T, P> displaySource(RegistryEntry<? extends DisplaySource> source) {
-		this.onRegisterAfter(
-			CreateRegistries.DISPLAY_SOURCE,
-			type -> DisplaySource.BY_BLOCK_ENTITY.add(type, source.get())
-		);
-		return this;
-	}
 
-	public CreateBlockEntityBuilder<T, P> displayTarget(RegistryEntry<? extends DisplayTarget> target) {
-		this.onRegisterAfter(
-			CreateRegistries.DISPLAY_TARGET,
-			type -> DisplayTarget.BY_BLOCK_ENTITY.register(type, target.get())
-		);
-		return this;
-	}
 
 	public CreateBlockEntityBuilder<T, P> visual(
 		NonNullSupplier<SimpleBlockEntityVisualizer.Factory<T>> visualFactory) {

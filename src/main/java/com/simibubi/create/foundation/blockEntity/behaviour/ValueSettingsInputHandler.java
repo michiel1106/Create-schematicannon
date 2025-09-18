@@ -1,10 +1,7 @@
 package com.simibubi.create.foundation.blockEntity.behaviour;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllTags.AllItemTags;
-import com.simibubi.create.CreateClient;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
-import com.simibubi.create.foundation.blockEntity.behaviour.filtering.SidedFilteringBehaviour;
 import com.simibubi.create.foundation.utility.AdventureUtil;
 
 import net.minecraft.core.BlockPos;
@@ -13,12 +10,10 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.api.distmarker.Dist;
+
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber
@@ -38,9 +33,7 @@ public class ValueSettingsInputHandler {
 		if (!(world.getBlockEntity(pos)instanceof SmartBlockEntity sbe))
 			return;
 
-		if (event.getSide() == LogicalSide.CLIENT)
-			DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-				() -> () -> CreateClient.VALUE_SETTINGS_HANDLER.cancelIfWarmupAlreadyStarted(event));
+
 
 		if (event.isCanceled())
 			return;
@@ -56,16 +49,9 @@ public class ValueSettingsInputHandler {
 			BlockHitResult ray = event.getHitVec();
 			if (ray == null)
 				return;
-			if (behaviour instanceof SidedFilteringBehaviour) {
-				behaviour = ((SidedFilteringBehaviour) behaviour).get(ray.getDirection());
-				if (behaviour == null)
-					continue;
-			}
+
 
 			if (!valueSettingsBehaviour.isActive())
-				continue;
-			if (valueSettingsBehaviour.onlyVisibleWithWrench()
-				&& !AllItemTags.WRENCH.matches(player.getItemInHand(hand)))
 				continue;
 			if (valueSettingsBehaviour.getSlotPositioning()instanceof ValueBoxTransform.Sided sidedSlot) {
 				if (!sidedSlot.isSideActive(sbe.getBlockState(), ray.getDirection()))
@@ -85,11 +71,7 @@ public class ValueSettingsInputHandler {
 				return;
 			}
 
-			if (event.getSide() == LogicalSide.CLIENT) {
-				BehaviourType<?> type = behaviour.getType();
-				DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateClient.VALUE_SETTINGS_HANDLER
-					.startInteractionWith(pos, type, hand, ray.getDirection()));
-			}
+
 
 			return;
 		}

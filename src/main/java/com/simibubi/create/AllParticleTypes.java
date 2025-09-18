@@ -2,14 +2,7 @@ package com.simibubi.create;
 
 import java.util.function.Supplier;
 
-import com.simibubi.create.content.equipment.bell.SoulBaseParticle;
-import com.simibubi.create.content.equipment.bell.SoulParticle;
-import com.simibubi.create.content.fluids.particle.FluidParticleData;
-import com.simibubi.create.content.kinetics.base.RotationIndicatorParticleData;
-import com.simibubi.create.content.kinetics.fan.AirFlowParticleData;
-import com.simibubi.create.content.kinetics.steamEngine.SteamJetParticleData;
-import com.simibubi.create.content.logistics.packagerLink.WiFiParticle;
-import com.simibubi.create.content.trains.CubeParticleData;
+
 import com.simibubi.create.foundation.particle.AirParticleData;
 import com.simibubi.create.foundation.particle.ICustomParticleData;
 
@@ -26,19 +19,9 @@ import net.minecraftforge.registries.RegistryObject;
 
 public enum AllParticleTypes {
 
-	ROTATION_INDICATOR(RotationIndicatorParticleData::new),
-	AIR_FLOW(AirFlowParticleData::new),
-	AIR(AirParticleData::new),
-	STEAM_JET(SteamJetParticleData::new),
-	CUBE(CubeParticleData::new),
-	FLUID_PARTICLE(FluidParticleData::new),
-	BASIN_FLUID(FluidParticleData::new),
-	FLUID_DRIP(FluidParticleData::new),
-	WIFI(WiFiParticle.Data::new),
-	SOUL(SoulParticle.Data::new),
-	SOUL_BASE(SoulBaseParticle.Data::new),
-	SOUL_PERIMETER(SoulParticle.PerimeterData::new),
-	SOUL_EXPANDING_PERIMETER(SoulParticle.ExpandingPerimeterData::new);
+
+	AIR(AirParticleData::new);
+
 
 	private final ParticleEntry<?> entry;
 

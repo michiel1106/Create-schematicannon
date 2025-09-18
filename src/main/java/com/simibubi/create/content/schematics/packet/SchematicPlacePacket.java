@@ -3,7 +3,7 @@ package com.simibubi.create.content.schematics.packet;
 import com.simibubi.create.content.schematics.SchematicPrinter;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 import com.simibubi.create.foundation.utility.BlockHelper;
-import com.simibubi.create.infrastructure.config.AllConfigs;
+
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -43,8 +43,8 @@ public class SchematicPlacePacket extends SimplePacketBase {
 			printer.loadSchematic(stack, world, !player.canUseGameMasterBlocks());
 			if (!printer.isLoaded() || printer.isErrored())
 				return;
-			
-			boolean includeAir = AllConfigs.server().schematics.creativePrintIncludesAir.get();
+
+			boolean includeAir = false;
 
 			while (printer.advanceCurrentPos()) {
 				if (!printer.shouldPlaceCurrent(world))
@@ -54,7 +54,7 @@ public class SchematicPlacePacket extends SimplePacketBase {
 					boolean placingAir = state.isAir();
 					if (placingAir && !includeAir)
 						return;
-					
+
 					CompoundTag data = BlockHelper.prepareBlockEntityData(state, blockEntity);
 					BlockHelper.placeSchematicBlock(world, state, pos, null, data);
 				}, (pos, entity) -> {

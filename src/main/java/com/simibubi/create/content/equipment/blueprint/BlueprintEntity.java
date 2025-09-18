@@ -13,7 +13,7 @@ import com.simibubi.create.AllEntityTypes;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.Create;
 import com.simibubi.create.api.schematic.requirement.SpecialEntityItemRequirement;
-import com.simibubi.create.content.logistics.filter.FilterItemStack;
+
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement.ItemUseType;
 import com.simibubi.create.foundation.networking.ISyncPersistentData;
@@ -352,11 +352,10 @@ public class BlueprintEntity extends HangingEntity
 		if (player instanceof FakePlayer)
 			return InteractionResult.PASS;
 
-		boolean holdingWrench = AllItems.WRENCH.isIn(player.getItemInHand(hand));
 		BlueprintSection section = getSectionAt(vec);
 		ItemStackHandler items = section.getItems();
 
-		if (!holdingWrench && !level().isClientSide && !items.getStackInSlot(9)
+		if (!level().isClientSide && !items.getStackInSlot(9)
 			.isEmpty()) {
 
 			IItemHandlerModifiable playerInv = new InvWrapper(player.getInventory());
@@ -370,30 +369,6 @@ public class BlueprintEntity extends HangingEntity
 				Map<Integer, ItemStack> craftingGrid = new HashMap<>();
 				boolean success = true;
 
-				Search:
-				for (int i = 0; i < 9; i++) {
-					FilterItemStack requestedItem = FilterItemStack.of(items.getStackInSlot(i));
-					if (requestedItem.isEmpty()) {
-						craftingGrid.put(i, ItemStack.EMPTY);
-						continue;
-					}
-
-					for (int slot = 0; slot < playerInv.getSlots(); slot++) {
-						if (!requestedItem.test(level(), playerInv.getStackInSlot(slot)))
-							continue;
-						ItemStack currentItem = playerInv.extractItem(slot, 1, false);
-						if (stacksTaken.containsKey(slot))
-							stacksTaken.get(slot)
-								.grow(1);
-						else
-							stacksTaken.put(slot, currentItem.copy());
-						craftingGrid.put(i, currentItem);
-						continue Search;
-					}
-
-					success = false;
-					break;
-				}
 
 				if (success) {
 					CraftingContainer craftingInventory = new BlueprintCraftingInventory(craftingGrid);

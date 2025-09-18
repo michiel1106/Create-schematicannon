@@ -1,7 +1,6 @@
 package com.simibubi.create.foundation.gui.widget;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.simibubi.create.AllKeys;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 
 import net.createmod.catnip.gui.element.ScreenElement;
@@ -30,7 +29,7 @@ public class IconButton extends AbstractSimiWidget {
 			isHovered = mouseX >= getX() && mouseY >= getY() && mouseX < getX() + width && mouseY < getY() + height;
 
 			AllGuiTextures button = !active ? AllGuiTextures.BUTTON_DISABLED
-				: isHovered && AllKeys.isMouseButtonDown(0) ? AllGuiTextures.BUTTON_DOWN
+				: isHovered ? AllGuiTextures.BUTTON_DOWN
 					: isHovered ? AllGuiTextures.BUTTON_HOVER
 						: green ? AllGuiTextures.BUTTON_GREEN : AllGuiTextures.BUTTON;
 

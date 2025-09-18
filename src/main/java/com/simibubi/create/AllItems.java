@@ -1,6 +1,5 @@
 package com.simibubi.create;
 
-import com.simibubi.create.content.equipment.blueprint.BlueprintItem;
 import com.simibubi.create.content.schematics.SchematicAndQuillItem;
 import com.simibubi.create.content.schematics.SchematicItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -10,21 +9,6 @@ import net.minecraft.world.item.Item;
 
 public class AllItems {
 	private static final CreateRegistrate REGISTRATE = Create.registrate();
-
-	static {
-		REGISTRATE.setCreativeTab(AllCreativeModeTabs.BASE_CREATIVE_TAB);
-	}
-
-
-
-
-	public static final ItemEntry<BlueprintItem> CRAFTING_BLUEPRINT =
-		REGISTRATE.item("crafting_blueprint", BlueprintItem::new)
-			.register();
-
-
-
-
 
 
 

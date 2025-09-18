@@ -6,7 +6,6 @@ import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
 import com.simibubi.create.AllTags.AllBlockTags;
-import com.simibubi.create.content.SharedProperties;
 import com.simibubi.create.content.equipment.clipboard.ClipboardBlock;
 import com.simibubi.create.content.equipment.clipboard.ClipboardBlockItem;
 import com.simibubi.create.content.equipment.clipboard.ClipboardOverrides;
@@ -37,7 +36,7 @@ public class AllBlocks {
 	// Schematics
 
 	public static final BlockEntry<ClipboardBlock> CLIPBOARD = REGISTRATE.block("clipboard", ClipboardBlock::new)
-		.initialProperties(SharedProperties.wooden())
+		.initialProperties(() -> Blocks.STRIPPED_SPRUCE_WOOD)
 		.properties(p -> p.forceSolidOn())
 		.transform(axeOrPickaxe())
 		.tag(AllBlockTags.SAFE_NBT.tag)
