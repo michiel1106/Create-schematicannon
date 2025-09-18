@@ -13,7 +13,7 @@ public class DeferralBehaviour extends BlockEntityBehaviour {
 	public static final BehaviourType<DeferralBehaviour> TYPE = new BehaviourType<>();
 
 	private boolean needsUpdate;
-	private Supplier<Boolean> callback;
+	private final Supplier<Boolean> callback;
 
 	public DeferralBehaviour(SmartBlockEntity be, Supplier<Boolean> callback) {
 		super(be);

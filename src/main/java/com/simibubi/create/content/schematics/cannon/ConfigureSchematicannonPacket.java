@@ -9,12 +9,12 @@ import net.minecraftforge.network.NetworkEvent.Context;
 
 public class ConfigureSchematicannonPacket extends SimplePacketBase {
 
-	public static enum Option {
-		DONT_REPLACE, REPLACE_SOLID, REPLACE_ANY, REPLACE_EMPTY, SKIP_MISSING, SKIP_BLOCK_ENTITIES, PLAY, PAUSE, STOP;
+	public enum Option {
+		DONT_REPLACE, REPLACE_SOLID, REPLACE_ANY, REPLACE_EMPTY, SKIP_MISSING, SKIP_BLOCK_ENTITIES, PLAY, PAUSE, STOP
 	}
 
-	private Option option;
-	private boolean set;
+	private final Option option;
+	private final boolean set;
 
 	public ConfigureSchematicannonPacket(Option option, boolean set) {
 		this.option = option;

@@ -15,9 +15,9 @@ public class SchematicUploadPacket extends SimplePacketBase {
 	public static final int WRITE = 1;
 	public static final int FINISH = 2;
 
-	private int code;
+	private final int code;
 	private long size;
-	private String schematic;
+	private final String schematic;
 	private byte[] data;
 
 	public SchematicUploadPacket(int code, String schematic) {

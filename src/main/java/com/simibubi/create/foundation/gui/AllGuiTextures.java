@@ -260,8 +260,6 @@ public enum AllGuiTextures implements ScreenElement, TextureSheetSegment {
 	// ComputerCraft
 	COMPUTER("computer", 200, 102);
 
-	;
-
 	public static final int FONT_COLOR = 0x575F7A;
 
 	public final ResourceLocation location;

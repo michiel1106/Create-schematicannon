@@ -22,7 +22,7 @@ public class ClipboardOverrides {
 		public String file;
 		public static ResourceLocation ID = Create.asResource("clipboard_type");
 
-		private ClipboardType(String file) {
+		ClipboardType(String file) {
 			this.file = file;
 		}
 	}

@@ -336,7 +336,7 @@ public class BlueprintOverlayRenderer {
 		}
 
 		int x = (width - w) / 2;
-		int y = (int) (height - 100);
+		int y = height - 100;
 
 		if (shopContext != null) {
 			TooltipRenderUtil.renderTooltipBackground(graphics, x - 2, y + 1, w + 4, 19, 0, 0x55_000000, 0x55_000000, 0,

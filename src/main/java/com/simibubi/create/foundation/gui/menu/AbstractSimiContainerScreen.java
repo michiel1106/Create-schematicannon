@@ -156,7 +156,7 @@ public abstract class AbstractSimiContainerScreen<T extends AbstractContainerMen
 	@Override
 	public GuiEventListener getFocused() {
 		GuiEventListener focused = super.getFocused();
-		if (focused instanceof AbstractWidget && !((AbstractWidget) focused).isFocused())
+		if (focused instanceof AbstractWidget && !focused.isFocused())
 			focused = null;
 		setFocused(focused);
 		return focused;

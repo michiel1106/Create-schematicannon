@@ -8,6 +8,6 @@ public interface IClearableMenu {
 		AllPackets.getChannel().sendToServer(new ClearMenuPacket());
 	}
 
-	public void clearContents();
+	void clearContents();
 
 }

@@ -15,10 +15,10 @@ import net.minecraft.network.chat.CommonComponents;
 
 public class ModularGuiLineBuilder {
 
-	private ModularGuiLine target;
-	private Font font;
-	private int x;
-	private int y;
+	private final ModularGuiLine target;
+	private final Font font;
+	private final int x;
+	private final int y;
 
 	public ModularGuiLineBuilder(Font font, ModularGuiLine target, int x, int y) {
 		this.font = font;

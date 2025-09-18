@@ -23,7 +23,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class ValueSettingsClient implements IGuiOverlay {
 
-	private Minecraft mc;
+	private final Minecraft mc;
 
 	public int interactHeldTicks = -1;
 	public BlockPos interactHeldPos = null;
@@ -39,22 +39,7 @@ public class ValueSettingsClient implements IGuiOverlay {
 		mc = Minecraft.getInstance();
 	}
 
-	public void cancelIfWarmupAlreadyStarted(PlayerInteractEvent.RightClickBlock event) {
-		if (interactHeldTicks != -1 && event.getPos()
-			.equals(interactHeldPos)) {
-			event.setCanceled(true);
-			event.setCancellationResult(InteractionResult.FAIL);
-		}
-	}
 
-	public void startInteractionWith(BlockPos pos, BehaviourType<?> behaviourType, InteractionHand hand,
-		Direction side) {
-		interactHeldTicks = 0;
-		interactHeldPos = pos;
-		interactHeldBehaviour = behaviourType;
-		interactHeldHand = hand;
-		interactHeldFace = side;
-	}
 
 	public void cancelInteraction() {
 		interactHeldTicks = -1;

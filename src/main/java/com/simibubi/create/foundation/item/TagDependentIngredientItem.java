@@ -7,7 +7,7 @@ import net.minecraftforge.registries.tags.ITagManager;
 
 public class TagDependentIngredientItem extends Item {
 
-	private TagKey<Item> tag;
+	private final TagKey<Item> tag;
 
 	public TagDependentIngredientItem(Properties properties, TagKey<Item> tag) {
 		super(properties);

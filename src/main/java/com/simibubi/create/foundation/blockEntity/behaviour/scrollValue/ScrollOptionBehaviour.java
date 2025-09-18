@@ -12,7 +12,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class ScrollOptionBehaviour<E extends Enum<E> & INamedIconOptions> extends ScrollValueBehaviour {
 
-	private E[] options;
+	private final E[] options;
 
 	public ScrollOptionBehaviour(Class<E> enum_, Component label, SmartBlockEntity be, ValueBoxTransform slot) {
 		super(label, be, slot);

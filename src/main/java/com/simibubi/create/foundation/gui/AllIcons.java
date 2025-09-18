@@ -25,8 +25,8 @@ public class AllIcons implements ScreenElement {
 	public static final int ICON_ATLAS_SIZE = 256;
 
 	private static int x = 0, y = -1;
-	private int iconX;
-	private int iconY;
+	private final int iconX;
+	private final int iconY;
 
 	public static final AllIcons
 		I_ADD = newRow(),
@@ -168,7 +168,6 @@ public class AllIcons implements ScreenElement {
 		I_PARTIAL_REQUESTS = next(),
 		I_FULL_REQUESTS = next(),
 		I_MOVE_GAUGE = next();
-	;
 
 	public AllIcons(int x, int y) {
 		iconX = x * 16;

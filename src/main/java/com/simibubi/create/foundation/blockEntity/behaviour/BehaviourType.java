@@ -2,7 +2,7 @@ package com.simibubi.create.foundation.blockEntity.behaviour;
 
 public class BehaviourType<T extends BlockEntityBehaviour> {
 
-	private String name;
+	private final String name;
 
 	public BehaviourType(String name) {
 		this.name = name;

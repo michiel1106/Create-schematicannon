@@ -16,7 +16,7 @@ public interface ICustomParticleDataWithSprite<T extends ParticleOptions> extend
 
 	Deserializer<T> getDeserializer();
 
-	public default ParticleType<T> createType() {
+	default ParticleType<T> createType() {
 		return new ParticleType<>(false, getDeserializer()) {
 
 			@Override
@@ -33,11 +33,11 @@ public interface ICustomParticleDataWithSprite<T extends ParticleOptions> extend
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public SpriteParticleRegistration<T> getMetaFactory();
+	SpriteParticleRegistration<T> getMetaFactory();
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public default void register(ParticleType<T> type, RegisterParticleProvidersEvent event) {
+	default void register(ParticleType<T> type, RegisterParticleProvidersEvent event) {
 		event.registerSpriteSet(type, getMetaFactory());
 	}
 

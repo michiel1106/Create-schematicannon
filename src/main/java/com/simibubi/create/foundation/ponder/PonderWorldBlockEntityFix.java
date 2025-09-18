@@ -1,7 +1,5 @@
 package com.simibubi.create.foundation.ponder;
 
-import com.simibubi.create.content.kinetics.belt.BeltBlock;
-import com.simibubi.create.content.kinetics.belt.BeltBlockEntity;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 
 import net.createmod.ponder.api.level.PonderLevel;
@@ -13,17 +11,7 @@ public class PonderWorldBlockEntityFix {
 	public static void fixControllerBlockEntities(PonderLevel world) {
 		for (BlockEntity blockEntity : world.getBlockEntities()) {
 
-			if (blockEntity instanceof BeltBlockEntity beltBlockEntity) {
-				if (!beltBlockEntity.isController())
-					continue;
-				BlockPos controllerPos = blockEntity.getBlockPos();
-				for (BlockPos blockPos : BeltBlock.getBeltChain(world, controllerPos)) {
-					BlockEntity blockEntity2 = world.getBlockEntity(blockPos);
-					if (!(blockEntity2 instanceof BeltBlockEntity belt2))
-						continue;
-					belt2.setController(controllerPos);
-				}
-			}
+
 
 			if (blockEntity instanceof IMultiBlockEntityContainer multiBlockEntity) {
 				BlockPos lastKnown = multiBlockEntity.getLastKnownPos();

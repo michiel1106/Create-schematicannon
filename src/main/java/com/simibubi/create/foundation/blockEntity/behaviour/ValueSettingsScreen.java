@@ -30,17 +30,17 @@ import net.minecraft.world.phys.Vec2;
 public class ValueSettingsScreen extends AbstractSimiScreen {
 
 	private int ticksOpen;
-	private ValueSettingsBoard board;
+	private final ValueSettingsBoard board;
 	private int maxLabelWidth;
 	private int valueBarWidth;
-	private BlockPos pos;
-	private ValueSettings initialSettings;
+	private final BlockPos pos;
+	private final ValueSettings initialSettings;
 	private ValueSettings lastHovered = new ValueSettings(-1, -1);
-	private Consumer<ValueSettings> onHover;
-	private boolean iconMode;
-	private int milestoneSize;
+	private final Consumer<ValueSettings> onHover;
+	private final boolean iconMode;
+	private final int milestoneSize;
 	private int soundCoolDown;
-	private int netId;
+	private final int netId;
 
 	public ValueSettingsScreen(BlockPos pos, ValueSettingsBoard board, ValueSettings valueSettings,
 		Consumer<ValueSettings> onHover, int netId) {

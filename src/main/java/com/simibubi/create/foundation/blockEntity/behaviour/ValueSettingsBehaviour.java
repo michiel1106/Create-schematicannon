@@ -16,18 +16,18 @@ import net.minecraft.world.phys.Vec3;
 
 public interface ValueSettingsBehaviour extends ClipboardCloneable {
 
-	public static record ValueSettings(int row, int value) {
+	record ValueSettings(int row, int value) {
 
 		public MutableComponent format() {
 			return CreateLang.number(value)
 				.component();
 		}
 
-	};
+	}
 
-	public boolean testHit(Vec3 hit);
+	boolean testHit(Vec3 hit);
 
-	public boolean isActive();
+	boolean isActive();
 
 	default boolean onlyVisibleWithWrench() {
 		return false;
@@ -35,13 +35,13 @@ public interface ValueSettingsBehaviour extends ClipboardCloneable {
 
 	default void newSettingHovered(ValueSettings valueSetting) {}
 
-	public ValueBoxTransform getSlotPositioning();
+	ValueBoxTransform getSlotPositioning();
 
-	public ValueSettingsBoard createBoard(Player player, BlockHitResult hitResult);
+	ValueSettingsBoard createBoard(Player player, BlockHitResult hitResult);
 
-	public void setValueSettings(Player player, ValueSettings valueSetting, boolean ctrlDown);
+	void setValueSettings(Player player, ValueSettings valueSetting, boolean ctrlDown);
 
-	public ValueSettings getValueSettings();
+	ValueSettings getValueSettings();
 
 	default boolean acceptsValueSettings() {
 		return true;

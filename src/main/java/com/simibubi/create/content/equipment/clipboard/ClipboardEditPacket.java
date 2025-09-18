@@ -17,7 +17,7 @@ import net.minecraftforge.network.NetworkEvent.Context;
 
 public class ClipboardEditPacket extends SimplePacketBase {
 
-	private int hotbarSlot;
+	private final int hotbarSlot;
 	private CompoundTag data;
 	private BlockPos targetedBlock;
 

@@ -17,7 +17,7 @@ public interface ICustomParticleData<T extends ParticleOptions> {
 
 	Codec<T> getCodec(ParticleType<T> type);
 
-	public default ParticleType<T> createType() {
+	default ParticleType<T> createType() {
 		return new ParticleType<>(false, getDeserializer()) {
 
 			@Override
@@ -28,10 +28,10 @@ public interface ICustomParticleData<T extends ParticleOptions> {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public ParticleProvider<T> getFactory();
+	ParticleProvider<T> getFactory();
 
 	@OnlyIn(Dist.CLIENT)
-	public default void register(ParticleType<T> type, RegisterParticleProvidersEvent event) {
+	default void register(ParticleType<T> type, RegisterParticleProvidersEvent event) {
 		event.registerSpecial(type, getFactory());
 	}
 

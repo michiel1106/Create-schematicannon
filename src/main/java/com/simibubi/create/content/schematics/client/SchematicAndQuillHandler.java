@@ -39,7 +39,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class SchematicAndQuillHandler {
 
-	private Object outlineSlot = new Object();
+	private final Object outlineSlot = new Object();
 
 	public BlockPos firstPos;
 	public BlockPos secondPos;

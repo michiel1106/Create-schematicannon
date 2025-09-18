@@ -11,7 +11,7 @@ public class ScrollValueHandler {
 
 	private static float lastPassiveScroll = 0.0f;
 	private static float passiveScroll = 0.0f;
-	private static float passiveScrollDirection = 1f;
+	private static final float passiveScrollDirection = 1f;
 	public static final PhysicalFloat wrenchCog = PhysicalFloat.create()
 		.withDrag(0.3);
 

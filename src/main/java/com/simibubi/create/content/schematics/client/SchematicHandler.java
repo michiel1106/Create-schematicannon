@@ -68,8 +68,8 @@ public class SchematicHandler implements IGuiOverlay {
 	private ItemStack activeSchematicItem;
 	private AABBOutline outline;
 
-	private Vector<SchematicRenderer> renderers;
-	private SchematicHotbarSlotOverlay overlay;
+	private final Vector<SchematicRenderer> renderers;
+	private final SchematicHotbarSlotOverlay overlay;
 	private ToolSelectionScreen selectionScreen;
 
 	public SchematicHandler() {

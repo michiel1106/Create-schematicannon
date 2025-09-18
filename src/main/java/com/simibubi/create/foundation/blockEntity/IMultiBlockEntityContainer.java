@@ -57,11 +57,11 @@ public interface IMultiBlockEntityContainer {
 	int getWidth();
 	void setWidth(int width);
 
-	public interface Inventory extends IMultiBlockEntityContainer {
+	interface Inventory extends IMultiBlockEntityContainer {
 		default boolean hasInventory() { return false; }
 	}
 
-	public interface Fluid extends IMultiBlockEntityContainer {
+	interface Fluid extends IMultiBlockEntityContainer {
 		// done here rather than through the Capability to allow greater flexibility
 		default boolean hasTank() { return false; }
 

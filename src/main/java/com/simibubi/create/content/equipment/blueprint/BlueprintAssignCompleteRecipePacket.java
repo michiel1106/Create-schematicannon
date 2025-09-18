@@ -10,7 +10,7 @@ import net.minecraftforge.network.NetworkEvent.Context;
 
 public class BlueprintAssignCompleteRecipePacket extends SimplePacketBase {
 
-	private ResourceLocation recipeID;
+	private final ResourceLocation recipeID;
 
 	public BlueprintAssignCompleteRecipePacket(ResourceLocation recipeID) {
 		this.recipeID = recipeID;

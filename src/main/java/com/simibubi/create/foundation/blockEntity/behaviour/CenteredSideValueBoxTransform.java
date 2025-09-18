@@ -9,7 +9,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class CenteredSideValueBoxTransform extends ValueBoxTransform.Sided {
 
-	private BiPredicate<BlockState, Direction> allowedDirections;
+	private final BiPredicate<BlockState, Direction> allowedDirections;
 
 	public CenteredSideValueBoxTransform() {
 		this((b, d) -> true);

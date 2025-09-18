@@ -78,8 +78,8 @@ public abstract class SyncedBlockEntity extends BlockEntity {
 
 	@SuppressWarnings("deprecation")
 	public HolderGetter<Block> blockHolderGetter() {
-		return (HolderGetter<Block>) (level != null ? level.holderLookup(Registries.BLOCK)
-			: BuiltInRegistries.BLOCK.asLookup());
+		return level != null ? level.holderLookup(Registries.BLOCK)
+			: BuiltInRegistries.BLOCK.asLookup();
 	}
 
 }

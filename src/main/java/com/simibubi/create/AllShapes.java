@@ -191,8 +191,6 @@ public class AllShapes {
 
 		POSTBOX = shape(2, 0, 0, 14, 14, 16).forHorizontal(SOUTH);
 
-	;
-
 	// Internally Shared Shapes
 	private static final VoxelShape
 

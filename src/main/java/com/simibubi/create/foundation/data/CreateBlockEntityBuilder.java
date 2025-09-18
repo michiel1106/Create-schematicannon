@@ -32,7 +32,7 @@ public class CreateBlockEntityBuilder<T extends BlockEntity, P> extends BlockEnt
 	private NonNullSupplier<SimpleBlockEntityVisualizer.Factory<T>> visualFactory;
 	private NonNullPredicate<T> renderNormally;
 
-	private Collection<NonNullSupplier<? extends Collection<NonNullSupplier<? extends Block>>>> deferredValidBlocks =
+	private final Collection<NonNullSupplier<? extends Collection<NonNullSupplier<? extends Block>>>> deferredValidBlocks =
 		new ArrayList<>();
 
 	public static <T extends BlockEntity, P> BlockEntityBuilder<T, P> create(AbstractRegistrate<?> owner, P parent,

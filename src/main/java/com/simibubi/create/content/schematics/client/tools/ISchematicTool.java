@@ -9,14 +9,14 @@ import net.minecraftforge.client.gui.overlay.ForgeGui;
 
 public interface ISchematicTool {
 
-	public void init();
-	public void updateSelection();
+	void init();
+	void updateSelection();
 
-	public boolean handleRightClick();
-	public boolean handleMouseWheel(double delta);
+	boolean handleRightClick();
+	boolean handleMouseWheel(double delta);
 
-	public void renderTool(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera);
-	public void renderOverlay(ForgeGui gui, GuiGraphics graphics, float partialTicks, int width, int height);
-	public void renderOnSchematic(PoseStack ms, SuperRenderTypeBuffer buffer);
+	void renderTool(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera);
+	void renderOverlay(ForgeGui gui, GuiGraphics graphics, float partialTicks, int width, int height);
+	void renderOnSchematic(PoseStack ms, SuperRenderTypeBuffer buffer);
 
 }

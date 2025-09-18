@@ -78,7 +78,7 @@ public class ClipboardScreen extends AbstractSimiScreen {
 	IconButton closeBtn;
 	IconButton clearBtn;
 
-	private int targetSlot;
+	private final int targetSlot;
 
 	public ClipboardScreen(int targetSlot, ItemStack item, @Nullable BlockPos pos) {
 		this.targetSlot = targetSlot;
@@ -559,13 +559,13 @@ public class ClipboardScreen extends AbstractSimiScreen {
 			int j = rect2i.getY();
 			int k = i + rect2i.getWidth();
 			int l = j + rect2i.getHeight();
-			bufferbuilder.vertex((double) i, (double) l, 0.0D)
+			bufferbuilder.vertex(i, l, 0.0D)
 				.endVertex();
-			bufferbuilder.vertex((double) k, (double) l, 0.0D)
+			bufferbuilder.vertex(k, l, 0.0D)
 				.endVertex();
-			bufferbuilder.vertex((double) k, (double) j, 0.0D)
+			bufferbuilder.vertex(k, j, 0.0D)
 				.endVertex();
-			bufferbuilder.vertex((double) i, (double) j, 0.0D)
+			bufferbuilder.vertex(i, j, 0.0D)
 				.endVertex();
 		}
 
@@ -595,7 +595,7 @@ public class ClipboardScreen extends AbstractSimiScreen {
 				editingIndex = -1;
 				if (hoveredEntry < currentEntries.size()) {
 					currentEntries.get(hoveredEntry).checked ^= true;
-					if (currentEntries.get(hoveredEntry).checked == true)
+					if (currentEntries.get(hoveredEntry).checked)
 						Minecraft.getInstance()
 							.getSoundManager()
 							.play(SimpleSoundInstance.forUI(AllSoundEvents.CLIPBOARD_CHECKMARK.getMainEvent(),

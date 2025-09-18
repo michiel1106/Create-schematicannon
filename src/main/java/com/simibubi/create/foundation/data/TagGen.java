@@ -1,14 +1,10 @@
 package com.simibubi.create.foundation.data;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
-import com.simibubi.create.foundation.data.recipe.CommonMetal;
-import com.simibubi.create.foundation.data.recipe.Mods;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
@@ -16,7 +12,6 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 
 import net.minecraft.core.Holder;
 import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.data.tags.TagsProvider.TagAppender;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagBuilder;
@@ -39,10 +34,7 @@ public class TagGen {
 		return b -> b.tag(BlockTags.MINEABLE_WITH_PICKAXE);
 	}
 
-	public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, ItemBuilder<BlockItem, BlockBuilder<T, P>>> tagBlockAndItem(
-		CommonMetal.ItemLikeTag tag) {
-		return tagBlockAndItem(Map.of(tag.blocks(), tag.items()));
-	}
+
 
 	public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, ItemBuilder<BlockItem, BlockBuilder<T, P>>> tagBlockAndItem(
 		TagKey<Block> blockTag, TagKey<Item> itemTag) {
@@ -63,17 +55,7 @@ public class TagGen {
 		};
 	}
 
-	public static <T extends TagAppender<?>> T addOptional(T appender, Mods mod, String id) {
-		appender.addOptional(mod.asResource(id));
-		return appender;
-	}
 
-	public static <T extends TagAppender<?>> T addOptional(T appender, Mods mod, List<String> ids) {
-		for (String id : ids) {
-			appender.addOptional(mod.asResource(id));
-		}
-		return appender;
-	}
 
 	public static class CreateTagsProvider<T> {
 

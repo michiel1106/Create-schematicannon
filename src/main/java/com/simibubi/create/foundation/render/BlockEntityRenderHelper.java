@@ -109,8 +109,7 @@ public class BlockEntityRenderHelper {
 				// Prevent this BE from causing more issues in the future.
 				toRemove.add(blockEntity);
 
-				String message = "BlockEntity " + CatnipServices.REGISTRIES.getKeyOrThrow(blockEntity.getType())
-					.toString() + " could not be rendered virtually.";
+				String message = "BlockEntity " + CatnipServices.REGISTRIES.getKeyOrThrow(blockEntity.getType()) + " could not be rendered virtually.";
 				if (AllConfigs.client().explainRenderErrors.get()) Create.LOGGER.error(message, e);
 				else Create.LOGGER.error(message);
 			}

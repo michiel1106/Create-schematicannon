@@ -42,40 +42,15 @@ public class AllEntityTypes {
 		OrientedContraptionEntity::new, () -> OrientedContraptionEntityRenderer::new, 5, 3, true)
 		.visual(() -> ContraptionVisual::new)
 		.register();
-	public static final EntityEntry<ControlledContraptionEntity> CONTROLLED_CONTRAPTION =
-		contraption("stationary_contraption", ControlledContraptionEntity::new, () -> ContraptionEntityRenderer::new,
-			20, 40, false)
-			.visual(() -> ContraptionVisual::new)
-			.register();
-	public static final EntityEntry<GantryContraptionEntity> GANTRY_CONTRAPTION = contraption("gantry_contraption",
-		GantryContraptionEntity::new, () -> ContraptionEntityRenderer::new, 10, 40, false)
-		.visual(() -> ContraptionVisual::new)
-		.register();
-	public static final EntityEntry<CarriageContraptionEntity> CARRIAGE_CONTRAPTION =
-		contraption("carriage_contraption", CarriageContraptionEntity::new,
-			() -> CarriageContraptionEntityRenderer::new, 15, 3, true)
-			.visual(() -> CarriageContraptionVisual::new)
-			.register();
 
-	public static final EntityEntry<SuperGlueEntity> SUPER_GLUE =
-		register("super_glue", SuperGlueEntity::new, () -> SuperGlueRenderer::new, MobCategory.MISC, 10,
-			Integer.MAX_VALUE, false, true, SuperGlueEntity::build).register();
+
 
 	public static final EntityEntry<BlueprintEntity> CRAFTING_BLUEPRINT =
 		register("crafting_blueprint", BlueprintEntity::new, () -> BlueprintRenderer::new, MobCategory.MISC, 10,
 			Integer.MAX_VALUE, false, true, BlueprintEntity::build).register();
 
-	public static final EntityEntry<PotatoProjectileEntity> POTATO_PROJECTILE =
-		register("potato_projectile", PotatoProjectileEntity::new, () -> PotatoProjectileRenderer::new,
-			MobCategory.MISC, 4, 20, true, false, PotatoProjectileEntity::build).register();
 
-	public static final EntityEntry<SeatEntity> SEAT = register("seat", SeatEntity::new, () -> SeatEntity.Render::new,
-		MobCategory.MISC, 5, Integer.MAX_VALUE, false, true, SeatEntity::build).register();
 
-	public static final EntityEntry<PackageEntity> PACKAGE = register("package", PackageEntity::new, () -> PackageRenderer::new,
-		MobCategory.MISC, 10, 3, true, false, PackageEntity::build)
-		.visual(() -> PackageVisual::new, true)
-		.register();
 
 	//
 
@@ -104,10 +79,6 @@ public class AllEntityTypes {
 			.renderer(renderer);
 	}
 
-	public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
-		event.put(PACKAGE.get(), PackageEntity.createPackageAttributes()
-			.build());
-	}
 
 	public static void register() {
 	}

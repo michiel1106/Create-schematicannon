@@ -158,7 +158,7 @@ public class BlueprintMenu extends GhostItemMenu<BlueprintSection> {
 
 	class BlueprintCraftSlot extends SlotItemHandler {
 
-		private int index;
+		private final int index;
 
 		public BlueprintCraftSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
 			super(itemHandler, index, xPosition, yPosition);

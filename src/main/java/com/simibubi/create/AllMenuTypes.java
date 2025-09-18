@@ -45,41 +45,8 @@ public class AllMenuTypes {
 	public static final MenuEntry<SchematicannonMenu> SCHEMATICANNON =
 		register("schematicannon", SchematicannonMenu::new, () -> SchematicannonScreen::new);
 
-	public static final MenuEntry<FilterMenu> FILTER =
-		register("filter", FilterMenu::new, () -> FilterScreen::new);
-
-	public static final MenuEntry<AttributeFilterMenu> ATTRIBUTE_FILTER =
-		register("attribute_filter", AttributeFilterMenu::new, () -> AttributeFilterScreen::new);
-
-	public static final MenuEntry<PackageFilterMenu> PACKAGE_FILTER =
-		register("package_filter", PackageFilterMenu::new, () -> PackageFilterScreen::new);
-
 	public static final MenuEntry<BlueprintMenu> CRAFTING_BLUEPRINT =
 		register("crafting_blueprint", BlueprintMenu::new, () -> BlueprintScreen::new);
-
-	public static final MenuEntry<LinkedControllerMenu> LINKED_CONTROLLER =
-		register("linked_controller", LinkedControllerMenu::new, () -> LinkedControllerScreen::new);
-
-	public static final MenuEntry<ToolboxMenu> TOOLBOX =
-		register("toolbox", ToolboxMenu::new, () -> ToolboxScreen::new);
-
-	public static final MenuEntry<ScheduleMenu> SCHEDULE =
-		register("schedule", ScheduleMenu::new, () -> ScheduleScreen::new);
-
-	public static final MenuEntry<StockKeeperCategoryMenu> STOCK_KEEPER_CATEGORY =
-		register("stock_keeper_category", StockKeeperCategoryMenu::new, () -> StockKeeperCategoryScreen::new);
-
-	public static final MenuEntry<StockKeeperRequestMenu> STOCK_KEEPER_REQUEST =
-		register("stock_keeper_request", StockKeeperRequestMenu::new, () -> StockKeeperRequestScreen::new);
-
-	public static final MenuEntry<PackagePortMenu> PACKAGE_PORT =
-		register("package_port", PackagePortMenu::new, () -> PackagePortScreen::new);
-
-	public static final MenuEntry<RedstoneRequesterMenu> REDSTONE_REQUESTER =
-		register("redstone_requester", RedstoneRequesterMenu::new, () -> RedstoneRequesterScreen::new);
-
-	public static final MenuEntry<FactoryPanelSetItemMenu> FACTORY_PANEL_SET_ITEM =
-		register("factory_panel_set_item", FactoryPanelSetItemMenu::new, () -> FactoryPanelSetItemScreen::new);
 
 	private static <C extends AbstractContainerMenu, S extends Screen & MenuAccess<C>> MenuEntry<C> register(
 		String name, ForgeMenuFactory<C> factory, NonNullSupplier<ScreenFactory<C, S>> screenFactory) {

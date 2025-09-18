@@ -335,7 +335,7 @@ public class CopperBlockSet {
 																  boolean waxed) {
 			if (!blocks.hasVariant(parent)) {
 				throw new IllegalStateException(
-					"Cannot add StairVariant '" + toString() + "' without parent Variant '" + parent.toString() + "'!");
+					"Cannot add StairVariant '" + this + "' without parent Variant '" + parent.toString() + "'!");
 			}
 			Supplier<BlockState> defaultStateSupplier = () -> blocks.get(parent, state, waxed)
 				.getDefaultState();

@@ -9,7 +9,6 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 
-import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.foundation.block.IBE;
 
 import net.createmod.catnip.data.Pair;
@@ -167,7 +166,7 @@ public class ItemHelper {
 		return true;
 	}
 
-	public static enum ExtractionCountMode {
+	public enum ExtractionCountMode {
 		EXACTLY, UPTO
 	}
 
@@ -235,7 +234,7 @@ public class ItemHelper {
 			if (checkHasEnoughItems)
 				checkHasEnoughItems = false;
 			else
-				break Extraction;
+				break;
 
 		} while (true);
 
@@ -306,9 +305,6 @@ public class ItemHelper {
 	public static ItemStack fromItemEntity(Entity entityIn) {
 		if (!entityIn.isAlive())
 			return ItemStack.EMPTY;
-		if (entityIn instanceof PackageEntity packageEntity) {
-			return packageEntity.getBox();
-		}
 		return entityIn instanceof ItemEntity itemEntity ? itemEntity.getItem() : ItemStack.EMPTY;
 	}
 

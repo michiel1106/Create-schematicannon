@@ -10,7 +10,6 @@ public enum AllSpecialTextures implements BindableTexture {
 	CUTOUT_CHECKERED("cutout_checkerboard.png"),
 	HIGHLIGHT_CHECKERED("highlighted_checkerboard.png"),
 	SELECTION("selection.png"),
-	GLUE("glue.png"),
 
 	;
 

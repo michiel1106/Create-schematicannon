@@ -10,7 +10,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class RotateTool extends PlacementToolBase {
 
-	private LineOutline line = new LineOutline();
+	private final LineOutline line = new LineOutline();
 
 	@Override
 	public boolean handleMouseWheel(double delta) {

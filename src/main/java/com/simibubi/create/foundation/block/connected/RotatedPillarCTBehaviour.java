@@ -38,8 +38,7 @@ public class RotatedPillarCTBehaviour extends HorizontalCTBehaviour {
 		if (secondaryOffset != null && secondaryOffset.getAxis() != stateAxis) {
 			if (!ConnectedPillarBlock.getConnection(state, secondaryOffset))
 				return false;
-			if (!ConnectedPillarBlock.getConnection(other, secondaryOffset.getOpposite()))
-				return false;
+			return ConnectedPillarBlock.getConnection(other, secondaryOffset.getOpposite());
 		}
 		return true;
 	}

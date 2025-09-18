@@ -44,7 +44,6 @@ public class CreateNBTProcessors {
 
 		NBTProcessors.addProcessor(AllBlockEntityTypes.CLIPBOARD.get(), CreateNBTProcessors::clipboardProcessor);
 
-		NBTProcessors.addProcessor(AllBlockEntityTypes.CREATIVE_CRATE.get(), NBTProcessors.itemProcessor("Filter"));
 	}
 
 	public static CompoundTag clipboardProcessor(CompoundTag data) {

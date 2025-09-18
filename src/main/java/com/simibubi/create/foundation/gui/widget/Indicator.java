@@ -35,7 +35,7 @@ public class Indicator extends AbstractSimiWidget {
 
 	public enum State {
 		OFF, ON,
-		RED, YELLOW, GREEN;
+		RED, YELLOW, GREEN
 	}
 
 }

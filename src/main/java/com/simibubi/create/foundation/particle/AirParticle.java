@@ -17,12 +17,17 @@ import net.minecraft.world.phys.Vec3;
 
 public class AirParticle extends SimpleAnimatedParticle {
 
-	private float originX, originY, originZ;
-	private float targetX, targetY, targetZ;
-	private float drag;
+	private final float originX;
+	private final float originY;
+	private final float originZ;
+	private final float targetX;
+	private final float targetY;
+	private final float targetZ;
+	private final float drag;
 
-	private float twirlRadius, twirlAngleOffset;
-	private Axis twirlAxis;
+	private final float twirlRadius;
+	private final float twirlAngleOffset;
+	private final Axis twirlAxis;
 
 	protected AirParticle(ClientLevel world, AirParticleData data, double x, double y, double z, double dx, double dy,
 						  double dz, SpriteSet sprite) {

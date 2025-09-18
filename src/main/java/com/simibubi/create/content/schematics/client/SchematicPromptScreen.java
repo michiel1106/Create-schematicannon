@@ -18,7 +18,7 @@ import net.minecraft.network.chat.Component;
 
 public class SchematicPromptScreen extends AbstractSimiScreen {
 
-	private AllGuiTextures background;
+	private final AllGuiTextures background;
 
 	private final Component convertLabel = CreateLang.translateDirect("schematicAndQuill.convert");
 	private final Component abortLabel = CreateLang.translateDirect("action.discard");

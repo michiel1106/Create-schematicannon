@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class FlipTool extends PlacementToolBase {
 
-	private AABBOutline outline = new AABBOutline(new AABB(BlockPos.ZERO));
+	private final AABBOutline outline = new AABBOutline(new AABB(BlockPos.ZERO));
 
 	@Override
 	public void init() {

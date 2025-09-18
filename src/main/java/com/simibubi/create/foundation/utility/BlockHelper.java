@@ -13,11 +13,6 @@ import com.simibubi.create.api.schematic.nbt.SafeNbtWriterRegistry.SafeNbtWriter
 import com.simibubi.create.api.schematic.state.SchematicStateFilter;
 import com.simibubi.create.api.schematic.state.SchematicStateFilterRegistry;
 import com.simibubi.create.api.schematic.state.SchematicStateFilterRegistry.StateFilter;
-import com.simibubi.create.compat.Mods;
-import com.simibubi.create.compat.framedblocks.FramedBlocksInSchematics;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel;
 import com.simibubi.create.foundation.blockEntity.IMergeableBE;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 
@@ -290,8 +285,6 @@ public class BlockHelper {
 		} else if (blockEntity instanceof PartialSafeNBT safeNbtBE) {
 			data = new CompoundTag();
 			safeNbtBE.writeSafe(data);
-		} else if (Mods.FRAMEDBLOCKS.contains(blockState.getBlock())) {
-			data = FramedBlocksInSchematics.prepareBlockEntityData(blockState, blockEntity);
 		}
 
 		return NBTProcessors.process(blockState, blockEntity, data, true);
@@ -340,8 +333,6 @@ public class BlockHelper {
 
 		if (state.getBlock() instanceof BaseRailBlock) {
 			placeRailWithoutUpdate(world, state, target);
-		} else if (AllBlocks.BELT.has(state)) {
-			world.setBlock(target, state, 2);
 		} else {
 			world.setBlock(target, state, 18);
 		}
@@ -362,8 +353,6 @@ public class BlockHelper {
 				data.putInt("x", target.getX());
 				data.putInt("y", target.getY());
 				data.putInt("z", target.getZ());
-				if (blockEntity instanceof KineticBlockEntity kbe)
-					kbe.warnOfMovement();
 				if (blockEntity instanceof IMultiBlockEntityContainer imbe)
 					if (!imbe.isController())
 						data.put("Controller", NbtUtils.writeBlockPos(imbe.getController()));
@@ -420,14 +409,6 @@ public class BlockHelper {
 		return toState;
 	}
 
-	public static boolean isNotUnheated(BlockState state) {
-		if (state.is(BlockTags.CAMPFIRES) && state.hasProperty(CampfireBlock.LIT)) {
-			return state.getValue(CampfireBlock.LIT);
-		}
-		if (state.hasProperty(BlazeBurnerBlock.HEAT_LEVEL)) {
-			return state.getValue(BlazeBurnerBlock.HEAT_LEVEL) != HeatLevel.NONE;
-		}
-		return true;
-	}
+
 
 }

@@ -146,8 +146,8 @@ public class SmartInventory extends RecipeWrapper
 
 	protected static class SyncedStackHandler extends ItemStackHandler {
 
-		private SyncedBlockEntity blockEntity;
-		private boolean stackNonStackables;
+		private final SyncedBlockEntity blockEntity;
+		private final boolean stackNonStackables;
 		private int stackSize;
 		private BiPredicate<Integer, ItemStack> isValid = super::isItemValid;
 		private Consumer<Integer> updateCallback;

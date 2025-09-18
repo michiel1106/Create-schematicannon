@@ -20,10 +20,10 @@ public enum ToolType {
 	FLIP(new FlipTool(), AllIcons.I_TOOL_MIRROR),
 	PRINT(new PlaceTool(), AllIcons.I_CONFIRM);
 
-	private ISchematicTool tool;
-	private AllIcons icon;
+	private final ISchematicTool tool;
+	private final AllIcons icon;
 
-	private ToolType(ISchematicTool tool, AllIcons icon) {
+	ToolType(ISchematicTool tool, AllIcons icon) {
 		this.tool = tool;
 		this.icon = icon;
 	}

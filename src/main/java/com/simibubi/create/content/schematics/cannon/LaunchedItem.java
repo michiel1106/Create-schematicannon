@@ -1,25 +1,14 @@
 package com.simibubi.create.content.schematics.cannon;
 
-import java.util.Arrays;
 import java.util.Optional;
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.kinetics.belt.BeltBlock;
-import com.simibubi.create.content.kinetics.belt.BeltBlockEntity;
-import com.simibubi.create.content.kinetics.belt.BeltBlockEntity.CasingType;
-import com.simibubi.create.content.kinetics.belt.BeltPart;
-import com.simibubi.create.content.kinetics.belt.BeltSlope;
-import com.simibubi.create.content.kinetics.belt.item.BeltConnectorItem;
-import com.simibubi.create.content.kinetics.simpleRelays.AbstractSimpleShaftBlock;
 import com.simibubi.create.foundation.utility.BlockHelper;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
@@ -73,8 +62,8 @@ public abstract class LaunchedItem {
 	}
 
 	public static LaunchedItem fromNBT(CompoundTag c, HolderGetter<Block> holderGetter) {
-		LaunchedItem launched = c.contains("Length") ? new LaunchedItem.ForBelt()
-			: c.contains("BlockState") ? new LaunchedItem.ForBlockState() : new LaunchedItem.ForEntity();
+		LaunchedItem launched = c.contains("BlockState") ? new LaunchedItem.ForBlockState() : new LaunchedItem.ForEntity();
+
 		launched.readNBT(c, holderGetter);
 		return launched;
 	}
@@ -130,64 +119,7 @@ public abstract class LaunchedItem {
 
 	}
 
-	public static class ForBelt extends ForBlockState {
-		public int length;
-		public CasingType[] casings;
 
-		public ForBelt() {}
-
-		@Override
-		public CompoundTag serializeNBT() {
-			CompoundTag serializeNBT = super.serializeNBT();
-			serializeNBT.putInt("Length", length);
-			serializeNBT.putIntArray("Casing", Arrays.stream(casings)
-				.map(CasingType::ordinal)
-				.toList());
-			return serializeNBT;
-		}
-
-		@Override
-		void readNBT(CompoundTag nbt, HolderGetter<Block> holderGetter) {
-			length = nbt.getInt("Length");
-			int[] intArray = nbt.getIntArray("Casing");
-			casings = new CasingType[length];
-			for (int i = 0; i < casings.length; i++)
-				casings[i] = i >= intArray.length ? CasingType.NONE
-					: CasingType.values()[Mth.clamp(intArray[i], 0, CasingType.values().length - 1)];
-			super.readNBT(nbt, holderGetter);
-		}
-
-		public ForBelt(BlockPos start, BlockPos target, ItemStack stack, BlockState state, CasingType[] casings) {
-			super(start, target, stack, state, null);
-			this.casings = casings;
-			this.length = casings.length;
-		}
-
-		@Override
-		void place(Level world) {
-			boolean isStart = state.getValue(BeltBlock.PART) == BeltPart.START;
-			BlockPos offset = BeltBlock.nextSegmentPosition(state, BlockPos.ZERO, isStart);
-			int i = length - 1;
-			Axis axis = state.getValue(BeltBlock.SLOPE) == BeltSlope.SIDEWAYS ? Axis.Y
-				: state.getValue(BeltBlock.HORIZONTAL_FACING)
-					.getClockWise()
-					.getAxis();
-			world.setBlockAndUpdate(target, AllBlocks.SHAFT.getDefaultState()
-				.setValue(AbstractSimpleShaftBlock.AXIS, axis));
-			BeltConnectorItem.createBelts(world, target,
-				target.offset(offset.getX() * i, offset.getY() * i, offset.getZ() * i));
-
-			for (int segment = 0; segment < length; segment++) {
-				if (casings[segment] == CasingType.NONE)
-					continue;
-				BlockPos casingTarget =
-					target.offset(offset.getX() * segment, offset.getY() * segment, offset.getZ() * segment);
-				if (world.getBlockEntity(casingTarget) instanceof BeltBlockEntity bbe)
-					bbe.setCasingType(casings[segment]);
-			}
-		}
-
-	}
 
 	public static class ForEntity extends LaunchedItem {
 		public Entity entity;

@@ -10,9 +10,9 @@ import net.minecraftforge.network.NetworkEvent.Context;
 
 public class InstantSchematicPacket extends SimplePacketBase {
 
-	private String name;
-	private BlockPos origin;
-	private BlockPos bounds;
+	private final String name;
+	private final BlockPos origin;
+	private final BlockPos bounds;
 
 	public InstantSchematicPacket(String name, BlockPos origin, BlockPos bounds) {
 		this.name = name;

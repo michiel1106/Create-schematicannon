@@ -188,9 +188,9 @@ public class BlueprintEntity extends HangingEntity
 		d2 = pos.y;
 		d3 = pos.z;
 
-		double d4 = (double) this.getWidth();
-		double d5 = (double) this.getHeight();
-		double d6 = (double) this.getWidth();
+		double d4 = this.getWidth();
+		double d5 = this.getHeight();
+		double d6 = this.getWidth();
 		Direction.Axis direction$axis = this.direction.getAxis();
 		switch (direction$axis) {
 			case X:
@@ -330,7 +330,7 @@ public class BlueprintEntity extends HangingEntity
 					   int p_180426_9_, boolean p_180426_10_) {
 		BlockPos blockpos =
 			this.pos.offset(BlockPos.containing(p_180426_1_ - this.getX(), p_180426_3_ - this.getY(), p_180426_5_ - this.getZ()));
-		this.setPos((double) blockpos.getX(), (double) blockpos.getY(), (double) blockpos.getZ());
+		this.setPos(blockpos.getX(), blockpos.getY(), blockpos.getZ());
 	}
 
 	@Override
@@ -499,7 +499,7 @@ public class BlueprintEntity extends HangingEntity
 		return persistentData.getCompound("Recipes");
 	}
 
-	private Map<Integer, BlueprintSection> sectionCache = new HashMap<>();
+	private final Map<Integer, BlueprintSection> sectionCache = new HashMap<>();
 
 	public BlueprintSection getSection(int index) {
 		return sectionCache.computeIfAbsent(index, i -> new BlueprintSection(i));

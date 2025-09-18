@@ -12,8 +12,6 @@ import com.simibubi.create.api.schematic.requirement.SchematicRequirementRegistr
 import com.simibubi.create.api.schematic.requirement.SpecialBlockEntityItemRequirement;
 import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.simibubi.create.api.schematic.requirement.SpecialEntityItemRequirement;
-import com.simibubi.create.compat.framedblocks.FramedBlocksInSchematics;
-import com.simibubi.create.foundation.data.recipe.Mods;
 import com.simibubi.create.foundation.mixin.accessor.ItemFrameAccessor;
 
 import net.createmod.catnip.nbt.NBTProcessors;
@@ -36,8 +34,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
-
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemRequirement {
 	public static final ItemRequirement NONE = new ItemRequirement(Collections.emptyList());
@@ -86,8 +82,6 @@ public class ItemRequirement {
 				requirement = requirement.union(beRequirement.getRequiredItems(be, state));
 			} else if (be instanceof SpecialBlockEntityItemRequirement specialBE) {
 				requirement = requirement.union(specialBE.getRequiredItems(state));
-			} else if (com.simibubi.create.compat.Mods.FRAMEDBLOCKS.contains(block)) {
-				requirement = requirement.union(FramedBlocksInSchematics.getRequiredItems(state, be));
 			}
 		}
 
@@ -117,8 +111,6 @@ public class ItemRequirement {
 			return new ItemRequirement(ItemUseType.CONSUME, new ItemStack(item, state.getValue(SnowLayerBlock.LAYERS)
 				.intValue()));
 		// FD's rich soil extends FarmBlock so this is to make sure the cost is correct (it should be rich soil not dirt)
-		if (block == ForgeRegistries.BLOCKS.getValue(Mods.FD.asResource("rich_soil_farmland")))
-			return new ItemRequirement(ItemUseType.CONSUME, ForgeRegistries.ITEMS.getValue(Mods.FD.asResource("rich_soil")));
 		if (block instanceof FarmBlock || block instanceof DirtPathBlock)
 			return new ItemRequirement(ItemUseType.CONSUME, Items.DIRT);
 		if (block instanceof AbstractBannerBlock && be instanceof BannerBlockEntity bannerBE)

@@ -19,9 +19,9 @@ public interface ISyncPersistentData {
 		AllPackets.getChannel().send(PacketDistributor.TRACKING_ENTITY.with(() -> self), new PersistentDataPacket(self));
 	}
 
-	public static class PersistentDataPacket extends SimplePacketBase {
+	class PersistentDataPacket extends SimplePacketBase {
 
-		private int entityId;
+		private final int entityId;
 		private Entity entity;
 		private CompoundTag readData;
 

@@ -49,7 +49,7 @@ public class SchematicPrinter {
 	private BlockPos currentPos;
 	private int printingEntityIndex;
 	private PrintStage printStage;
-	private List<BlockPos> deferredBlocks;
+	private final List<BlockPos> deferredBlocks;
 
 	public SchematicPrinter() {
 		printingEntityIndex = -1;
