@@ -12,7 +12,6 @@ import com.bikerboys.schematicannon.foundation.gui.AllGuiTextures;
 
 import net.createmod.catnip.gui.TickableGuiEventListener;
 import net.createmod.catnip.gui.widget.AbstractSimiWidget;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.EditBox;
@@ -22,9 +21,7 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraftforge.api.distmarker.Dist;
@@ -82,12 +79,6 @@ public abstract class AbstractSimiContainerScreen<T extends AbstractContainerMen
 	protected <W extends GuiEventListener & Renderable & NarratableEntry> void addRenderableWidgets(Collection<W> widgets) {
 		for (W widget : widgets) {
 			addRenderableWidget(widget);
-		}
-	}
-
-	protected void removeWidgets(GuiEventListener... widgets) {
-		for (GuiEventListener widget : widgets) {
-			removeWidget(widget);
 		}
 	}
 
@@ -183,12 +174,6 @@ public abstract class AbstractSimiContainerScreen<T extends AbstractContainerMen
 			graphics.fill(area.getX() + area.getWidth(), area.getY() + area.getHeight(), area.getX(), area.getY(),
 				0xD3D3D3D3);
 		}
-	}
-
-	protected void playUiSound(SoundEvent sound, float volume, float pitch) {
-		Minecraft.getInstance()
-			.getSoundManager()
-			.play(SimpleSoundInstance.forUI(sound, pitch, volume * 0.25f));
 	}
 
 }
