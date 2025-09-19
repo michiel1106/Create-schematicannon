@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "priority": 1100,
+  "package": "com.bikerboys.schematicannon.foundation.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "schematicannon.refmap.json",
+  "plugin": "com.bikerboys.schematicannon.foundation.mixin.SchematicannonMixinPlugin",
+  "mixins": [
+    "BuiltInRegistriesMixin",
+    "accessor.BuiltInRegistriesAccessor",
+    "accessor.FluidInteractionRegistryAccessor",
+    "accessor.ItemFrameAccessor",
+    "accessor.StateHolderAccessor"
+  ],
+  "client": [
+    "accessor.HumanoidArmorLayerAccessor",
+    "accessor.LevelRendererAccessor",
+    "client.BlockDestructionProgressMixin",
+    "client.LevelRendererMixin",
+    "client.PlayerRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

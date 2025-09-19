@@ -36,8 +36,8 @@ project.logger.lifecycle("Dependencies included in Workspace: [Ponder: ${ponderI
 
 Provider<RegularFile> refmap
 mixin {
-    refmap = add(sourceSets.main, "create.refmap.json")
-    config "create.mixins.json"
+    refmap = add(sourceSets.main, "schematicannon.refmap.json")
+    config "schematicannon.mixins.json"
 }
 
 println("Java: ${System.getProperty("java.version")}, JVM: ${System.getProperty("java.vm.version")} (${System.getProperty("java.vendor")}), Arch: ${System.getProperty("os.arch")}")
@@ -89,7 +89,7 @@ legacyForge {
             systemProperty("mixin.debug.export", "true")
             systemProperty("mixin.debug.verbose", "true")
 
-            programArgument("-mixin.config=create.mixins.json")
+            programArgument("-mixin.config=schematicannon.mixins.json")
             programArgument("-mixin.config=ponder.mixins.json")
         }
 
@@ -294,7 +294,7 @@ jar {
     }
 
     manifest.attributes([
-        "MixinConfigs": "create.mixins.json",
+        "MixinConfigs": "schematicannon.mixins.json",
         "Git-Hash"    : gitHash
     ])
 }
@@ -310,7 +310,7 @@ final slimJar = tasks.register("slimJar", Jar) {
     from(sourceSets.main.output)
     from(refmap)
     manifest.attributes([
-        "MixinConfigs": "create.mixins.json",
+        "MixinConfigs": "schematicannon.mixins.json",
         "Git-Hash"    : gitHash
     ])
 }

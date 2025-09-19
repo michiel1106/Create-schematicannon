@@ -1,14 +1,14 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
-issueTrackerURL = "https://github.com/Creators-of-Create/Create/issues"
+issueTrackerURL = "https://github.com/michiel1106/Create-schematicannon/issues"
 license = "${mod_license}"
 
 [[mods]]
-modId = "create"
+modId = "schematicannon"
 # The Implementation-Version property in the jar's MANIFEST.MF file will be used as the mod version at runtime
 version = "${file.jarVersion}"
 displayName = "${mod_name}"
-displayURL = "https://www.curseforge.com/minecraft/mc-mods/create"
+displayURL = "https://github.com/michiel1106/Create-schematicannon"
 logoFile = "icon.png"
 #credits=""
 authors = "${mod_author}"
@@ -16,35 +16,35 @@ description = '''
 ${mod_description}
 '''
 
-[[dependencies.create]]
+[[dependencies.schematicannon]]
 modId = "forge"
 mandatory = true
 versionRange = "[47.1.3,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.create]]
+[[dependencies.schematicannon]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20.1]"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.create]]
+[[dependencies.schematicannon]]
 modId = "flywheel"
 mandatory = true
 versionRange = "[1.0.0,2.0)"
 ordering = "AFTER"
 side = "CLIENT"
 
-[[dependencies.create]]
+[[dependencies.schematicannon]]
 modId = "ponder"
 mandatory = true
 versionRange = "[0.8,)"
 ordering = "AFTER"
 side = "BOTH"
 
-[[dependencies.create]]
+[[dependencies.schematicannon]]
 modId = "jei"
 mandatory = false
 versionRange = "[15.19.0,)"

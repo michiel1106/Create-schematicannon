@@ -1,0 +1,83 @@
+package com.bikerboys.schematicannon.foundation.blockEntity.behaviour;
+
+import com.bikerboys.schematicannon.AllBlocks;
+import com.bikerboys.schematicannon.foundation.blockEntity.SmartBlockEntity;
+import com.bikerboys.schematicannon.foundation.utility.AdventureUtil;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+
+@EventBusSubscriber
+public class ValueSettingsInputHandler {
+
+	@SubscribeEvent
+	public static void onBlockActivated(PlayerInteractEvent.RightClickBlock event) {
+		Level world = event.getLevel();
+		BlockPos pos = event.getPos();
+		Player player = event.getEntity();
+		InteractionHand hand = event.getHand();
+
+		if (!canInteract(player))
+			return;
+		if (AllBlocks.CLIPBOARD.isIn(player.getMainHandItem()))
+			return;
+		if (!(world.getBlockEntity(pos)instanceof SmartBlockEntity sbe))
+			return;
+
+
+
+		if (event.isCanceled())
+			return;
+
+		for (BlockEntityBehaviour behaviour : sbe.getAllBehaviours()) {
+			if (!(behaviour instanceof ValueSettingsBehaviour valueSettingsBehaviour))
+				continue;
+			if (valueSettingsBehaviour.bypassesInput(player.getMainHandItem()))
+				continue;
+			if (!valueSettingsBehaviour.mayInteract(player))
+				continue;
+
+			BlockHitResult ray = event.getHitVec();
+			if (ray == null)
+				return;
+
+
+			if (!valueSettingsBehaviour.isActive())
+				continue;
+			if (valueSettingsBehaviour.getSlotPositioning()instanceof ValueBoxTransform.Sided sidedSlot) {
+				if (!sidedSlot.isSideActive(sbe.getBlockState(), ray.getDirection()))
+					continue;
+				sidedSlot.fromSide(ray.getDirection());
+			}
+
+			boolean fakePlayer = player instanceof FakePlayer;
+			if (!valueSettingsBehaviour.testHit(ray.getLocation()) && !fakePlayer)
+				continue;
+
+			event.setCanceled(true);
+			event.setCancellationResult(InteractionResult.SUCCESS);
+
+			if (!valueSettingsBehaviour.acceptsValueSettings() || fakePlayer) {
+				valueSettingsBehaviour.onShortInteract(player, hand, ray.getDirection(), ray);
+				return;
+			}
+
+
+
+			return;
+		}
+	}
+
+	public static boolean canInteract(Player player) {
+		return player != null && !player.isSpectator() && !player.isShiftKeyDown() && !AdventureUtil.isAdventure(player);
+	}
+}
