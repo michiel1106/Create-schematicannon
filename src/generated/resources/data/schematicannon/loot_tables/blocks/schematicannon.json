@@ -24,11 +24,11 @@
               "source": "block_entity"
             }
           ],
-          "name": "create:schematicannon"
+          "name": "schematicannon:schematicannon"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "create:blocks/schematicannon"
+  "random_sequence": "schematicannon:blocks/schematicannon"
 }

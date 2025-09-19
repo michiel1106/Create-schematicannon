@@ -5,7 +5,7 @@
 		"0": "schematicannon:block/andesite_casing_short",
 		"2": "block/stonecutter_bottom",
 		"3": "block/anvil",
-		"4": "create:block/schematicannon",
+		"4": "schematicannon:block/schematicannon",
 		"5": "block/spruce_log",
 		"6": "block/spruce_log_top",
 		"8": "block/stone",
