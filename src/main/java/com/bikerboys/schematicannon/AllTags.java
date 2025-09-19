@@ -2,8 +2,6 @@ package com.bikerboys.schematicannon;
 
 import static com.bikerboys.schematicannon.AllTags.NameSpace.FORGE;
 import static com.bikerboys.schematicannon.AllTags.NameSpace.MOD;
-import static com.bikerboys.schematicannon.AllTags.NameSpace.QUARK;
-import static com.bikerboys.schematicannon.AllTags.NameSpace.TIC;
 
 import org.jetbrains.annotations.ApiStatus.ScheduledForRemoval;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +10,6 @@ import net.createmod.catnip.lang.Lang;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -80,49 +77,7 @@ public class AllTags {
 
 	public enum AllBlockTags {
 
-		BRITTLE,
-		CASING,
-		COPYCAT_ALLOW,
-		COPYCAT_DENY,
-		FAN_PROCESSING_CATALYSTS_BLASTING(MOD, "fan_processing_catalysts/blasting"),
-		FAN_PROCESSING_CATALYSTS_HAUNTING(MOD, "fan_processing_catalysts/haunting"),
-		FAN_PROCESSING_CATALYSTS_SMOKING(MOD, "fan_processing_catalysts/smoking"),
-		FAN_PROCESSING_CATALYSTS_SPLASHING(MOD, "fan_processing_catalysts/splashing"),
-		FAN_TRANSPARENT,
-		GIRDABLE_TRACKS,
-		MOVABLE_EMPTY_COLLIDER,
-		NON_MOVABLE,
-		NON_BREAKABLE,
-		PASSIVE_BOILER_HEATERS,
 		SAFE_NBT,
-		SEATS,
-		POSTBOXES,
-		TABLE_CLOTHS,
-		TOOLBOXES,
-		TRACKS,
-		TREE_ATTACHMENTS,
-		VALVE_HANDLES,
-		WINDMILL_SAILS,
-		WRENCH_PICKUP,
-		CHEST_MOUNTED_STORAGE,
-		SIMPLE_MOUNTED_STORAGE,
-		FALLBACK_MOUNTED_STORAGE_BLACKLIST,
-		ROOTS,
-		SUGAR_CANE_VARIANTS,
-		NON_HARVESTABLE,
-		SINGLE_BLOCK_INVENTORIES,
-		CARDBOARD_STORAGE_BLOCKS(FORGE, "storage_blocks/cardboard"),
-		ANDESITE_ALLOY_STORAGE_BLOCKS(FORGE, "storage_blocks/andesite_alloy"),
-
-		STONE_ORES_IN_GROUND(FORGE, "ores_in_ground/stone"),
-		DEEPSLATE_ORES_IN_GROUND(FORGE, "ores_in_ground/deepslate"),
-
-		CORALS,
-
-		RELOCATION_NOT_SUPPORTED(FORGE),
-
-		SLIMY_LOGS(TIC),
-		NON_DOUBLE_DOOR(QUARK),
 
 		;
 
@@ -140,15 +95,8 @@ public class AllTags {
 			this.tag = TagKey.create(Registries.BLOCK, namespace.id(this, pathOverride));
 		}
 
-		@SuppressWarnings("deprecation")
-		public boolean matches(Block block) {
-			return block.builtInRegistryHolder()
-				.is(tag);
-		}
 
-		public boolean matches(ItemStack stack) {
-			return stack != null && stack.getItem() instanceof BlockItem blockItem && matches(blockItem.getBlock());
-		}
+
 
 		public boolean matches(BlockState state) {
 			return state.is(tag);

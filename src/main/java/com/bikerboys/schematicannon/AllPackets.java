@@ -20,16 +20,12 @@ import com.bikerboys.schematicannon.foundation.networking.ISyncPersistentData;
 import com.bikerboys.schematicannon.foundation.networking.SimplePacketBase;
 import com.bikerboys.schematicannon.foundation.utility.ServerSpeedProvider;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
 
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent.Context;
 import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.PacketDistributor.TargetPoint;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public enum AllPackets {
@@ -97,12 +93,6 @@ public enum AllPackets {
 
 	public static SimpleChannel getChannel() {
 		return channel;
-	}
-
-	public static void sendToNear(Level world, BlockPos pos, int range, Object message) {
-		getChannel().send(
-			PacketDistributor.NEAR.with(TargetPoint.p(pos.getX(), pos.getY(), pos.getZ(), range, world.dimension())),
-			message);
 	}
 
 	private static class PacketType<T extends SimplePacketBase> {

@@ -15,30 +15,17 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class AllShapes {
 
-	public static final VoxelShaper CASING_12PX = shape(0, 0, 0, 16, 12, 16).forDirectional();
-
-	public static final VoxelShaper FOUR_VOXEL_POLE = shape(6, 0, 6, 10, 16, 10).forAxis();
-	public static final VoxelShaper SIX_VOXEL_POLE = shape(5, 0, 5, 11, 16, 11).forAxis();
-
-	public static final VoxelShaper GIRDER_BEAM = shape(4, 2, 0, 12, 14, 16).forHorizontalAxis();
 
 	public static final VoxelShaper CLIPBOARD_FLOOR = shape(3, 0, 1, 13, 1, 15).forHorizontal(SOUTH);
 	public static final VoxelShaper CLIPBOARD_CEILING = shape(3, 15, 1, 13, 16, 15).forHorizontal(SOUTH);
 	public static final VoxelShaper CLIPBOARD_WALL = shape(3, 1, 0, 13, 15, 1).forHorizontal(SOUTH);
 
 
-	public static final VoxelShaper WHISTLE_BASE = shape(1, 0, 1, 15, 3, 15).add(5, 0, 5, 11, 8, 11)
-			.forDirectional(UP);
-
-	private static final VoxelShape TANK_BOTTOM_LID = shape(0, 0, 0, 16, 4, 16).build();
-	private static final VoxelShape TANK_TOP_LID = shape(0, 12, 0, 16, 16, 16).build(),,,,
-
-
 	public static final VoxelShape TABLE_POLE_SHAPE = shape(4, 0, 4, 12, 2, 12).add(5, 2, 5, 11, 14, 11)
 			.build();
 	public static final VoxelShape SCHEMATICANNON_SHAPE = shape(1, 0, 1, 15, 8, 15).add(0.5, 8, 0.5, 15.5, 11, 15.5)
 			.build();
-	public static final VoxelShape TANK = shape(1, 0, 1, 15, 16, 15).build();
+
 
 	// More Shapers
 	public static final VoxelShaper
