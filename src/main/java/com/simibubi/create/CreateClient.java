@@ -6,12 +6,9 @@ import com.simibubi.create.content.schematics.client.SchematicAndQuillHandler;
 import com.simibubi.create.content.schematics.client.SchematicHandler;
 import com.simibubi.create.foundation.ClientResourceReloadListener;
 import com.simibubi.create.foundation.model.ModelSwapper;
-import com.simibubi.create.foundation.ponder.CreatePonderPlugin;
-
 
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBufferCache;
-import net.createmod.ponder.foundation.PonderIndex;
 
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -47,9 +44,6 @@ public class CreateClient {
 		AllPartialModels.init();
 
 
-		//AllPonderTags.register();
-		//PonderIndex.register();
-		PonderIndex.addPlugin(new CreatePonderPlugin());
 	}
 
 

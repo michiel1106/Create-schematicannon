@@ -73,7 +73,6 @@ public class Create {
 		AllBlocks.register();
 		AllItems.register();
 		AllMenuTypes.register();
-		AllEntityTypes.register();
 		AllBlockEntityTypes.register();
 		AllParticleTypes.register(modEventBus);
 		AllStructureProcessorTypes.register(modEventBus);

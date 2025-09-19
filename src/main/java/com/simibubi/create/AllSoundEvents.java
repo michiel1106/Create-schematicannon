@@ -46,27 +46,9 @@ public class AllSoundEvents {
 		SCHEMATICANNON_FINISH = create("schematicannon_finish").subtitle("Schematicannon dings")
 			.playExisting(SoundEvents.NOTE_BLOCK_BELL, 1, .7f)
 			.category(SoundSource.BLOCKS)
-			.build(),
-
-
-
-		CONFIRM = create("confirm").subtitle("Affirmative ding")
-			.playExisting(SoundEvents.NOTE_BLOCK_BELL, 0.5f, 0.8f)
-			.category(SoundSource.PLAYERS)
-			.build(),
-
-		CONFIRM_2 = create("confirm_2").subtitle("Affirmative ding")
-			.category(SoundSource.PLAYERS)
-			.build(),
-
-		DENY = create("deny").subtitle("Declining boop")
-			.playExisting(SoundEvents.NOTE_BLOCK_BASS, 1f, 0.5f)
-			.category(SoundSource.PLAYERS)
-			.build(),
-
-		FWOOMP = create("fwoomp").subtitle("Resonant fwoomp")
-			.category(SoundSource.PLAYERS)
 			.build();
+
+
 	private static SoundEntryBuilder create(String name) {
 		return create(Create.asResource(name));
 	}

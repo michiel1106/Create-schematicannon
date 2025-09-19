@@ -8,16 +8,10 @@
   "plugin": "com.simibubi.create.foundation.mixin.CreateMixinPlugin",
   "mixins": [
     "BuiltInRegistriesMixin",
-    "accessor.AbstractProjectileDispenseBehaviorAccessor",
     "accessor.BuiltInRegistriesAccessor",
-    "accessor.ConcretePowderBlockAccessor",
-    "accessor.DispenserBlockAccessor",
     "accessor.FluidInteractionRegistryAccessor",
-    "accessor.GameTestHelperAccessor",
     "accessor.ItemFrameAccessor",
-    "accessor.MobEffectInstanceAccessor",
-    "accessor.StateHolderAccessor",
-    "accessor.SystemReportAccessor"
+    "accessor.StateHolderAccessor"
   ],
   "client": [
     "accessor.HumanoidArmorLayerAccessor",

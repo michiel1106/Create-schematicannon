@@ -21,9 +21,9 @@ public class CreateLang extends Lang {
 	 *
 	 */
 	public static MutableComponent translateDirect(String key, Object... args) {
-        Object[] args1 = LangBuilder.resolveBuilders(args);
-        return Component.translatable(Create.ID + "." + key, args1);
-    }
+		Object[] args1 = LangBuilder.resolveBuilders(args);
+		return Component.translatable(Create.ID + "." + key, args1);
+	}
 
 	public static List<Component> translatedOptions(String prefix, String... keys) {
 		List<Component> result = new ArrayList<>(keys.length);
@@ -40,17 +40,17 @@ public class CreateLang extends Lang {
 
 	public static LangBuilder blockName(BlockState state) {
 		return builder().add(state.getBlock()
-				.getName());
+			.getName());
 	}
 
 	public static LangBuilder itemName(ItemStack stack) {
 		return builder().add(stack.getHoverName()
-				.copy());
+			.copy());
 	}
 
 	public static LangBuilder fluidName(FluidStack stack) {
 		return builder().add(stack.getDisplayName()
-				.copy());
+			.copy());
 	}
 
 	public static LangBuilder number(double d) {
