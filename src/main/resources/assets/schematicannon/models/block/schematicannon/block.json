@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "create:block/andesite_casing_short",
+		"0": "schematicannon:block/andesite_casing_short",
 		"2": "block/stonecutter_bottom",
-		"4": "create:block/schematicannon",
+		"4": "schematicannon:block/schematicannon",
 		"8": "block/stone",
 		"particle": "block/spruce_log"
 	},

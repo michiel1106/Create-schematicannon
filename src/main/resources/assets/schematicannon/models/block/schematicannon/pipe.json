@@ -3,7 +3,7 @@
 	"parent": "block/block",
 	"textures": {
 		"3": "block/anvil",
-		"4": "create:block/schematicannon",
+		"4": "schematicannon:block/schematicannon",
 		"particle": "block/spruce_log"
 	},
 	"elements": [

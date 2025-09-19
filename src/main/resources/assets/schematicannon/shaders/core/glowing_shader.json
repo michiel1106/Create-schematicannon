@@ -4,8 +4,8 @@
         "srcrgb": "srcalpha",
         "dstrgb": "1-srcalpha"
     },
-    "vertex": "create:glowing_shader",
-    "fragment": "create:glowing_shader",
+    "vertex": "schematicannon:glowing_shader",
+    "fragment": "schematicannon:glowing_shader",
     "attributes": [
         "Position",
         "Color",
