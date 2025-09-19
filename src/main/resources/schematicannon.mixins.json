@@ -7,7 +7,6 @@
   "refmap": "schematicannon.refmap.json",
   "plugin": "com.bikerboys.schematicannon.foundation.mixin.SchematicannonMixinPlugin",
   "mixins": [
-    "BuiltInRegistriesMixin",
     "accessor.BuiltInRegistriesAccessor",
     "accessor.FluidInteractionRegistryAccessor",
     "accessor.ItemFrameAccessor",
