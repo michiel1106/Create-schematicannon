@@ -7,7 +7,6 @@ import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import com.simibubi.create.compat.Mods;
 
 public class CreateMixinPlugin implements IMixinConfigPlugin {
 	@Override
@@ -21,9 +20,8 @@ public class CreateMixinPlugin implements IMixinConfigPlugin {
 
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-		if (mixinClassName.startsWith("com.simibubi.create.foundation.mixin.compat.journeymap") && !Mods.JOURNEYMAP.isLoaded())
-			return false;
-		return !targetClassName.startsWith("com.simibubi.create.foundation.mixin.compat.xaeros") || Mods.XAEROWORLDMAP.isLoaded();
+
+		return true;
 	}
 
 	@Override

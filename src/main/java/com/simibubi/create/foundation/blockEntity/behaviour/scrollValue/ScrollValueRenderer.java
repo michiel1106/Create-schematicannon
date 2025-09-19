@@ -3,9 +3,7 @@ package com.simibubi.create.foundation.blockEntity.behaviour.scrollValue;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.simibubi.create.AllItems;
 import com.simibubi.create.AllKeys;
-import com.simibubi.create.CreateClient;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBox;
@@ -54,8 +52,6 @@ public class ScrollValueRenderer {
 
 			ItemStack mainhandItem = mc.player.getItemInHand(InteractionHand.MAIN_HAND);
 			boolean clipboard = behaviour.bypassesInput(mainhandItem);
-			if (behaviour.needsWrench && !AllItems.WRENCH.isIn(mainhandItem) && !clipboard)
-				continue;
 			boolean highlight = behaviour.testHit(target.getLocation()) && !clipboard && !highlightFound;
 
 			if (behaviour instanceof BulkScrollValueBehaviour bulkScrolling && AllKeys.ctrlDown()) {
@@ -74,7 +70,7 @@ public class ScrollValueRenderer {
 			List<MutableComponent> tip = new ArrayList<>();
 			tip.add(behaviour.label.copy());
 			tip.add(CreateLang.translateDirect("gui.value_settings.hold_to_edit"));
-			CreateClient.VALUE_SETTINGS_HANDLER.showHoverTip(tip);
+
 		}
 	}
 

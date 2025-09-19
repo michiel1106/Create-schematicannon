@@ -1,7 +1,6 @@
 package com.simibubi.create.foundation.events;
 
 import com.simibubi.create.Create;
-import com.simibubi.create.foundation.data.RuntimeDataGenerator;
 import com.simibubi.create.foundation.pack.DynamicPack;
 import com.simibubi.create.foundation.pack.DynamicPackSource;
 import com.simibubi.create.foundation.utility.ServerSpeedProvider;
@@ -74,7 +73,6 @@ public class CommonEvents {
 		public static void addPackFinders(AddPackFindersEvent event) {
 			if (event.getPackType() == PackType.SERVER_DATA) {
 				DynamicPack dynamicPack = new DynamicPack("create:dynamic_data", PackType.SERVER_DATA);
-				RuntimeDataGenerator.insertIntoPack(dynamicPack);
 				event.addRepositorySource(new DynamicPackSource("create:dynamic_data", PackType.SERVER_DATA, Pack.Position.BOTTOM, dynamicPack));
 			}
 		}

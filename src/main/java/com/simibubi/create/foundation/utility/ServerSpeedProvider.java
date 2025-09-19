@@ -2,7 +2,6 @@ package com.simibubi.create.foundation.utility;
 
 import com.simibubi.create.AllPackets;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
-import com.simibubi.create.infrastructure.config.AllConfigs;
 
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.animation.LerpedFloat.Chaser;
@@ -40,7 +39,7 @@ public class ServerSpeedProvider {
 	}
 
 	public static Integer getSyncInterval() {
-		return AllConfigs.server().tickrateSyncTimer.get();
+		return 20;
 	}
 
 	public static float get() {

@@ -1,10 +1,7 @@
 package com.simibubi.create;
 
 
-import com.simibubi.create.content.equipment.blueprint.BlueprintEntity;
-import com.simibubi.create.content.equipment.blueprint.BlueprintRenderer;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
-import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
@@ -19,11 +16,6 @@ import net.minecraft.world.entity.MobCategory;
 
 public class AllEntityTypes {
 
-
-
-	public static final EntityEntry<BlueprintEntity> CRAFTING_BLUEPRINT =
-		register("crafting_blueprint", BlueprintEntity::new, () -> BlueprintRenderer::new, MobCategory.MISC, 10,
-			Integer.MAX_VALUE, false, true, BlueprintEntity::build).register();
 
 
 

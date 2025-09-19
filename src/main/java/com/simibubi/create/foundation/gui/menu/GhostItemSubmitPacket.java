@@ -1,7 +1,5 @@
 package com.simibubi.create.foundation.gui.menu;
 
-import com.simibubi.create.content.logistics.filter.FilterItem;
-import com.simibubi.create.content.logistics.stockTicker.StockKeeperCategoryMenu;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 
 import net.minecraft.network.FriendlyByteBuf;
@@ -39,12 +37,6 @@ public class GhostItemSubmitPacket extends SimplePacketBase {
 
 			if (player.containerMenu instanceof GhostItemMenu<?> menu) {
 				menu.ghostInventory.setStackInSlot(slot, item);
-				menu.getSlot(36 + slot)
-					.setChanged();
-			}
-			if (player.containerMenu instanceof StockKeeperCategoryMenu menu
-				&& (item.isEmpty() || item.getItem() instanceof FilterItem)) {
-				menu.proxyInventory.setStackInSlot(slot, item);
 				menu.getSlot(36 + slot)
 					.setChanged();
 			}

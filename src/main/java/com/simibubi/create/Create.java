@@ -10,11 +10,7 @@ import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.schematics.ServerSchematicLoader;
 import com.simibubi.create.foundation.CreateNBTProcessors;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.item.ItemDescription;
-import com.simibubi.create.foundation.item.KineticStats;
-import com.simibubi.create.foundation.item.TooltipModifier;
 
-import net.createmod.catnip.lang.FontHelper;
 import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -53,11 +49,7 @@ public class Create {
 
 
 	private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(ID)
-		.defaultCreativeTab((ResourceKey<CreativeModeTab>) null)
-		.setTooltipModifierFactory(item ->
-			new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
-				.andThen(TooltipModifier.mapNull(KineticStats.create(item)))
-		);
+		.defaultCreativeTab((ResourceKey<CreativeModeTab>) null);
 
 	public static final ServerSchematicLoader SCHEMATIC_RECEIVER = new ServerSchematicLoader();
 

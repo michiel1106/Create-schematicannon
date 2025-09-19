@@ -1,7 +1,5 @@
 package com.simibubi.create;
 
-import com.simibubi.create.content.equipment.blueprint.BlueprintMenu;
-import com.simibubi.create.content.equipment.blueprint.BlueprintScreen;
 import com.simibubi.create.content.schematics.cannon.SchematicannonMenu;
 import com.simibubi.create.content.schematics.cannon.SchematicannonScreen;
 import com.simibubi.create.content.schematics.table.SchematicTableMenu;
@@ -23,8 +21,6 @@ public class AllMenuTypes {
 	public static final MenuEntry<SchematicannonMenu> SCHEMATICANNON =
 		register("schematicannon", SchematicannonMenu::new, () -> SchematicannonScreen::new);
 
-	public static final MenuEntry<BlueprintMenu> CRAFTING_BLUEPRINT =
-		register("crafting_blueprint", BlueprintMenu::new, () -> BlueprintScreen::new);
 
 	private static <C extends AbstractContainerMenu, S extends Screen & MenuAccess<C>> MenuEntry<C> register(
 		String name, ForgeMenuFactory<C> factory, NonNullSupplier<ScreenFactory<C, S>> screenFactory) {

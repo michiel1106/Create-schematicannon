@@ -19,7 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.minecraft.world.phys.AABB;
 
 public class SchematicExport {
 	/**
@@ -43,7 +42,7 @@ public class SchematicExport {
 		structure.fillFromWorld(level, origin, bounds, true, Blocks.AIR);
 		CompoundTag data = structure.save(new CompoundTag());
 		SchematicAndQuillItem.replaceStructureVoidWithAir(data);
-		SchematicAndQuillItem.clampGlueBoxes(level, new AABB(origin, origin.offset(bounds)), data);
+
 
 		if (fileName.isEmpty())
 			fileName = CreateLang.translateDirect("schematicAndQuill.fallbackName").getString();

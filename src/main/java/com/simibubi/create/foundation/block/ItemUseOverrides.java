@@ -3,15 +3,14 @@ package com.simibubi.create.foundation.block;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.simibubi.create.AllItems;
-
-import net.createmod.catnip.platform.CatnipServices;
 import net.createmod.catnip.math.VecHelper;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -27,8 +26,6 @@ public class ItemUseOverrides {
 
 	@SubscribeEvent
 	public static void onBlockActivated(PlayerInteractEvent.RightClickBlock event) {
-		if (AllItems.WRENCH.isIn(event.getItemStack()))
-			return;
 
 		BlockState state = event.getLevel()
 				.getBlockState(event.getPos());

@@ -4,18 +4,13 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.Create;
 import com.simibubi.create.CreateClient;
-import com.simibubi.create.content.equipment.blueprint.BlueprintOverlayRenderer;
 import com.simibubi.create.content.equipment.clipboard.ClipboardValueSettingsHandler;
-import com.simibubi.create.foundation.blockEntity.behaviour.edgeInteraction.EdgeInteractionRenderer;
-import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringRenderer;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueRenderer;
 import com.simibubi.create.foundation.item.TooltipModifier;
-import com.simibubi.create.foundation.sound.SoundScapes;
 import com.simibubi.create.foundation.utility.CameraAngleAnimationService;
 import com.simibubi.create.foundation.utility.ServerSpeedProvider;
 import com.simibubi.create.foundation.utility.TickBasedCache;
-import com.simibubi.create.infrastructure.config.AllConfigs;
 
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.config.ui.BaseConfigScreen;
@@ -57,7 +52,7 @@ public class ClientEvents {
 
 		Level world = Minecraft.getInstance().level;
 
-		SoundScapes.tick();
+
 
 		CreateClient.SCHEMATIC_SENDER.tick();
 		CreateClient.SCHEMATIC_AND_QUILL_HANDLER.tick();
@@ -68,11 +63,8 @@ public class ClientEvents {
 		PonderTooltipHandler.tick();
 		ServerSpeedProvider.clientTick();
 
-		FilteringRenderer.tick();
 		ScrollValueRenderer.tick();
-		EdgeInteractionRenderer.tick();
 
-		BlueprintOverlayRenderer.tick();
 
 		CameraAngleAnimationService.tick();
 		ClipboardValueSettingsHandler.clientTick();
@@ -136,8 +128,7 @@ public class ClientEvents {
 
 	@SubscribeEvent
 	public static void addToItemTooltip(ItemTooltipEvent event) {
-		if (!AllConfigs.client().tooltips.get())
-			return;
+
 		if (event.getEntity() == null)
 			return;
 
@@ -172,7 +163,6 @@ public class ClientEvents {
 		@SubscribeEvent
 		public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
 
-			event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "blueprint", BlueprintOverlayRenderer.OVERLAY);
 			event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "schematic", CreateClient.SCHEMATIC_HANDLER);
 		}
 

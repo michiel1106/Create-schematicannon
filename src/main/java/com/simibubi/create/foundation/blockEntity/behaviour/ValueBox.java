@@ -3,7 +3,6 @@ package com.simibubi.create.foundation.blockEntity.behaviour;
 import java.lang.ref.WeakReference;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform.Sided;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.INamedIconOptions;
 import com.simibubi.create.foundation.gui.AllIcons;
@@ -140,7 +139,7 @@ public class ValueBox extends ChasingAABBOutline {
 			Font font = Minecraft.getInstance().font;
 			ms.translate(17.5f, -5f, 7f);
 
-			boolean isFilter = stack.getItem() instanceof FilterItem;
+			boolean isFilter = false;
 			boolean isEmpty = stack.isEmpty();
 
 			ItemRenderer itemRenderer = Minecraft.getInstance()

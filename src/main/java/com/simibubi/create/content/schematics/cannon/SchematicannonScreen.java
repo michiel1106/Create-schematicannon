@@ -1,7 +1,6 @@
 package com.simibubi.create.content.schematics.cannon;
 
 import static net.minecraft.ChatFormatting.BLUE;
-import static net.minecraft.ChatFormatting.DARK_PURPLE;
 import static net.minecraft.ChatFormatting.GRAY;
 
 import java.util.ArrayList;
@@ -392,14 +391,7 @@ public class SchematicannonScreen extends AbstractSimiContainerScreen<Schematica
 			.getCount() * be.getShotsPerGunpowder();
 		List<Component> tooltip = new ArrayList<>();
 
-		if (be.hasCreativeCrate) {
-			tooltip.add(CreateLang.translateDirect(_gunpowderLevel, "" + 100));
-			tooltip.add(Component.literal("(").append(AllBlocks.CREATIVE_CRATE.get()
-					.getName())
-				.append(")")
-				.withStyle(DARK_PURPLE));
-			return tooltip;
-		}
+
 
 		int fillPercent = (int) ((be.remainingFuel / (float) be.getShotsPerGunpowder()) * 100);
 		tooltip.add(CreateLang.translateDirect(_gunpowderLevel, fillPercent));
