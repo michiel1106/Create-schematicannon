@@ -19,8 +19,8 @@ ext.buildNumber = System.getenv("BUILD_NUMBER")
 String gitHash = calculateGitHash() + (hasUnstaged() ? "-modified" : "")
 
 base {
-    archivesName = "create-${artifact_minecraft_version}"
-    group = "com.simibubi.create"
+    archivesName = "schematicannon-${artifact_minecraft_version}"
+    group = "com.bikerboys.schematicannon"
     version = mod_version + (dev && buildNumber != null ? "-${buildNumber}" : "")
 }
 
