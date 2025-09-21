@@ -8,7 +8,6 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.AllShapes;
-import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.block.ProperWaterloggedBlock;
 
@@ -37,15 +36,15 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.util.FakePlayer;
 
 public class ClipboardBlock extends FaceAttachedHorizontalDirectionalBlock
-	implements IBE<ClipboardBlockEntity>, IWrenchable, ProperWaterloggedBlock {
+	implements IBE<ClipboardBlockEntity>, ProperWaterloggedBlock {
 
 	public static final BooleanProperty WRITTEN = BooleanProperty.create("written");
 
@@ -123,7 +122,7 @@ public class ClipboardBlock extends FaceAttachedHorizontalDirectionalBlock
 			pPlayer.getInventory()
 				.placeItemBackInInventory(cloneItemStack);
 	}
-	
+
 	@Override
 	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		if (level.getBlockEntity(pos) instanceof ClipboardBlockEntity cbe)

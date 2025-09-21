@@ -8,9 +8,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector4f;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.virtualWorld.VirtualRenderWorld;
-import com.simibubi.create.infrastructure.config.AllConfigs;
 
 import dev.engine_room.flywheel.api.visualization.VisualizationManager;
 import dev.engine_room.flywheel.lib.transform.TransformStack;
@@ -110,8 +108,6 @@ public class BlockEntityRenderHelper {
 
 				String message = "BlockEntity " + RegisteredObjectsHelper.getKeyOrThrow(blockEntity.getType())
 					.toString() + " could not be rendered virtually.";
-				if (AllConfigs.client().explainRenderErrors.get()) Create.LOGGER.error(message, e);
-				else Create.LOGGER.error(message);
 			}
 
 			ms.popPose();

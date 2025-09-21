@@ -1,23 +1,14 @@
 package com.simibubi.create.api.registry;
 
 import java.util.List;
-import java.util.function.Function;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.simibubi.create.impl.registry.SimpleRegistryImpl;
-import com.simibubi.create.impl.registry.TagProviderImpl;
 
-import net.minecraft.core.Holder;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.StateHolder;
-import net.minecraft.world.level.material.Fluid;
 
 /**
  * A simple registry mapping between objects with identity semantics.
@@ -88,48 +79,7 @@ public interface SimpleRegistry<K, V> {
 		 * Create a provider that will return the same value for all entries in a tag.
 		 * The Provider will invalidate itself when tags are reloaded.
 		 */
-		static <K, V> Provider<K, V> forTag(TagKey<K> tag, Function<K, Holder<K>> holderGetter, V value) {
-			return new TagProviderImpl<>(tag, holderGetter, value);
-		}
 
-		/**
-		 * Shortcut for {@link #forTag} when the registry's type is Block.
-		 */
-		@SuppressWarnings("deprecation")
-		static <V> Provider<Block, V> forBlockTag(TagKey<Block> tag, V value) {
-			return new TagProviderImpl<>(tag, Block::builtInRegistryHolder, value);
-		}
-
-		/**
-		 * Shortcut for {@link #forTag} when the registry's type is BlockEntityType.
-		 */
-		static <V> Provider<BlockEntityType<?>, V> forBlockEntityTag(TagKey<BlockEntityType<?>> tag, V value) {
-			return new TagProviderImpl<>(tag, TagProviderImpl::getBeHolder, value);
-		}
-
-		/**
-		 * Shortcut for {@link #forTag} when the registry's type is Item.
-		 */
-		@SuppressWarnings("deprecation")
-		static <V> Provider<Item, V> forItemTag(TagKey<Item> tag, V value) {
-			return new TagProviderImpl<>(tag, Item::builtInRegistryHolder, value);
-		}
-
-		/**
-		 * Shortcut for {@link #forTag} when the registry's type is EntityType.
-		 */
-		@SuppressWarnings("deprecation")
-		static <V> Provider<EntityType<?>, V> forEntityTag(TagKey<EntityType<?>> tag, V value) {
-			return new TagProviderImpl<>(tag, EntityType::builtInRegistryHolder, value);
-		}
-
-		/**
-		 * Shortcut for {@link #forTag} when the registry's type is Fluid.
-		 */
-		@SuppressWarnings("deprecation")
-		static <V> Provider<Fluid, V> forFluidTag(TagKey<Fluid> tag, V value) {
-			return new TagProviderImpl<>(tag, Fluid::builtInRegistryHolder, value);
-		}
 	}
 
 	/**

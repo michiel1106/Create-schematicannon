@@ -1,11 +1,9 @@
 package com.simibubi.create.foundation.utility;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags.AllBlockTags;
 import com.simibubi.create.api.schematic.nbt.PartialSafeNBT;
 import com.simibubi.create.api.schematic.nbt.SafeNbtWriterRegistry;
@@ -13,66 +11,42 @@ import com.simibubi.create.api.schematic.nbt.SafeNbtWriterRegistry.SafeNbtWriter
 import com.simibubi.create.api.schematic.state.SchematicStateFilter;
 import com.simibubi.create.api.schematic.state.SchematicStateFilterRegistry;
 import com.simibubi.create.api.schematic.state.SchematicStateFilterRegistry.StateFilter;
-import com.simibubi.create.compat.Mods;
-import com.simibubi.create.compat.framedblocks.FramedBlocksInSchematics;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel;
 import com.simibubi.create.foundation.blockEntity.IMergeableBE;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 
 import net.createmod.catnip.nbt.NBTProcessors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseRailBlock;
-import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.IceBlock;
-import net.minecraft.world.level.block.LevelEvent;
-import net.minecraft.world.level.block.SlimeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.SpecialPlantable;
-import net.neoforged.neoforge.event.level.BlockDropsEvent;
-import net.neoforged.neoforge.event.level.BlockEvent;
 
 public class BlockHelper {
 	private static final List<IntegerProperty> COUNT_STATES = List.of(
@@ -124,153 +98,9 @@ public class BlockHelper {
 		return blockState;
 	}
 
-	public static int findAndRemoveInInventory(BlockState block, Player player, int amount) {
-		int amountFound = 0;
-		Item required = getRequiredItem(block).getItem();
 
-		boolean needsTwo = block.hasProperty(BlockStateProperties.SLAB_TYPE)
-			&& block.getValue(BlockStateProperties.SLAB_TYPE) == SlabType.DOUBLE;
 
-		if (needsTwo)
-			amount *= 2;
 
-		for (IntegerProperty property : COUNT_STATES)
-			if (block.hasProperty(property))
-				amount *= block.getValue(property);
-
-		if (VINELIKE_BLOCKS.contains(block.getBlock())) {
-			int vineCount = 0;
-
-			for (BooleanProperty vineState : VINELIKE_STATES) {
-				if (block.hasProperty(vineState) && block.getValue(vineState)) {
-					vineCount++;
-				}
-			}
-
-			amount += vineCount - 1;
-		}
-
-		{
-			// Try held Item first
-			int preferredSlot = player.getInventory().selected;
-			ItemStack itemstack = player.getInventory()
-				.getItem(preferredSlot);
-			int count = itemstack.getCount();
-			if (itemstack.getItem() == required && count > 0) {
-				int taken = Math.min(count, amount - amountFound);
-				player.getInventory()
-					.setItem(preferredSlot, new ItemStack(itemstack.getItem(), count - taken));
-				amountFound += taken;
-			}
-		}
-
-		// Search inventory
-		for (int i = 0; i < player.getInventory()
-			.getContainerSize(); ++i) {
-			if (amountFound == amount)
-				break;
-
-			ItemStack itemstack = player.getInventory()
-				.getItem(i);
-			int count = itemstack.getCount();
-			if (itemstack.getItem() == required && count > 0) {
-				int taken = Math.min(count, amount - amountFound);
-				player.getInventory()
-					.setItem(i, new ItemStack(itemstack.getItem(), count - taken));
-				amountFound += taken;
-			}
-		}
-
-		if (needsTwo) {
-			// Give back 1 if uneven amount was removed
-			if (amountFound % 2 != 0)
-				player.getInventory()
-					.add(new ItemStack(required));
-			amountFound /= 2;
-		}
-
-		return amountFound;
-	}
-
-	public static ItemStack getRequiredItem(BlockState state) {
-		ItemStack itemStack = new ItemStack(state.getBlock());
-		Item item = itemStack.getItem();
-		if (item == Items.FARMLAND || item == Items.DIRT_PATH)
-			itemStack = new ItemStack(Items.DIRT);
-		return itemStack;
-	}
-
-	public static void destroyBlock(Level world, BlockPos pos, float effectChance) {
-		destroyBlock(world, pos, effectChance, stack -> Block.popResource(world, pos, stack));
-	}
-
-	public static void destroyBlock(Level world, BlockPos pos, float effectChance,
-									Consumer<ItemStack> droppedItemCallback) {
-		destroyBlockAs(world, pos, null, ItemStack.EMPTY, effectChance, droppedItemCallback);
-	}
-
-	public static void destroyBlockAs(Level world, BlockPos pos, @Nullable Player player, ItemStack usedTool,
-									  float effectChance, Consumer<ItemStack> droppedItemCallback) {
-		FluidState fluidState = world.getFluidState(pos);
-		BlockState state = world.getBlockState(pos);
-
-		if (world.random.nextFloat() < effectChance)
-			world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(state));
-		BlockEntity blockEntity = state.hasBlockEntity() ? world.getBlockEntity(pos) : null;
-
-		if (player != null) {
-			BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(world, pos, state, player);
-			NeoForge.EVENT_BUS.post(event);
-			if (event.isCanceled())
-				return;
-
-			usedTool.mineBlock(world, state, pos, player);
-			player.awardStat(Stats.BLOCK_MINED.get(state.getBlock()));
-		}
-
-		if (world instanceof ServerLevel serverLevel && world.getGameRules()
-			.getBoolean(GameRules.RULE_DOBLOCKDROPS) && !world.restoringBlockSnapshots
-			&& (player == null || !player.isCreative())) {
-			List<ItemStack> drops = Block.getDrops(state, serverLevel, pos, blockEntity, player, usedTool);
-			if (player != null) {
-				BlockDropsEvent event = new BlockDropsEvent(serverLevel, pos, state, blockEntity, List.of(), player, usedTool);
-				NeoForge.EVENT_BUS.post(event);
-				if (!event.isCanceled()) {
-					if ( event.getDroppedExperience() > 0)
-						state.getBlock().popExperience(serverLevel, pos, event.getDroppedExperience());
-				}
-			}
-			for (ItemStack itemStack : drops)
-				droppedItemCallback.accept(itemStack);
-
-			// Simulating IceBlock#playerDestroy. Not calling method directly as it would drop item
-			// entities as a side-effect
-			Registry<Enchantment> enchantmentRegistry = world.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
-			if (state.getBlock() instanceof IceBlock && usedTool.getEnchantmentLevel(enchantmentRegistry.getHolderOrThrow(Enchantments.SILK_TOUCH)) == 0) {
-				if (!world.dimensionType().ultraWarm()) {
-					BlockState below = world.getBlockState(pos.below());
-					if (below.blocksMotion() || below.liquid()) {
-						fluidState = IceBlock.meltsInto().getFluidState();
-					}
-				}
-			}
-
-			state.spawnAfterBreak((ServerLevel) world, pos, ItemStack.EMPTY, true);
-		}
-
-		world.setBlockAndUpdate(pos, fluidState.createLegacyBlock());
-	}
-
-	public static boolean isSolidWall(BlockGetter reader, BlockPos fromPos, Direction toDirection) {
-		return hasBlockSolidSide(reader.getBlockState(fromPos.relative(toDirection)), reader,
-			fromPos.relative(toDirection), toDirection.getOpposite());
-	}
-
-	public static boolean noCollisionInSpace(BlockGetter reader, BlockPos pos) {
-		return reader.getBlockState(pos)
-			.getCollisionShape(reader, pos)
-			.isEmpty();
-	}
 
 	private static void placeRailWithoutUpdate(Level world, BlockState state, BlockPos target) {
 		LevelChunk chunk = world.getChunkAt(target);
@@ -305,8 +135,6 @@ public class BlockHelper {
 		} else if (blockEntity instanceof PartialSafeNBT safeNbtBE) {
 			data = new CompoundTag();
 			safeNbtBE.writeSafe(data, access);
-		} else if (Mods.FRAMEDBLOCKS.contains(blockState.getBlock())) {
-			data = FramedBlocksInSchematics.prepareBlockEntityData(blockState, blockEntity);
 		}
 
 		return NBTProcessors.process(blockState, blockEntity, data, true);
@@ -362,8 +190,6 @@ public class BlockHelper {
 			// pass
 		} else if (state.getBlock() instanceof BaseRailBlock) {
 			placeRailWithoutUpdate(world, state, target);
-		} else if (AllBlocks.BELT.has(state)) {
-			world.setBlock(target, state, Block.UPDATE_CLIENTS);
 		} else {
 			world.setBlock(target, state, Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE);
 		}
@@ -384,8 +210,6 @@ public class BlockHelper {
 				data.putInt("x", target.getX());
 				data.putInt("y", target.getY());
 				data.putInt("z", target.getZ());
-				if (blockEntity instanceof KineticBlockEntity kbe)
-					kbe.warnOfMovement();
 				if (blockEntity instanceof IMultiBlockEntityContainer imbe)
 					if (!imbe.isController())
 						data.put("Controller", NbtUtils.writeBlockPos(imbe.getController()));
@@ -400,55 +224,11 @@ public class BlockHelper {
 		}
 	}
 
-	public static double getBounceMultiplier(Block block) {
-		if (block instanceof SlimeBlock)
-			return 0.8D;
-		if (block instanceof BedBlock)
-			return 0.66 * 0.8D;
-		return 0;
-	}
-
 	public static boolean hasBlockSolidSide(BlockState state, BlockGetter blockGetter, BlockPos pos, Direction dir) {
 		return !state.is(BlockTags.LEAVES)
 			&& Block.isFaceFull(state.getCollisionShape(blockGetter, pos), dir);
 	}
 
-	public static boolean extinguishFire(Level world, @Nullable Player player, BlockPos pos, Direction dir) {
-		pos = pos.relative(dir);
-		if (world.getBlockState(pos)
-			.getBlock() == Blocks.FIRE) {
-			world.levelEvent(player, LevelEvent.SOUND_EXTINGUISH_FIRE, pos, 0);
-			world.removeBlock(pos, false);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public static BlockState copyProperties(BlockState fromState, BlockState toState) {
-		for (Property<?> property : fromState.getProperties()) {
-			toState = copyProperty(property, fromState, toState);
-		}
-		return toState;
-	}
-
-	public static <T extends Comparable<T>> BlockState copyProperty(Property<T> property, BlockState fromState,
-																	BlockState toState) {
-		if (fromState.hasProperty(property) && toState.hasProperty(property)) {
-			return toState.setValue(property, fromState.getValue(property));
-		}
-		return toState;
-	}
-
-	public static boolean isNotUnheated(BlockState state) {
-		if (state.is(BlockTags.CAMPFIRES) && state.hasProperty(CampfireBlock.LIT)) {
-			return state.getValue(CampfireBlock.LIT);
-		}
-		if (state.hasProperty(BlazeBurnerBlock.HEAT_LEVEL)) {
-			return state.getValue(BlazeBurnerBlock.HEAT_LEVEL) != HeatLevel.NONE;
-		}
-		return true;
-	}
 
 	public static InteractionResult invokeUse(BlockState state, Level level, Player player,
 											   InteractionHand hand, BlockHitResult ray) {

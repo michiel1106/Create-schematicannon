@@ -20,8 +20,6 @@ import com.simibubi.create.content.schematics.table.SchematicTableBlockEntity;
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.foundation.utility.CreatePaths;
 import com.simibubi.create.foundation.utility.FilesHelper;
-import com.simibubi.create.infrastructure.config.AllConfigs;
-import com.simibubi.create.infrastructure.config.CSchematics;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
@@ -63,7 +61,7 @@ public class ServerSchematicLoader {
 
 	public void tick() {
 		// Detect Timed out Uploads
-		int timeout = getConfig().schematicIdleTimeout.get();
+		int timeout = 600;
 		for (String upload : activeUploads.keySet()) {
 			SchematicUploadEntry entry = activeUploads.get(upload);
 
@@ -129,7 +127,7 @@ public class ServerSchematicLoader {
 				count = list.count();
 			}
 
-			if (count >= getConfig().maxSchematics.get()) {
+			if (count >= 10) {
 				Stream<Path> list2 = Files.list(playerPath);
 				Optional<Path> lastFilePath = list2.filter(f -> !Files.isDirectory(f))
 					.min(Comparator.comparingLong(f -> f.toFile()
@@ -152,7 +150,7 @@ public class ServerSchematicLoader {
 	}
 
 	protected boolean validateSchematicSizeOnServer(ServerPlayer player, long size) {
-		long maxFileSize = getConfig().maxTotalSchematicSize.get();
+		long maxFileSize = 256;
 		if (size > maxFileSize * 1000) {
 			player.sendSystemMessage(CreateLang.translateDirect("schematics.uploadTooLarge")
 				.append(Component.literal(" (" + size / 1000 + " KB).")));
@@ -163,9 +161,6 @@ public class ServerSchematicLoader {
 		return true;
 	}
 
-	public CSchematics getConfig() {
-		return AllConfigs.server().schematics;
-	}
 
 	public void handleWriteRequest(ServerPlayer player, String schematic, byte[] data) {
 		String playerSchematicId = player.getGameProfile()
@@ -176,7 +171,7 @@ public class ServerSchematicLoader {
 			entry.bytesUploaded += data.length;
 
 			// Size Validations
-			if (data.length > getConfig().maxSchematicPacketSize.get()) {
+			if (data.length > 2048) {
 				Create.LOGGER.warn("Oversized Upload Packet received: {}", playerSchematicId);
 				cancelUpload(playerSchematicId);
 				return;
@@ -312,7 +307,7 @@ public class ServerSchematicLoader {
 	private boolean tryDeleteOldestSchematic(Path dir) {
 		try (Stream<Path> stream = Files.list(dir)) {
 			List<Path> files = stream.toList();
-			if (files.size() < getConfig().maxSchematics.get())
+			if (files.size() < 10)
 				return true;
 			Optional<Path> oldest = files.stream().min(Comparator.comparingLong(this::getLastModifiedTime));
 			Files.delete(oldest.orElseThrow());

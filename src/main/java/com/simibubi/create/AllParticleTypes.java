@@ -2,14 +2,8 @@ package com.simibubi.create;
 
 import java.util.function.Supplier;
 
-import com.simibubi.create.content.equipment.bell.SoulBaseParticle;
-import com.simibubi.create.content.equipment.bell.SoulParticle;
-import com.simibubi.create.content.fluids.particle.FluidParticleData;
-import com.simibubi.create.content.kinetics.base.RotationIndicatorParticleData;
-import com.simibubi.create.content.kinetics.fan.AirFlowParticleData;
-import com.simibubi.create.content.kinetics.steamEngine.SteamJetParticleData;
-import com.simibubi.create.content.logistics.packagerLink.WiFiParticle;
-import com.simibubi.create.content.trains.CubeParticleData;
+import org.jetbrains.annotations.ApiStatus.Internal;
+
 import com.simibubi.create.foundation.particle.AirParticleData;
 import com.simibubi.create.foundation.particle.ICustomParticleData;
 
@@ -17,6 +11,7 @@ import net.createmod.catnip.lang.Lang;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
+
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
@@ -24,22 +19,8 @@ import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import org.jetbrains.annotations.ApiStatus.Internal;
-
 public enum AllParticleTypes {
-	ROTATION_INDICATOR(RotationIndicatorParticleData::new),
-	AIR_FLOW(AirFlowParticleData::new),
-	AIR(AirParticleData::new),
-	STEAM_JET(SteamJetParticleData::new),
-	CUBE(CubeParticleData::new),
-	FLUID_PARTICLE(FluidParticleData::new),
-	BASIN_FLUID(FluidParticleData::new),
-	FLUID_DRIP(FluidParticleData::new),
-	WIFI(WiFiParticle.Data::new),
-	SOUL(SoulParticle.Data::new),
-	SOUL_BASE(SoulBaseParticle.Data::new),
-	SOUL_PERIMETER(SoulParticle.PerimeterData::new),
-	SOUL_EXPANDING_PERIMETER(SoulParticle.ExpandingPerimeterData::new);
+	AIR(AirParticleData::new);
 
 	private final ParticleEntry<?> entry;
 

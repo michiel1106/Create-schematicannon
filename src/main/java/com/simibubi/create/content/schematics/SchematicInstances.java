@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.simibubi.create.AllDataComponents;
-import com.simibubi.create.content.contraptions.StructureTransform;
+import com.simibubi.create.foundation.StructureTransform;
 
 import net.createmod.catnip.data.WorldAttached;
 import net.createmod.catnip.levelWrappers.SchematicLevel;

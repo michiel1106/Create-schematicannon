@@ -21,8 +21,6 @@ import com.simibubi.create.content.schematics.packet.SchematicUploadPacket;
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.foundation.utility.CreatePaths;
 import com.simibubi.create.foundation.utility.FilesHelper;
-import com.simibubi.create.infrastructure.config.AllConfigs;
-
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -93,7 +91,7 @@ public class ClientSchematicLoader {
 	public static boolean validateSizeLimitation(long size) {
 		if (Minecraft.getInstance().hasSingleplayerServer())
 			return true;
-		long maxSize = AllConfigs.server().schematics.maxTotalSchematicSize.get();
+		long maxSize = 256;
 		if (size > maxSize * 1000) {
 			LocalPlayer player = Minecraft.getInstance().player;
 			if (player != null) {
@@ -126,7 +124,7 @@ public class ClientSchematicLoader {
 
 	private void continueUpload(String schematic) {
 		if (activeUploads.containsKey(schematic)) {
-			int maxPacketSize = AllConfigs.server().schematics.maxSchematicPacketSize.get();
+			int maxPacketSize = 2048;
 			byte[] data = new byte[maxPacketSize];
 			try {
 				int status = activeUploads.get(schematic).read(data);

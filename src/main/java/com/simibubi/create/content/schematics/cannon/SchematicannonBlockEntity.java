@@ -1,6 +1,5 @@
 package com.simibubi.create.content.schematics.cannon;
 
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,12 +13,6 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllSoundEvents;
-import com.simibubi.create.content.kinetics.belt.BeltBlock;
-import com.simibubi.create.content.kinetics.belt.BeltBlockEntity;
-import com.simibubi.create.content.kinetics.belt.BeltBlockEntity.CasingType;
-import com.simibubi.create.content.kinetics.belt.BeltPart;
-import com.simibubi.create.content.kinetics.belt.BeltSlope;
-import com.simibubi.create.content.kinetics.simpleRelays.AbstractSimpleShaftBlock;
 import com.simibubi.create.content.schematics.SchematicPrinter;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement.ItemUseType;
@@ -29,16 +22,12 @@ import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.ItemHelper.ExtractionCountMode;
 import com.simibubi.create.foundation.utility.BlockHelper;
 import com.simibubi.create.foundation.utility.CreateLang;
-import com.simibubi.create.infrastructure.config.AllConfigs;
-import com.simibubi.create.infrastructure.config.CSchematics;
 
 import io.netty.buffer.ByteBuf;
 import net.createmod.catnip.codecs.CatnipCodecUtils;
 import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.Axis;
-import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap.Builder;
 import net.minecraft.nbt.CompoundTag;
@@ -138,9 +127,6 @@ public class SchematicannonBlockEntity extends SmartBlockEntity implements MenuP
 
 			if (!level.isLoaded(worldPosition.relative(facing)))
 				continue;
-
-			if (AllBlocks.CREATIVE_CRATE.has(level.getBlockState(worldPosition.relative(facing))))
-				hasCreativeCrate = true;
 
 			BlockEntity blockEntity = level.getBlockEntity(worldPosition.relative(facing));
 			if (blockEntity != null) {
@@ -305,9 +291,6 @@ public class SchematicannonBlockEntity extends SmartBlockEntity implements MenuP
 		}
 	}
 
-	public CSchematics config() {
-		return AllConfigs.server().schematics;
-	}
 
 	protected void tickPrinter() {
 		ItemStack blueprint = inventory.getStackInSlot(0);
@@ -432,14 +415,14 @@ public class SchematicannonBlockEntity extends SmartBlockEntity implements MenuP
 			launchEntity(target, icon, entity);
 		});
 
-		printerCooldown = config().schematicannonDelay.get();
+		printerCooldown = 20;
 		remainingFuel -= 1;
 		sendUpdate = true;
 		missingItem = null;
 	}
 
 	public int getShotsPerGunpowder() {
-		return hasCreativeCrate ? 0 : config().schematicannonShotsPerGunpowder.get();
+		return hasCreativeCrate ? 0 : 400;
 	}
 
 	protected void initializePrinter(ItemStack blueprint) {
@@ -645,8 +628,6 @@ public class SchematicannonBlockEntity extends SmartBlockEntity implements MenuP
 			return true;
 		if (state.getBlock() instanceof PistonHeadBlock)
 			return true;
-		if (AllBlocks.BELT.has(state))
-			return state.getValue(BeltBlock.PART) == BeltPart.MIDDLE;
 
 		return false;
 	}
@@ -749,73 +730,15 @@ public class SchematicannonBlockEntity extends SmartBlockEntity implements MenuP
 		sendUpdate = true;
 	}
 
-	public static BlockState stripBeltIfNotLast(BlockState blockState) {
-		BeltPart part = blockState.getValue(BeltBlock.PART);
-		if (part == BeltPart.MIDDLE)
-			return Blocks.AIR.defaultBlockState();
 
-		// is highest belt?
-		boolean isLastSegment = false;
-		Direction facing = blockState.getValue(BeltBlock.HORIZONTAL_FACING);
-		BeltSlope slope = blockState.getValue(BeltBlock.SLOPE);
-		boolean positive = facing.getAxisDirection() == AxisDirection.POSITIVE;
-		boolean start = part == BeltPart.START;
-		boolean end = part == BeltPart.END;
-
-		switch (slope) {
-		case DOWNWARD:
-			isLastSegment = start;
-			break;
-		case UPWARD:
-			isLastSegment = end;
-			break;
-		default:
-			isLastSegment = positive && end || !positive && start;
-		}
-		if (isLastSegment)
-			return blockState;
-
-		return AllBlocks.SHAFT.getDefaultState()
-			.setValue(AbstractSimpleShaftBlock.AXIS, slope == BeltSlope.SIDEWAYS ? Axis.Y
-				: facing.getClockWise()
-					.getAxis());
-	}
 
 	protected void launchBlockOrBelt(BlockPos target, ItemStack icon, BlockState blockState, BlockEntity blockEntity) {
-		if (AllBlocks.BELT.has(blockState)) {
-			blockState = stripBeltIfNotLast(blockState);
-			if (blockEntity instanceof BeltBlockEntity bbe && AllBlocks.BELT.has(blockState)) {
-				CasingType[] casings = new CasingType[bbe.beltLength];
-				Arrays.fill(casings, CasingType.NONE);
-				BlockPos currentPos = target;
-				for (int i = 0; i < bbe.beltLength; i++) {
-					BlockState currentState = bbe.getLevel()
-						.getBlockState(currentPos);
-					if (!(currentState.getBlock() instanceof BeltBlock))
-						break;
-					if (!(bbe.getLevel()
-						.getBlockEntity(currentPos) instanceof BeltBlockEntity beltAtSegment))
-						break;
-					casings[i] = beltAtSegment.casing;
-					currentPos = BeltBlock.nextSegmentPosition(currentState, currentPos,
-						blockState.getValue(BeltBlock.PART) != BeltPart.END);
-				}
-				launchBelt(target, blockState, bbe.beltLength, casings);
-			} else if (blockState != Blocks.AIR.defaultBlockState())
-				launchBlock(target, icon, blockState, null);
-			return;
-		}
 
 		CompoundTag data = BlockHelper.prepareBlockEntityData(level, blockState, blockEntity);
 		launchBlock(target, icon, blockState, data);
 	}
 
-	protected void launchBelt(BlockPos target, BlockState state, int length, CasingType[] casings) {
-		blocksPlaced++;
-		ItemStack connector = AllItems.BELT_CONNECTOR.asStack();
-		flyingBlocks.add(new LaunchedItem.ForBelt(this.getBlockPos(), target, connector, state, casings));
-		playFiringSound();
-	}
+
 
 	protected void launchBlock(BlockPos target, ItemStack stack, BlockState state, @Nullable CompoundTag data) {
 		if (!state.isAir())

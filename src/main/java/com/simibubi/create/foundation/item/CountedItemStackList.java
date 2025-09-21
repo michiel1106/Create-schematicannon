@@ -7,14 +7,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
-
 import net.createmod.catnip.data.IntAttached;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 public class CountedItemStackList {
 

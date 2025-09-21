@@ -9,7 +9,6 @@ import java.util.function.Supplier;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.simibubi.create.foundation.data.TagGen;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.providers.DataGenContext;

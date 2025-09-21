@@ -3,7 +3,7 @@ package com.simibubi.create.content.schematics.packet;
 import com.simibubi.create.AllPackets;
 import com.simibubi.create.content.schematics.SchematicPrinter;
 import com.simibubi.create.foundation.utility.BlockHelper;
-import com.simibubi.create.infrastructure.config.AllConfigs;
+
 
 import net.createmod.catnip.net.base.ServerboundPacketPayload;
 import net.minecraft.nbt.CompoundTag;
@@ -39,7 +39,7 @@ public record SchematicPlacePacket(ItemStack stack) implements ServerboundPacket
 			return;
 		}
 
-		boolean includeAir = AllConfigs.server().schematics.creativePrintIncludesAir.get();
+		boolean includeAir = false;
 
 		while (printer.advanceCurrentPos()) {
 			if (!printer.shouldPlaceCurrent(level)) {

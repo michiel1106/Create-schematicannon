@@ -1,7 +1,6 @@
 package com.simibubi.create.content.schematics.cannon;
 
 import static net.minecraft.ChatFormatting.BLUE;
-import static net.minecraft.ChatFormatting.DARK_PURPLE;
 import static net.minecraft.ChatFormatting.GRAY;
 
 import java.util.ArrayList;
@@ -18,11 +17,11 @@ import com.simibubi.create.foundation.gui.widget.IconButton;
 import com.simibubi.create.foundation.gui.widget.Indicator;
 import com.simibubi.create.foundation.gui.widget.Indicator.State;
 import com.simibubi.create.foundation.item.TooltipHelper;
-import net.createmod.catnip.platform.CatnipServices;
 import com.simibubi.create.foundation.utility.CreateLang;
 
 import net.createmod.catnip.gui.element.GuiGameElement;
 import net.createmod.catnip.lang.FontHelper.Palette;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -393,10 +392,6 @@ public class SchematicannonScreen extends AbstractSimiContainerScreen<Schematica
 
 		if (be.hasCreativeCrate) {
 			tooltip.add(CreateLang.translateDirect(_gunpowderLevel, "" + 100));
-			tooltip.add(Component.literal("(").append(AllBlocks.CREATIVE_CRATE.get()
-					.getName())
-				.append(")")
-				.withStyle(DARK_PURPLE));
 			return tooltip;
 		}
 

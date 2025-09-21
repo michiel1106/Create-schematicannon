@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.logistics.AddressEditBoxHelper;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 
@@ -99,7 +98,6 @@ public class ClipboardBlockEntity extends SmartBlockEntity {
 
 	@OnlyIn(Dist.CLIENT)
 	private void advertiseToAddressHelper() {
-		AddressEditBoxHelper.advertiseClipboard(this);
 	}
 
 }

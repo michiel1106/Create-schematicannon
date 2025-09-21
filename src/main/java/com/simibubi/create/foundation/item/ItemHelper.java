@@ -5,21 +5,16 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.jetbrains.annotations.Nullable;
 
-import org.apache.commons.lang3.mutable.MutableInt;
-
-import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.foundation.block.IBE;
-import com.simibubi.create.foundation.mixin.accessor.ItemStackHandlerAccessor;
 
 import net.createmod.catnip.data.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -304,14 +299,7 @@ public class ItemHelper {
 		return -1;
 	}
 
-	public static ItemStack fromItemEntity(Entity entityIn) {
-		if (!entityIn.isAlive())
-			return ItemStack.EMPTY;
-		if (entityIn instanceof PackageEntity packageEntity) {
-			return packageEntity.getBox();
-		}
-		return entityIn instanceof ItemEntity itemEntity ? itemEntity.getItem() : ItemStack.EMPTY;
-	}
+
 
 	public static void fillItemStackHandler(ItemContainerContents contents, ItemStackHandler inv) {
 		List<ItemStack> itemStacks = contents.stream().toList();
@@ -321,9 +309,6 @@ public class ItemHelper {
 		}
 	}
 
-	public static ItemContainerContents containerContentsFromHandler(ItemStackHandler handler) {
-		return ItemContainerContents.fromItems(((ItemStackHandlerAccessor) handler).create$getStacks());
-	}
 
 	public static ItemStack limitCountToMaxStackSize(ItemStack stack, boolean simulate) {
 		int count = stack.getCount();

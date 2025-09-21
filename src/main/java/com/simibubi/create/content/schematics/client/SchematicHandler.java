@@ -10,12 +10,12 @@ import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllKeys;
 import com.simibubi.create.Create;
-import com.simibubi.create.content.contraptions.StructureTransform;
 import com.simibubi.create.content.schematics.SchematicInstances;
 import com.simibubi.create.content.schematics.SchematicItem;
 import com.simibubi.create.content.schematics.client.tools.ToolType;
 import com.simibubi.create.content.schematics.packet.SchematicPlacePacket;
 import com.simibubi.create.content.schematics.packet.SchematicSyncPacket;
+import com.simibubi.create.foundation.StructureTransform;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.utility.CreateLang;
@@ -286,8 +286,6 @@ public class SchematicHandler implements LayeredDraw.Layer {
 		if (mc.hitResult instanceof BlockHitResult blockRayTraceResult) {
 			BlockState clickedBlock = mc.level.getBlockState(blockRayTraceResult.getBlockPos());
 			if (AllBlocks.SCHEMATICANNON.has(clickedBlock))
-				return false;
-			if (AllBlocks.DEPLOYER.has(clickedBlock))
 				return false;
 		}
 		return currentTool.getTool()

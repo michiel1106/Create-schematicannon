@@ -9,7 +9,6 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.equipment.clipboard.ClipboardOverrides.ClipboardType;
-import com.simibubi.create.content.trains.track.TrackBlockOutline;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.CreateLang;
@@ -82,7 +81,6 @@ public class ClipboardValueSettingsHandler {
 
 		ms.pushPose();
 		ms.translate(pos.getX() - camPos.x, pos.getY() - camPos.y, pos.getZ() - camPos.z);
-		TrackBlockOutline.renderShape(shape, ms, vb, true);
 		event.setCanceled(true);
 
 		ms.popPose();

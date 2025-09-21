@@ -3,9 +3,7 @@ package com.simibubi.create.content.schematics.cannon;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.schematics.cannon.LaunchedItem.ForBelt;
 import com.simibubi.create.content.schematics.cannon.LaunchedItem.ForBlockState;
 import com.simibubi.create.content.schematics.cannon.LaunchedItem.ForEntity;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
@@ -169,12 +167,8 @@ public class SchematicannonRenderer extends SafeBlockEntityRenderer<Schematicann
 			if (launched instanceof ForBlockState) {
 				// Render the Block
 				BlockState state;
-				if (launched instanceof ForBelt) {
-					// Render a shaft instead of the belt
-					state = AllBlocks.SHAFT.getDefaultState();
-				} else {
-					state = ((ForBlockState) launched).state;
-				}
+				state = ((ForBlockState) launched).state;
+
 				float scale = .3f;
 				ms.scale(scale, scale, scale);
 				Minecraft.getInstance()
