@@ -11,7 +11,6 @@ import com.bikerboys.schematicannon.content.schematics.packet.SchematicUploadPac
 import com.bikerboys.schematicannon.foundation.blockEntity.RemoveBlockEntityPacket;
 import com.bikerboys.schematicannon.foundation.blockEntity.behaviour.ValueSettingsPacket;
 import com.bikerboys.schematicannon.foundation.networking.ISyncPersistentData;
-import com.bikerboys.schematicannon.foundation.utility.ServerSpeedProvider;
 
 import net.createmod.catnip.net.base.BasePacketPayload;
 import net.createmod.catnip.net.base.CatnipPacketRegistry;
@@ -31,7 +30,6 @@ public enum AllPackets implements BasePacketPayload.PacketTypeProvider {
 
 	REMOVE_TE(RemoveBlockEntityPacket.class, RemoveBlockEntityPacket.STREAM_CODEC),
 	// Server to Client
-	SERVER_SPEED(ServerSpeedProvider.Packet.class, ServerSpeedProvider.Packet.STREAM_CODEC),
 	PERSISTENT_DATA(ISyncPersistentData.PersistentDataPacket.class, ISyncPersistentData.PersistentDataPacket.STREAM_CODEC),
 	;
 
@@ -55,7 +53,7 @@ public enum AllPackets implements BasePacketPayload.PacketTypeProvider {
 	}
 
 	public static void register() {
-		CatnipPacketRegistry packetRegistry = new CatnipPacketRegistry(Schematicannon.ID, CreateBuildInfo.VERSION);
+		CatnipPacketRegistry packetRegistry = new CatnipPacketRegistry(Schematicannon.ID, com.bikerboys.schematicannon.CreateBuildInfo.VERSION);
 		for (AllPackets packet : AllPackets.values()) {
 			packetRegistry.registerPacket(packet.type);
 		}

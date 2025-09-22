@@ -134,7 +134,7 @@ public class ItemRequirement {
 		}
 
 		if (entity instanceof ItemFrame itemFrame) {
-			ItemStack frame = ((ItemFrameAccessor) itemFrame).create$getFrameItemStack();
+			ItemStack frame = ((ItemFrameAccessor) itemFrame).schematicannon$getFrameItemStack();
 			ItemStack displayedItem = ComponentProcessors.withUnsafeComponentsDiscarded(itemFrame.getItem());
 			if (displayedItem.isEmpty())
 				return new ItemRequirement(ItemUseType.CONSUME, frame);

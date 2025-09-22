@@ -35,14 +35,14 @@ public class LevelRendererMixin {
 	private Long2ObjectMap<SortedSet<BlockDestructionProgress>> destructionProgress;
 
 	@Inject(method = "destroyBlockProgress(ILnet/minecraft/core/BlockPos;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/BlockDestructionProgress;updateTick(I)V", shift = Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
-	private void create$onDestroyBlockProgress(int breakerId, BlockPos pos, int progress, CallbackInfo ci, BlockDestructionProgress progressObj) {
+	private void schematicannon$onDestroyBlockProgress(int breakerId, BlockPos pos, int progress, CallbackInfo ci, BlockDestructionProgress progressObj) {
 		BlockState state = level.getBlockState(pos);
 		IClientBlockExtensions properties = IClientBlockExtensions.of(state);
 		if (properties instanceof MultiPosDestructionHandler handler) {
 			Set<BlockPos> extraPositions = handler.getExtraPositions(level, pos, state, progress);
 			if (extraPositions != null) {
 				extraPositions.remove(pos);
-				((BlockDestructionProgressExtension) progressObj).create$setExtraPositions(extraPositions);
+				((BlockDestructionProgressExtension) progressObj).schematicannon$setExtraPositions(extraPositions);
 				for (BlockPos extraPos : extraPositions) {
 					destructionProgress.computeIfAbsent(extraPos.asLong(), l -> Sets.newTreeSet()).add(progressObj);
 				}
@@ -51,8 +51,8 @@ public class LevelRendererMixin {
 	}
 
 	@Inject(method = "removeProgress(Lnet/minecraft/server/level/BlockDestructionProgress;)V", at = @At("RETURN"))
-	private void create$onRemoveProgress(BlockDestructionProgress progress, CallbackInfo ci) {
-		Set<BlockPos> extraPositions = ((BlockDestructionProgressExtension) progress).create$getExtraPositions();
+	private void schematicannon$onRemoveProgress(BlockDestructionProgress progress, CallbackInfo ci) {
+		Set<BlockPos> extraPositions = ((BlockDestructionProgressExtension) progress).schematicannon$getExtraPositions();
 		if (extraPositions != null) {
 			for (BlockPos extraPos : extraPositions) {
 				long l = extraPos.asLong();

@@ -1,9 +1,7 @@
 package com.bikerboys.schematicannon.foundation.utility;
 
 import net.createmod.catnip.animation.LerpedFloat;
-import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.Mth;
 
 public class CameraAngleAnimationService {
 
@@ -41,47 +39,6 @@ public class CameraAngleAnimationService {
 
 	public static float getPitch(float partialTicks) {
 		return xRotation.getValue(partialTicks);
-	}
-
-	public static void setAnimationMode(Mode mode) {
-		animationMode = mode;
-	}
-
-	public static void setAnimationSpeed(float speed) {
-		animationSpeed = speed;
-	}
-
-	public static void setYawTarget(float yaw) {
-		float currentYaw = getCurrentYaw();
-		yRotation.startWithValue(currentYaw);
-		setupChaser(yRotation, currentYaw + AngleHelper.getShortestAngleDiff(currentYaw, Mth.wrapDegrees(yaw)));
-	}
-
-	public static void setPitchTarget(float pitch) {
-		float currentPitch = getCurrentPitch();
-		xRotation.startWithValue(currentPitch);
-		setupChaser(xRotation, currentPitch + AngleHelper.getShortestAngleDiff(currentPitch, Mth.wrapDegrees(pitch)));
-	}
-
-	private static float getCurrentYaw() {
-		if (Minecraft.getInstance().player == null)
-			return 0;
-		return Mth.wrapDegrees(Minecraft.getInstance().player.getYRot());
-	}
-
-	private static float getCurrentPitch() {
-		if (Minecraft.getInstance().player == null)
-			return 0;
-
-		return Mth.wrapDegrees(Minecraft.getInstance().player.getXRot());
-	}
-
-	private static void setupChaser(LerpedFloat rotation, float target) {
-		if (animationMode == Mode.LINEAR) {
-			rotation.chase(target, animationSpeed > 0 ? animationSpeed : 2, LerpedFloat.Chaser.LINEAR);
-		} else if (animationMode == Mode.EXPONENTIAL) {
-			rotation.chase(target, animationSpeed > 0 ? animationSpeed : 0.25, LerpedFloat.Chaser.EXP);
-		}
 	}
 
 	public enum Mode {

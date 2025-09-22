@@ -11,19 +11,5 @@ public class SharedProperties {
 		return Blocks.STRIPPED_SPRUCE_WOOD;
 	}
 
-	public static Block stone() {
-		return Blocks.ANDESITE;
-	}
 
-	public static Block softMetal() {
-		return Blocks.GOLD_BLOCK;
-	}
-
-	public static Block copperMetal() {
-		return Blocks.COPPER_BLOCK;
-	}
-
-	public static Block netheriteMetal() {
-		return Blocks.NETHERITE_BLOCK;
-	}
 }

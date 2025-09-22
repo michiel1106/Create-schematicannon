@@ -11,7 +11,6 @@ import com.bikerboys.schematicannon.foundation.blockEntity.behaviour.scrollValue
 import com.bikerboys.schematicannon.foundation.blockEntity.behaviour.scrollValue.ScrollValueRenderer;
 import com.bikerboys.schematicannon.foundation.item.TooltipModifier;
 import com.bikerboys.schematicannon.foundation.utility.CameraAngleAnimationService;
-import com.bikerboys.schematicannon.foundation.utility.ServerSpeedProvider;
 import com.bikerboys.schematicannon.foundation.utility.TickBasedCache;
 
 import net.createmod.catnip.animation.AnimationTickHolder;
@@ -67,7 +66,6 @@ public class ClientEvents {
 		SchematicannonClient.SCHEMATIC_AND_QUILL_HANDLER.tick();
 		SchematicannonClient.SCHEMATIC_HANDLER.tick();
 
-		ServerSpeedProvider.clientTick();
 		ScrollValueRenderer.tick();
 
 		CameraAngleAnimationService.tick();

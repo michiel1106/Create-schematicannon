@@ -1,16 +1,19 @@
 package com.bikerboys.schematicannon;
 
+import static com.bikerboys.schematicannon.CreateBuildInfo.GIT_COMMIT;
+import static com.bikerboys.schematicannon.CreateBuildInfo.VERSION;
+
 import java.util.Random;
 
 import org.slf4j.Logger;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.mojang.logging.LogUtils;
 import com.bikerboys.schematicannon.api.schematic.state.AllSchematicStateFilters;
 import com.bikerboys.schematicannon.content.schematics.ServerSchematicLoader;
 import com.bikerboys.schematicannon.foundation.CreateNBTProcessors;
 import com.bikerboys.schematicannon.foundation.data.CreateRegistrate;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.mojang.logging.LogUtils;
 
 import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.resources.ResourceKey;
@@ -56,7 +59,7 @@ public class Schematicannon {
 	}
 
 	public static void onCtor(IEventBus modEventBus, ModContainer modContainer) {
-		LOGGER.info("{} {} initializing! Commit hash: {}", NAME, CreateBuildInfo.VERSION, CreateBuildInfo.GIT_COMMIT);
+		LOGGER.info("{} {} initializing! Commit hash: {}", NAME, VERSION, GIT_COMMIT);
 		ModLoadingContext modLoadingContext = ModLoadingContext.get();
 
 		REGISTRATE.registerEventListeners(modEventBus);

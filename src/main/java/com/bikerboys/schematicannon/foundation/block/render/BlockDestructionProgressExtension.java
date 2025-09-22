@@ -8,7 +8,7 @@ import net.minecraft.core.BlockPos;
 
 public interface BlockDestructionProgressExtension {
 	@Nullable
-	Set<BlockPos> create$getExtraPositions();
+	Set<BlockPos> schematicannon$getExtraPositions();
 
-	void create$setExtraPositions(@Nullable Set<BlockPos> positions);
+	void schematicannon$setExtraPositions(@Nullable Set<BlockPos> positions);
 }

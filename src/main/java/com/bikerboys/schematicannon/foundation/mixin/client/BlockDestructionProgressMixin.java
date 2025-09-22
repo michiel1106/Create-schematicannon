@@ -13,15 +13,15 @@ import net.minecraft.server.level.BlockDestructionProgress;
 @Mixin(BlockDestructionProgress.class)
 public class BlockDestructionProgressMixin implements BlockDestructionProgressExtension {
 	@Unique
-	private Set<BlockPos> create$extraPositions;
+	private Set<BlockPos> schematicannon$extraPositions;
 
 	@Override
-	public Set<BlockPos> create$getExtraPositions() {
-		return create$extraPositions;
+	public Set<BlockPos> schematicannon$getExtraPositions() {
+		return schematicannon$extraPositions;
 	}
 
 	@Override
-	public void create$setExtraPositions(Set<BlockPos> positions) {
-		create$extraPositions = positions;
+	public void schematicannon$setExtraPositions(Set<BlockPos> positions) {
+		schematicannon$extraPositions = positions;
 	}
 }

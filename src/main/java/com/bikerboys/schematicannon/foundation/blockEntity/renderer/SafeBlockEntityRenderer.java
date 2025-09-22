@@ -39,9 +39,9 @@ public abstract class SafeBlockEntityRenderer<T extends BlockEntity> implements 
 			return false;
 
 		LevelRendererAccessor accessor = (LevelRendererAccessor) Minecraft.getInstance().levelRenderer;
-		Frustum frustum = accessor.create$getCapturedFrustum() != null ?
-			accessor.create$getCapturedFrustum() :
-			accessor.create$getCullingFrustum();
+		Frustum frustum = accessor.schematicannon$getCapturedFrustum() != null ?
+			accessor.schematicannon$getCapturedFrustum() :
+			accessor.schematicannon$getCullingFrustum();
 
 		AABB itemBB = new AABB(
 				itemPos.x - 0.25,

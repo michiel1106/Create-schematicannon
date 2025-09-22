@@ -9,5 +9,5 @@ import net.minecraft.world.item.ItemStack;
 @Mixin(ItemFrame.class)
 public interface ItemFrameAccessor {
 	@Invoker("getFrameItemStack")
-	ItemStack create$getFrameItemStack();
+	ItemStack schematicannon$getFrameItemStack();
 }

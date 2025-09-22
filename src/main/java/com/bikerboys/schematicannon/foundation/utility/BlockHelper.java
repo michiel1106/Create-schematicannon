@@ -1,7 +1,5 @@
 package com.bikerboys.schematicannon.foundation.utility;
 
-import java.util.List;
-
 import org.jetbrains.annotations.Nullable;
 
 import com.bikerboys.schematicannon.AllTags.AllBlockTags;
@@ -16,7 +14,6 @@ import com.bikerboys.schematicannon.foundation.blockEntity.IMultiBlockEntityCont
 
 import net.createmod.catnip.nbt.NBTProcessors;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -32,7 +29,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
@@ -40,8 +36,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.phys.BlockHitResult;
@@ -49,24 +43,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.SpecialPlantable;
 
 public class BlockHelper {
-	private static final List<IntegerProperty> COUNT_STATES = List.of(
-		BlockStateProperties.EGGS,
-		BlockStateProperties.PICKLES,
-		BlockStateProperties.CANDLES
-	);
 
-	private static final List<Block> VINELIKE_BLOCKS = List.of(
-		Blocks.VINE, Blocks.GLOW_LICHEN
-	);
-
-	private static final List<BooleanProperty> VINELIKE_STATES = List.of(
-		BlockStateProperties.UP,
-		BlockStateProperties.NORTH,
-		BlockStateProperties.EAST,
-		BlockStateProperties.SOUTH,
-		BlockStateProperties.WEST,
-		BlockStateProperties.DOWN
-	);
 
 	public static BlockState setZeroAge(BlockState blockState) {
 		if (blockState.hasProperty(BlockStateProperties.AGE_1))
@@ -224,10 +201,6 @@ public class BlockHelper {
 		}
 	}
 
-	public static boolean hasBlockSolidSide(BlockState state, BlockGetter blockGetter, BlockPos pos, Direction dir) {
-		return !state.is(BlockTags.LEAVES)
-			&& Block.isFaceFull(state.getCollisionShape(blockGetter, pos), dir);
-	}
 
 
 	public static InteractionResult invokeUse(BlockState state, Level level, Player player,

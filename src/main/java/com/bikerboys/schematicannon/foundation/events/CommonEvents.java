@@ -3,7 +3,6 @@ package com.bikerboys.schematicannon.foundation.events;
 import com.bikerboys.schematicannon.Schematicannon;
 import com.bikerboys.schematicannon.foundation.pack.DynamicPack;
 import com.bikerboys.schematicannon.foundation.pack.DynamicPackSource;
-import com.bikerboys.schematicannon.foundation.utility.ServerSpeedProvider;
 import com.bikerboys.schematicannon.foundation.utility.TickBasedCache;
 
 import net.createmod.catnip.data.WorldAttached;
@@ -23,7 +22,6 @@ public class CommonEvents {
 	@SubscribeEvent
 	public static void onServerTick(net.neoforged.neoforge.event.tick.ServerTickEvent.Post event) {
 		Schematicannon.SCHEMATIC_RECEIVER.tick();
-		ServerSpeedProvider.serverTick();
 		TickBasedCache.tick();
 	}
 
