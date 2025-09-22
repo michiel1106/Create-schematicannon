@@ -20,8 +20,8 @@ String buildNumber = System.getenv("BUILD_NUMBER")
 String gitHash = calculateGitHash() + (hasUnstaged() ? "-modified" : "")
 
 base {
-    archivesName = "create-$minecraft_version"
-    group = "com.simibubi.create"
+    archivesName = "schematicannon-$minecraft_version"
+    group = "com.bikerboys.schematicannon"
     version = mod_version + (dev && buildNumber != null ? "-${buildNumber}" : "")
 }
 
@@ -198,7 +198,7 @@ sourceSets.main {
     resources {
         srcDir("src/generated/resources")
         exclude(".cache/")
-        exclude("data/create/.wiki")
+        exclude("data/schematicannon/.wiki")
     }
 
     blossom.javaSources {
@@ -215,7 +215,7 @@ jar {
     }
 
     manifest.attributes([
-        "MixinConfigs": "create.mixins.json",
+        "MixinConfigs": "schematicannon.mixins.json",
         "Git-Hash"    : gitHash
     ])
 }
@@ -230,7 +230,7 @@ final slimJar = tasks.register("slimJar", Jar) {
     archiveClassifier = "slim"
     from(sourceSets.main.output)
     manifest.attributes([
-        "MixinConfigs": "create.mixins.json",
+        "MixinConfigs": "schematicannon.mixins.json",
         "Git-Hash"    : gitHash
     ])
 }
@@ -316,7 +316,7 @@ publishMods {
 
     github {
         accessToken = providers.environmentVariable("GITHUB_TOKEN")
-        repository = "Creators-of-Create/Create"
+        repository = "michiel1106/schematicannon"
         commitish = gitHash
         tagName = "mc$minecraft_version-$mod_version"
         file.unset()

@@ -1,0 +1,36 @@
+{
+  "clipboard_check": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "schematicannon:clipboard_check"
+      }
+    ]
+  },
+  "clipboard_erase": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "schematicannon:clipboard_erase"
+      }
+    ]
+  },
+  "schematicannon_finish": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:block.note_block.bell"
+      }
+    ],
+    "subtitle": "schematicannon.subtitle.schematicannon_finish"
+  },
+  "schematicannon_launch_block": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.generic.explode"
+      }
+    ],
+    "subtitle": "schematicannon.subtitle.schematicannon_launch_block"
+  }
+}

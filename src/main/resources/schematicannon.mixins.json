@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "priority": 1100,
+  "package": "com.bikerboys.schematicannon.foundation.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "accessor.ItemFrameAccessor",
+    "accessor.StateHolderAccessor"
+  ],
+  "client": [
+    "accessor.LevelRendererAccessor",
+
+    "client.BlockDestructionProgressMixin",
+
+    "client.LevelRendererMixin",
+    "client.PlayerRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
