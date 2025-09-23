@@ -8,6 +8,7 @@ import java.util.Random;
 import org.slf4j.Logger;
 
 import com.bikerboys.schematicannon.api.schematic.state.AllSchematicStateFilters;
+import com.bikerboys.schematicannon.config.Config;
 import com.bikerboys.schematicannon.content.schematics.ServerSchematicLoader;
 import com.bikerboys.schematicannon.foundation.CreateNBTProcessors;
 import com.bikerboys.schematicannon.foundation.data.CreateRegistrate;
@@ -16,16 +17,16 @@ import com.google.gson.GsonBuilder;
 import com.mojang.logging.LogUtils;
 
 import net.createmod.catnip.lang.LangBuilder;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.Level;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig.Type;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
@@ -33,6 +34,7 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 public class Schematicannon {
 	public static final String ID = "schematicannon";
 	public static final String NAME = "Schematicannon";
+
 
 	public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -50,7 +52,7 @@ public class Schematicannon {
 
 
 	private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(ID)
-		.defaultCreativeTab((ResourceKey<CreativeModeTab>) null);
+		.defaultCreativeTab(CreativeModeTabs.REDSTONE_BLOCKS);
 
 	public static final ServerSchematicLoader SCHEMATIC_RECEIVER = new ServerSchematicLoader();
 
@@ -58,9 +60,14 @@ public class Schematicannon {
 		onCtor(eventBus, modContainer);
 	}
 
-	public static void onCtor(IEventBus modEventBus, ModContainer modContainer) {
+	public static void onCtor(IEventBus modEventBus, ModContainer container) {
+		container.registerConfig(Type.COMMON, Config.SPEC);
+
+
 		LOGGER.info("{} {} initializing! Commit hash: {}", NAME, VERSION, GIT_COMMIT);
 		ModLoadingContext modLoadingContext = ModLoadingContext.get();
+
+
 
 		REGISTRATE.registerEventListeners(modEventBus);
 
@@ -76,6 +83,7 @@ public class Schematicannon {
 		AllDataComponents.register(modEventBus);
 
 		AllSchematicStateFilters.registerDefaults();
+
 
 
 
@@ -106,4 +114,6 @@ public class Schematicannon {
 			throw new UnsupportedOperationException("Other mods are not permitted to use schematicannons registrate instance.");
 		return REGISTRATE;
 	}
+
+
 }

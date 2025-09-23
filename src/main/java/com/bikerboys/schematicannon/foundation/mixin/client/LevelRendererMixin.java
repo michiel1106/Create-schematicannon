@@ -12,9 +12,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import com.google.common.collect.Sets;
+import com.bikerboys.schematicannon.config.Config;
 import com.bikerboys.schematicannon.foundation.block.render.BlockDestructionProgressExtension;
 import com.bikerboys.schematicannon.foundation.block.render.MultiPosDestructionHandler;
+import com.google.common.collect.Sets;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -48,6 +49,10 @@ public class LevelRendererMixin {
 				}
 			}
 		}
+
+
+
+
 	}
 
 	@Inject(method = "removeProgress(Lnet/minecraft/server/level/BlockDestructionProgress;)V", at = @At("RETURN"))

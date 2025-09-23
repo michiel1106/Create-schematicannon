@@ -7,12 +7,11 @@ import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.bikerboys.schematicannon.AllBlocks;
 import com.bikerboys.schematicannon.AllDataComponents;
 import com.bikerboys.schematicannon.AllItems;
 import com.bikerboys.schematicannon.AllSoundEvents;
+import com.bikerboys.schematicannon.config.Config;
 import com.bikerboys.schematicannon.content.schematics.SchematicPrinter;
 import com.bikerboys.schematicannon.content.schematics.requirement.ItemRequirement;
 import com.bikerboys.schematicannon.content.schematics.requirement.ItemRequirement.ItemUseType;
@@ -22,6 +21,8 @@ import com.bikerboys.schematicannon.foundation.item.ItemHelper;
 import com.bikerboys.schematicannon.foundation.item.ItemHelper.ExtractionCountMode;
 import com.bikerboys.schematicannon.foundation.utility.BlockHelper;
 import com.bikerboys.schematicannon.foundation.utility.CreateLang;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import io.netty.buffer.ByteBuf;
 import net.createmod.catnip.codecs.CatnipCodecUtils;
@@ -415,14 +416,14 @@ public class SchematicannonBlockEntity extends SmartBlockEntity implements MenuP
 			launchEntity(target, icon, entity);
 		});
 
-		printerCooldown = 20;
+		printerCooldown = Config.SCHEMATICANNON_DELAY.getAsInt();
 		remainingFuel -= 1;
 		sendUpdate = true;
 		missingItem = null;
 	}
 
 	public int getShotsPerGunpowder() {
-		return hasCreativeCrate ? 0 : 400;
+		return hasCreativeCrate ? 0 : Config.SCHEMATICANNON_SHOTS_PER_GUNPOWDER.getAsInt();
 	}
 
 	protected void initializePrinter(ItemStack blueprint) {

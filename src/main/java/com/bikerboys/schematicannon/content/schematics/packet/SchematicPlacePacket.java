@@ -1,6 +1,7 @@
 package com.bikerboys.schematicannon.content.schematics.packet;
 
 import com.bikerboys.schematicannon.AllPackets;
+import com.bikerboys.schematicannon.config.Config;
 import com.bikerboys.schematicannon.content.schematics.SchematicPrinter;
 import com.bikerboys.schematicannon.foundation.utility.BlockHelper;
 
@@ -39,7 +40,7 @@ public record SchematicPlacePacket(ItemStack stack) implements ServerboundPacket
 			return;
 		}
 
-		boolean includeAir = false;
+		boolean includeAir = Config.CREATIVE_PRINT_INCLUDES_AIR.getAsBoolean();
 
 		while (printer.advanceCurrentPos()) {
 			if (!printer.shouldPlaceCurrent(level)) {

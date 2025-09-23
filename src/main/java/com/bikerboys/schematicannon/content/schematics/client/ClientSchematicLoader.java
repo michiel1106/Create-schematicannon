@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import com.bikerboys.schematicannon.Schematicannon;
+import com.bikerboys.schematicannon.config.Config;
 import com.bikerboys.schematicannon.content.schematics.packet.SchematicUploadPacket;
 import com.bikerboys.schematicannon.foundation.utility.CreateLang;
 import com.bikerboys.schematicannon.foundation.utility.CreatePaths;
@@ -91,7 +92,7 @@ public class ClientSchematicLoader {
 	public static boolean validateSizeLimitation(long size) {
 		if (Minecraft.getInstance().hasSingleplayerServer())
 			return true;
-		long maxSize = 256;
+		long maxSize = Config.MAX_TOTAL_SCHEMATIC_SIZE.getAsInt();
 		if (size > maxSize * 1000) {
 			LocalPlayer player = Minecraft.getInstance().player;
 			if (player != null) {
@@ -124,7 +125,7 @@ public class ClientSchematicLoader {
 
 	private void continueUpload(String schematic) {
 		if (activeUploads.containsKey(schematic)) {
-			int maxPacketSize = 2048;
+			int maxPacketSize = Config.MAX_SCHEMATIC_PACKET_SIZE.getAsInt();
 			byte[] data = new byte[maxPacketSize];
 			try {
 				int status = activeUploads.get(schematic).read(data);

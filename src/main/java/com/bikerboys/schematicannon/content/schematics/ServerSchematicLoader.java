@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 import com.bikerboys.schematicannon.AllBlocks;
 import com.bikerboys.schematicannon.AllItems;
 import com.bikerboys.schematicannon.Schematicannon;
+import com.bikerboys.schematicannon.config.Config;
 import com.bikerboys.schematicannon.content.schematics.SchematicExport.SchematicExportResult;
 import com.bikerboys.schematicannon.content.schematics.table.SchematicTableBlockEntity;
 import com.bikerboys.schematicannon.foundation.utility.CreateLang;
@@ -61,7 +62,7 @@ public class ServerSchematicLoader {
 
 	public void tick() {
 		// Detect Timed out Uploads
-		int timeout = 600;
+		int timeout = Config.SCHEMATIC_IDLE_TIMEOUT.getAsInt();
 		for (String upload : activeUploads.keySet()) {
 			SchematicUploadEntry entry = activeUploads.get(upload);
 
@@ -127,7 +128,7 @@ public class ServerSchematicLoader {
 				count = list.count();
 			}
 
-			if (count >= 10) {
+			if (count >= Config.MAX_SCHEMATICS.getAsInt()) {
 				Stream<Path> list2 = Files.list(playerPath);
 				Optional<Path> lastFilePath = list2.filter(f -> !Files.isDirectory(f))
 					.min(Comparator.comparingLong(f -> f.toFile()
@@ -150,7 +151,7 @@ public class ServerSchematicLoader {
 	}
 
 	protected boolean validateSchematicSizeOnServer(ServerPlayer player, long size) {
-		long maxFileSize = 256;
+		long maxFileSize = Config.MAX_TOTAL_SCHEMATIC_SIZE.getAsInt();
 		if (size > maxFileSize * 1000) {
 			player.sendSystemMessage(CreateLang.translateDirect("schematics.uploadTooLarge")
 				.append(Component.literal(" (" + size / 1000 + " KB).")));
@@ -171,7 +172,7 @@ public class ServerSchematicLoader {
 			entry.bytesUploaded += data.length;
 
 			// Size Validations
-			if (data.length > 2048) {
+			if (data.length > Config.MAX_SCHEMATIC_PACKET_SIZE.getAsInt()) {
 				Schematicannon.LOGGER.warn("Oversized Upload Packet received: {}", playerSchematicId);
 				cancelUpload(playerSchematicId);
 				return;
@@ -307,7 +308,7 @@ public class ServerSchematicLoader {
 	private boolean tryDeleteOldestSchematic(Path dir) {
 		try (Stream<Path> stream = Files.list(dir)) {
 			List<Path> files = stream.toList();
-			if (files.size() < 10)
+			if (files.size() < Config.MAX_SCHEMATICS.getAsInt())
 				return true;
 			Optional<Path> oldest = files.stream().min(Comparator.comparingLong(this::getLastModifiedTime));
 			Files.delete(oldest.orElseThrow());
