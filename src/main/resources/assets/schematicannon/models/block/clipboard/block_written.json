@@ -1,7 +1,0 @@
-{
-	"parent": "schematicannon:block/clipboard/block_empty",
-	"textures": {
-		"0": "schematicannon:block/clipboard_model_filled",
-		"particle": "schematicannon:block/clipboard_model_filled"
-	}
-}
